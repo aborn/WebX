@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.aborn.webdevtoolkit.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.aborn.webdevtoolkit.MyBundle
 
 class MyApplicationService {
 
