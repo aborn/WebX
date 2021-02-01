@@ -4,18 +4,14 @@ package com.github.aborn.webdevtoolkit.ui;
 import com.github.aborn.webdevtoolkit.commons.RestServiceManager;
 import com.github.aborn.webdevtoolkit.datatypes.RestServiceItem;
 import com.github.aborn.webdevtoolkit.datatypes.RestServiceModule;
-
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ModuleNode;
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ProjectNode;
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ServiceNode;
 import com.github.aborn.webdevtoolkit.utils.RSDataKeys;
-import com.github.aborn.webdevtoolkit.zhaow.RestServiceDataManager;
-import com.github.aborn.webdevtoolkit.zhaow.RestServiceProject;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
-
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
@@ -29,9 +25,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import java.awt.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -76,34 +70,13 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
     public void refresh() {
         ProjectNode projectNode = new ProjectNode();
         List<RestServiceModule> moduleNodeList = RestServiceManager.buildRestServiceData(myProject);
-        //projectNode.updateModuleNodes(moduleNodeList);
-
         DefaultMutableTreeNode rootNode = buildProjectRootNode(moduleNodeList, projectNode);
-
-        /*
-        DefaultMutableTreeNode projectRootNode = new DefaultMutableTreeNode(projectNode);
-
-        List<RestServiceItem> serviceItems = new ArrayList<>();
-        RestServiceItem restServiceItem = new RestServiceItem("/payment/charge");
-        serviceItems.add(restServiceItem);
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        RestServiceModule restServiceModule = new RestServiceModule("payment-recharge-web" + simpleDateFormat.format(new Date()), serviceItems);
-        DefaultMutableTreeNode moduleNode = convert(restServiceModule, projectNode);
-
-        RestServiceModule restServiceModule2 = new RestServiceModule("payment-recharge-web2", serviceItems);
-        DefaultMutableTreeNode moduleNode2 = convert(restServiceModule2, projectNode);
-
-        projectRootNode.add(moduleNode);
-        projectRootNode.add(moduleNode2);
-        TreeModel treeModel = new DefaultTreeModel(projectRootNode); */
-
         TreeModel treeModel = new DefaultTreeModel(rootNode);
         myTree.setModel(treeModel);
     }
 
     private DefaultMutableTreeNode buildProjectRootNode(List<RestServiceModule> moduleNodeList, ProjectNode projectNode) {
-        DefaultMutableTreeNode projectRootNode = new DefaultMutableTreeNode();
+        DefaultMutableTreeNode projectRootNode = new DefaultMutableTreeNode(projectNode);
         for (RestServiceModule module : moduleNodeList) {
             projectRootNode.add(convert(module, projectNode));
         }
