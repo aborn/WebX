@@ -1,7 +1,11 @@
 package com.github.aborn.webdevtoolkit.datatypes;
 
+import com.github.aborn.webdevtoolkit.zhaow.HttpMethod;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
+import com.intellij.pom.Navigatable;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -10,9 +14,24 @@ import org.jetbrains.annotations.Nullable;
  */
 public class RestServiceItem implements NavigationItem {
     String uri;
+    private Navigatable navigationElement;
+    private PsiMethod psiMethod;
+    private PsiElement psiElement;
 
     public RestServiceItem(String uri) {
         this.uri = uri;
+    }
+
+    public RestServiceItem(PsiElement psiElement, String requestMethod, String uri) {
+        this.psiElement = psiElement;
+        if (psiElement instanceof PsiMethod) {
+            this.psiMethod = (PsiMethod) psiElement;
+        }
+
+        this.uri = uri;
+        if (psiElement instanceof Navigatable) {
+            navigationElement = (Navigatable) psiElement;
+        }
     }
 
     @Override
@@ -27,12 +46,14 @@ public class RestServiceItem implements NavigationItem {
 
     @Override
     public void navigate(boolean requestFocus) {
-
+        if (navigationElement != null) {
+            navigationElement.navigate(requestFocus);
+        }
     }
 
     @Override
     public boolean canNavigate() {
-        return false;
+        return navigationElement != null && navigationElement.canNavigate();
     }
 
     @Override

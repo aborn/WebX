@@ -20,6 +20,7 @@ public class RestServiceModule {
         moduleName = "demoModuleName";
     }
 
+
     public RestServiceModule(String moduleName, List<RestServiceItem> serviceItems) {
         this.moduleName = moduleName;
         appName = moduleName;

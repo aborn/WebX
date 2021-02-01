@@ -31,4 +31,8 @@ public class ModuleNode extends BaseNode {
     public String getName() {
         return restServiceModule.getModuleName();
     }
+
+    public int getServiceCount() {
+        return serviceNodes.size();
+    }
 }

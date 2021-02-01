@@ -2,6 +2,7 @@ package com.github.aborn.webdevtoolkit.datatypes.nodes;
 
 import com.github.aborn.webdevtoolkit.utils.IconUtils;
 import com.intellij.ui.treeStructure.SimpleNode;
+import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +35,19 @@ public class ProjectNode extends BaseNode {
 
     public void updateServiceCount(int serviceCount) {
         this.serviceCount = serviceCount;
+    }
+
+    public void updateModuleNodes(List<ModuleNode> moduleNodes) {
+        if (CollectionUtils.isEmpty(moduleNodes)) {
+            this.serviceCount = 0;
+            return;
+        }
+        this.moduleNodes = moduleNodes;
+
+        int count = 0;
+        for (ModuleNode moduleNode : moduleNodes) {
+            count += moduleNode.getServiceCount();
+        }
+        this.serviceCount = count;
     }
 }
