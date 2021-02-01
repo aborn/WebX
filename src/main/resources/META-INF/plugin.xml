@@ -31,8 +31,8 @@
         </group>
 
 
-        <!-- url 导航 -->
-        <action id="Toolkit.GotoService" class="com.github.aborn.webdevtoolkit.zhaow.actions.GotoRequestMappingAction"
+        <!-- url 搜索 -->
+        <action id="Toolkit.GotoService" class="com.github.aborn.webdevtoolkit.actions.GotoServicesAction"
                 text="_Service" description="Go to Service"
                 icon="AllIcons.Actions.Search">
             <add-to-group group-id="GoToTargetEx" anchor="first"/>
