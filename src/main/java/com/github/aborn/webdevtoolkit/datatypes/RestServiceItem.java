@@ -1,6 +1,5 @@
 package com.github.aborn.webdevtoolkit.datatypes;
 
-import com.github.aborn.webdevtoolkit.zhaow.HttpMethod;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.pom.Navigatable;
@@ -59,5 +58,13 @@ public class RestServiceItem implements NavigationItem {
     @Override
     public boolean canNavigateToSource() {
         return true;
+    }
+
+    public PsiElement getPsiElement() {
+        return psiElement;
+    }
+
+    public PsiMethod getPsiMethod() {
+        return psiMethod;
     }
 }
