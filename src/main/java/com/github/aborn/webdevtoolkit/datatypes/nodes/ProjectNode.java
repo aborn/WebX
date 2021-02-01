@@ -1,7 +1,7 @@
-package com.github.aborn.webdevtoolkit.ui;
+package com.github.aborn.webdevtoolkit.datatypes.nodes;
 
-import com.github.aborn.webdevtoolkit.ui.BaseNode;
-import com.github.aborn.webdevtoolkit.ui.ModuleNode;
+import com.github.aborn.webdevtoolkit.datatypes.nodes.BaseNode;
+import com.github.aborn.webdevtoolkit.datatypes.nodes.ModuleNode;
 import com.intellij.ui.treeStructure.SimpleNode;
 
 import java.util.ArrayList;

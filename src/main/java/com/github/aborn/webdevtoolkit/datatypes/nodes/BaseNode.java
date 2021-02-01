@@ -1,4 +1,4 @@
-package com.github.aborn.webdevtoolkit.ui;
+package com.github.aborn.webdevtoolkit.datatypes.nodes;
 
 import com.intellij.ui.treeStructure.CachingSimpleNode;
 import com.intellij.ui.treeStructure.SimpleNode;

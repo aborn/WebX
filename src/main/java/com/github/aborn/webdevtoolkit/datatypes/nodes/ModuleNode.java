@@ -1,4 +1,4 @@
-package com.github.aborn.webdevtoolkit.ui;
+package com.github.aborn.webdevtoolkit.datatypes.nodes;
 
 import com.github.aborn.webdevtoolkit.datatypes.RestServiceModule;
 import com.intellij.ui.treeStructure.SimpleNode;
