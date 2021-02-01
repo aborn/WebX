@@ -8,6 +8,8 @@ import com.github.aborn.webdevtoolkit.datatypes.nodes.ModuleNode;
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ProjectNode;
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ServiceNode;
 import com.github.aborn.webdevtoolkit.utils.RSDataKeys;
+import com.github.aborn.webdevtoolkit.zhaow.RestServiceDataManager;
+import com.github.aborn.webdevtoolkit.zhaow.RestServiceProject;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DataProvider;
@@ -88,7 +90,7 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
         RestServiceModule restServiceModule2 = new RestServiceModule("payment-recharge-web2", serviceItems);
         DefaultMutableTreeNode moduleNode2 = convert(restServiceModule2, projectNode);
 
-        //List<RestServiceProject> projects = RestServiceDataManager.buildRestServiceData(myProject);
+        List<RestServiceProject> projects = RestServiceDataManager.buildRestServiceData(myProject);
 
         projectRootNode.add(moduleNode);
         projectRootNode.add(moduleNode2);
