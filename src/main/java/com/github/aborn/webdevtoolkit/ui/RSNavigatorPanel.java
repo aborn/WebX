@@ -117,6 +117,8 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
         }
 
         ModuleNode moduleNode = new ModuleNode(projectNode, restServiceModule);
+        projectNode.addModuleNode(moduleNode);
+
         DefaultMutableTreeNode moduleRoot = new DefaultMutableTreeNode(moduleNode);
         for (RestServiceItem item : restServiceItems) {
             moduleRoot.add(new DefaultMutableTreeNode(new ServiceNode(moduleNode, item)));

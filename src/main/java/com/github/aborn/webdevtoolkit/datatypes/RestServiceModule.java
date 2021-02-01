@@ -2,6 +2,7 @@ package com.github.aborn.webdevtoolkit.datatypes;
 
 import com.intellij.openapi.module.Module;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class RestServiceModule {
     String moduleName;
     Module module;
 
-    List<RestServiceItem> serviceItems;
+    List<RestServiceItem> serviceItems = new ArrayList<>();
 
     public RestServiceModule() {
         appName = "demoAppName";

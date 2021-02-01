@@ -50,4 +50,9 @@ public class ProjectNode extends BaseNode {
         }
         this.serviceCount = count;
     }
+
+    public void addModuleNode(ModuleNode moduleNode) {
+        moduleNodes.add(moduleNode);
+        this.serviceCount += moduleNode.getServiceCount();
+    }
 }
