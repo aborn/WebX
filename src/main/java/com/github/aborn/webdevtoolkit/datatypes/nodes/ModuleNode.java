@@ -1,6 +1,7 @@
 package com.github.aborn.webdevtoolkit.datatypes.nodes;
 
 import com.github.aborn.webdevtoolkit.datatypes.RestServiceModule;
+import com.github.aborn.webdevtoolkit.utils.IconUtils;
 import com.intellij.ui.treeStructure.SimpleNode;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class ModuleNode extends BaseNode {
     public ModuleNode(SimpleNode parent, RestServiceModule restServiceModule) {
         super(parent);
         this.restServiceModule = restServiceModule;
+        getTemplatePresentation().setIcon(IconUtils.MODULE);
     }
 
     @Override

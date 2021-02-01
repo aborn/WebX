@@ -1,7 +1,6 @@
 package com.github.aborn.webdevtoolkit.datatypes.nodes;
 
-import com.github.aborn.webdevtoolkit.datatypes.nodes.BaseNode;
-import com.github.aborn.webdevtoolkit.datatypes.nodes.ModuleNode;
+import com.github.aborn.webdevtoolkit.utils.IconUtils;
 import com.intellij.ui.treeStructure.SimpleNode;
 
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ public class ProjectNode extends BaseNode {
 
     public ProjectNode() {
         super(null);
+        getTemplatePresentation().setIcon(IconUtils.MODULE_GROUP);
     }
 
     @Override
