@@ -3,7 +3,6 @@ package com.github.aborn.webdevtoolkit.listeners;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManagerListener;
-import com.intellij.openapi.ui.Messages;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -17,7 +16,7 @@ public class MyProjectManagerListener implements ProjectManagerListener {
         if (ApplicationManager.getApplication().isUnitTestMode()) {
             return;
         }
-        Messages.showMessageDialog(project, "打开！", project.getName(), Messages.getInformationIcon());
+        //Messages.showMessageDialog(project, "打开！", project.getName(), Messages.getInformationIcon());
     }
 
     /**
@@ -31,7 +30,7 @@ public class MyProjectManagerListener implements ProjectManagerListener {
         if (ApplicationManager.getApplication().isUnitTestMode()) {
             return;
         }
-        Messages.showMessageDialog(project, "关闭！", project.getName(), Messages.getInformationIcon());
+        //Messages.showMessageDialog(project, "关闭！", project.getName(), Messages.getInformationIcon());
     }
 
 }

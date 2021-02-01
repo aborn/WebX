@@ -10,10 +10,47 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.aborn.webdevtoolkit.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.aborn.webdevtoolkit.services.MyProjectService"/>
+        <toolWindow id="WebX" anchor="right" secondary="true" icon="AllIcons.General.Modified"
+                    factoryClass="com.github.aborn.webdevtoolkit.ui.RSNavigator"/>
     </extensions>
 
     <applicationListeners>
         <listener class="com.github.aborn.webdevtoolkit.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <actions>
+
+        <group id="RestfulToolkit.RestMethod.EditorPopupMenu" text="RESTful Toolkit"
+               description="RESTful Toolkit"
+               popup="false">
+            <!--<add-to-group group-id="EditorPopupMenu" anchor="last" relative-to-action="EditorToggleColumnMode"/>-->
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <!--<reference ref="GenerateRestUrl"/>-->
+        </group>
+
+
+        <!-- url 导航 -->
+        <action id="Toolkit.GotoService" class="com.github.aborn.webdevtoolkit.zhaow.actions.GotoRequestMappingAction"
+                text="_Service" description="Go to Service"
+                icon="AllIcons.Actions.Search">
+            <add-to-group group-id="GoToTargetEx" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl BACK_SLASH" />
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt N"/>
+        </action>
+
+        <!--刷新-->
+        <action id="Toolkit.RefreshServices" class="com.github.aborn.webdevtoolkit.actions.ReloadTreeContentAction"
+                text="Refresh Services in Project"
+                icon="AllIcons.Actions.Refresh">
+        </action>
+
+        <group id="Toolkit.NavigatorActionsToolbar">
+            <reference id="Toolkit.RefreshServices"/>
+            <separator/>
+            <reference id="Toolkit.GotoService"/>
+            <separator/>
+        </group>
+
+    </actions>
 </idea-plugin>
