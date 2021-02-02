@@ -8,10 +8,7 @@ import com.github.aborn.webdevtoolkit.datatypes.nodes.ModuleNode;
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ProjectNode;
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ServiceNode;
 import com.github.aborn.webdevtoolkit.utils.RSDataKeys;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionToolbar;
-import com.intellij.openapi.actionSystem.DataProvider;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
@@ -49,7 +46,7 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
 
         final ActionManager actionManager = ActionManager.getInstance();
         ActionToolbar actionToolbar = actionManager.createActionToolbar("RestToolkit Navigator Toolbar",
-                (DefaultActionGroup) actionManager.getAction("Toolkit.NavigatorActionsToolbar"), true);
+                (ActionGroup) actionManager.getAction("Toolkit.NavigatorActionsToolbar"), true);
         setToolbar(actionToolbar.getComponent());
         Color gray = new Color(36, 38, 39);
         myTree.setBorder(BorderFactory.createLineBorder(gray));
