@@ -11,6 +11,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.aborn.webdevtoolkit.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.aborn.webdevtoolkit.services.MyProjectService"/>
+        <projectService serviceImplementation="com.github.aborn.webdevtoolkit.services.GotoRequestMappingService"/>
         <toolWindow id="WebX" anchor="right" secondary="true" icon="AllIcons.General.Modified"
                     factoryClass="com.github.aborn.webdevtoolkit.ui.RSNavigator"/>
     </extensions>
@@ -36,7 +37,7 @@
                 text="_Service" description="Go to Service"
                 icon="AllIcons.Actions.Search">
             <add-to-group group-id="GoToTargetEx" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl BACK_SLASH" />
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl BACK_SLASH"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt N"/>
         </action>
 

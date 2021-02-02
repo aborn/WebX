@@ -43,7 +43,7 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
 
         final ActionManager actionManager = ActionManager.getInstance();
         ActionToolbar actionToolbar = actionManager.createActionToolbar("RestToolkit Navigator Toolbar",
-                (ActionGroup) actionManager.getAction("Toolkit.NavigatorActionsToolbar"), true);
+                (ActionGroup) actionManager.getAction("WebX.NavigatorActionsToolbar"), true);
         setToolbar(actionToolbar.getComponent());
         Color gray = new Color(36, 38, 39);
         myTree.setBorder(BorderFactory.createLineBorder(gray));

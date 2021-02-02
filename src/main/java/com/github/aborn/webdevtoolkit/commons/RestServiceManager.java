@@ -4,7 +4,11 @@ import com.github.aborn.webdevtoolkit.datatypes.RestServiceItem;
 import com.github.aborn.webdevtoolkit.datatypes.RestServiceModule;
 import com.github.aborn.webdevtoolkit.zhaow.RestServiceDataManager;
 import com.github.aborn.webdevtoolkit.zhaow.RestServiceProject;
+import com.github.aborn.webdevtoolkit.zhaow.core.resolver.IResolver;
+import com.github.aborn.webdevtoolkit.zhaow.core.resolver.JavaxrsResolver;
+import com.github.aborn.webdevtoolkit.zhaow.core.resolver.SpringResolver;
 import com.intellij.openapi.project.Project;
+import org.apache.commons.compress.utils.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +37,19 @@ public class RestServiceManager {
         }
         return new RestServiceModule(p.getModuleName(), restServiceItems);
 
+    }
+
+    public static List<RestServiceItem> buildRestServiceItemListFrom(Project project) {
+        List<RestServiceItem> restServiceItems = new ArrayList<>();
+
+        List<RestServiceProject> restServiceProjects = RestServiceDataManager.buildRestServiceData(project);
+        for (RestServiceProject p : restServiceProjects) {
+            for (com.github.aborn.webdevtoolkit.zhaow.RestServiceItem restServiceItem : p.getServiceItems()) {
+                RestServiceItem item = new RestServiceItem(restServiceItem.getPsiElement(), restServiceItem.getRequestMethod(), restServiceItem.getUrl());
+                restServiceItems.add(item);
+            }
+        }
+
+        return restServiceItems;
     }
 }

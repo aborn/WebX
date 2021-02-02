@@ -1,12 +1,15 @@
 package com.github.aborn.webdevtoolkit.datatypes;
 
 import com.github.aborn.webdevtoolkit.datatypes.enums.HttpMethod;
+import com.github.aborn.webdevtoolkit.utils.IconUtils;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.pom.Navigatable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 /**
  * @author aborn
@@ -43,7 +46,7 @@ public class RestServiceItem implements NavigationItem {
 
     @Override
     public @Nullable ItemPresentation getPresentation() {
-        return null;
+        return new RestServiceItemPresentation();
     }
 
     @Override
@@ -73,5 +76,32 @@ public class RestServiceItem implements NavigationItem {
 
     public HttpMethod getHttpMethod() {
         return httpMethod;
+    }
+
+    private class RestServiceItemPresentation implements ItemPresentation {
+        @Nullable
+        @Override
+        public String getPresentableText() {
+            return uri;
+        }
+
+        // 对应的文件位置显示
+        @Nullable
+        @Override
+        public String getLocationString() {
+            String fileName = psiElement.getContainingFile().getName();
+            String location = null;
+            if (psiElement instanceof PsiMethod) {
+                PsiMethod psiMethod = ((PsiMethod) psiElement);;
+                location = psiMethod.getContainingClass().getName().concat("#").concat(psiMethod.getName());
+            }
+            return "(" + location + ")";
+        }
+
+        @Nullable
+        @Override
+        public Icon getIcon(boolean unused) {
+            return IconUtils.METHOD.get(httpMethod);
+        }
     }
 }
