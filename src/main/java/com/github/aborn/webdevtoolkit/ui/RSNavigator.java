@@ -1,14 +1,12 @@
 package com.github.aborn.webdevtoolkit.ui;
 
 import com.github.aborn.webdevtoolkit.utils.ToolkitUtil;
-import com.github.aborn.webdevtoolkit.zhaow.RestServiceStructure;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.DumbAware;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
-import com.intellij.openapi.wm.ToolWindowManager;
-import com.intellij.openapi.wm.ex.ToolWindowManagerListener;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.content.ContentManager;
@@ -29,7 +27,6 @@ public class RSNavigator implements ToolWindowFactory, DumbAware {
 
     private SimpleTree myTree;
     protected Project myProject;
-    private RestServiceStructure restServiceStructure;
 
     /**
      * Create the tool window content.
@@ -39,31 +36,27 @@ public class RSNavigator implements ToolWindowFactory, DumbAware {
      */
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-        toolWindow.setTitle("RestServices");
-        //toolWindow.setStripeTitle("RestServices");
-        ContentManager toolWindowManaer = toolWindow.getContentManager();
+        toolWindow.setStripeTitle("WebX");
+        ContentManager toolWindowContentManager = toolWindow.getContentManager();
         myProject = project;
         initTree();
 
-        JPanel panel = new RSNavigatorPanel(myProject, myTree);
+        final RSNavigatorPanel panel = new RSNavigatorPanel(myProject, myTree);
         final ContentFactory contentFactory = ServiceManager.getService(ContentFactory.class);
         final Content content = contentFactory.createContent(panel, "", false);
-        toolWindowManaer.addContent(content);
-        toolWindowManaer.setSelectedContent(content, false);
-        restServiceStructure = new RestServiceStructure();
+        toolWindowContentManager.addContent(content);
+        toolWindowContentManager.setSelectedContent(content, false);
 
-        final ToolWindowManagerListener toolWindowManagerListener = new ToolWindowManagerListener() {
-
+        // 当应用加载完成后，更新UIContents.
+        DumbService.getInstance(project).smartInvokeLater(new Runnable() {
             @Override
-            public void stateChanged(@NotNull ToolWindowManager toolWindowManager) {
-                System.out.println("goooooooo");
+            public void run() {
+                panel.refreshUIContent();
             }
-        };
+        });
+
     }
 
-    public void update() {
-        restServiceStructure.update(myProject);
-    }
 
     private void initTree() {
         myTree = new SimpleTree() {

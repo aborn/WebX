@@ -28,7 +28,7 @@ public class RestServiceManager {
     private static RestServiceModule convert(RestServiceProject p) {
         List<RestServiceItem> restServiceItems = new ArrayList<>();
         for (com.github.aborn.webdevtoolkit.zhaow.RestServiceItem restServiceItem : p.getServiceItems()) {
-            RestServiceItem item = new RestServiceItem(restServiceItem.getPsiElement(), "GET", restServiceItem.getUrl());
+            RestServiceItem item = new RestServiceItem(restServiceItem.getPsiElement(), restServiceItem.getRequestMethod(), restServiceItem.getUrl());
             restServiceItems.add(item);
         }
         return new RestServiceModule(p.getModuleName(), restServiceItems);

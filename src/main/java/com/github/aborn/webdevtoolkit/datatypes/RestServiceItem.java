@@ -1,5 +1,6 @@
 package com.github.aborn.webdevtoolkit.datatypes;
 
+import com.github.aborn.webdevtoolkit.datatypes.enums.HttpMethod;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.pom.Navigatable;
@@ -12,10 +13,11 @@ import org.jetbrains.annotations.Nullable;
  * @date 2021/02/01 3:05 PM
  */
 public class RestServiceItem implements NavigationItem {
-    String uri;
+    private String uri;
     private Navigatable navigationElement;
     private PsiMethod psiMethod;
     private PsiElement psiElement;
+    private HttpMethod httpMethod;
 
     public RestServiceItem(String uri) {
         this.uri = uri;
@@ -28,6 +30,7 @@ public class RestServiceItem implements NavigationItem {
         }
 
         this.uri = uri;
+        this.httpMethod = HttpMethod.getMethod(requestMethod);
         if (psiElement instanceof Navigatable) {
             navigationElement = (Navigatable) psiElement;
         }
@@ -66,5 +69,9 @@ public class RestServiceItem implements NavigationItem {
 
     public PsiMethod getPsiMethod() {
         return psiMethod;
+    }
+
+    public HttpMethod getHttpMethod() {
+        return httpMethod;
     }
 }

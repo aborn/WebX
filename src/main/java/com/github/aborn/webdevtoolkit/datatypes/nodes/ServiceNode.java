@@ -1,6 +1,7 @@
 package com.github.aborn.webdevtoolkit.datatypes.nodes;
 
 import com.github.aborn.webdevtoolkit.datatypes.RestServiceItem;
+import com.github.aborn.webdevtoolkit.utils.IconUtils;
 import com.intellij.lang.java.JavaLanguage;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
@@ -20,6 +21,7 @@ public class ServiceNode extends BaseNode {
     public ServiceNode(SimpleNode parent, RestServiceItem serviceItem) {
         super(parent);
         myServiceItem = serviceItem;
+        getTemplatePresentation().setIcon(IconUtils.METHOD.get(serviceItem.getHttpMethod()));
     }
 
     @Override

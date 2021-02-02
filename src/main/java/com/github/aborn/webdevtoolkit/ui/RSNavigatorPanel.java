@@ -67,7 +67,7 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
         setContent(servicesContentPaneSplitter);
     }
 
-    public void refresh() {
+    public void refreshUIContent() {
         ProjectNode projectNode = new ProjectNode();
         List<RestServiceModule> moduleNodeList = RestServiceManager.buildRestServiceData(myProject);
         DefaultMutableTreeNode rootNode = buildProjectRootNode(moduleNodeList, projectNode);
@@ -78,12 +78,12 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
     private DefaultMutableTreeNode buildProjectRootNode(List<RestServiceModule> moduleNodeList, ProjectNode projectNode) {
         DefaultMutableTreeNode projectRootNode = new DefaultMutableTreeNode(projectNode);
         for (RestServiceModule module : moduleNodeList) {
-            projectRootNode.add(convert(module, projectNode));
+            projectRootNode.add(buildModuleNode(module, projectNode));
         }
         return projectRootNode;
     }
 
-    private DefaultMutableTreeNode convert(RestServiceModule restServiceModule, ProjectNode projectNode) {
+    private DefaultMutableTreeNode buildModuleNode(RestServiceModule restServiceModule, ProjectNode projectNode) {
         List<RestServiceItem> restServiceItems = restServiceModule.getServiceItems();
         if (restServiceItems == null || restServiceItems.size() == 0) {
             return null;

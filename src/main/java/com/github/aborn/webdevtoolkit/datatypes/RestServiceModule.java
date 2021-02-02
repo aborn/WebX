@@ -16,12 +16,6 @@ public class RestServiceModule {
 
     List<RestServiceItem> serviceItems = new ArrayList<>();
 
-    public RestServiceModule() {
-        appName = "demoAppName";
-        moduleName = "demoModuleName";
-    }
-
-
     public RestServiceModule(String moduleName, List<RestServiceItem> serviceItems) {
         this.moduleName = moduleName;
         appName = moduleName;

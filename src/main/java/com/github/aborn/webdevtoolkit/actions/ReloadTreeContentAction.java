@@ -1,6 +1,5 @@
 package com.github.aborn.webdevtoolkit.actions;
 
-import com.github.aborn.webdevtoolkit.ui.RSNavigator;
 import com.github.aborn.webdevtoolkit.ui.RSNavigatorPanel;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -19,10 +18,9 @@ public class ReloadTreeContentAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         final Project project = CommonDataKeys.PROJECT.getData(e.getDataContext());
-        RSNavigator servicesNavigator = project.getComponent(RSNavigator.class);
         final ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow("WebX");
 
         RSNavigatorPanel panel = (RSNavigatorPanel)toolWindow.getContentManager().getContent(0).getComponent();
-        panel.refresh();
+        panel.refreshUIContent();
     }
 }
