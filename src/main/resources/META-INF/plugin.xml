@@ -22,7 +22,7 @@
 
     <actions>
 
-        <group id="RestfulToolkit.RestMethod.EditorPopupMenu" text="RESTful Toolkit"
+        <group id="WebX.RestMethod.EditorPopupMenu" text="RESTful Toolkit"
                description="RESTful Toolkit"
                popup="false">
             <!--<add-to-group group-id="EditorPopupMenu" anchor="last" relative-to-action="EditorToggleColumnMode"/>-->
@@ -32,7 +32,7 @@
 
 
         <!-- url 搜索 -->
-        <action id="Toolkit.GotoService" class="com.github.aborn.webdevtoolkit.actions.GotoServicesAction"
+        <action id="WebX.GotoService" class="com.github.aborn.webdevtoolkit.actions.GotoServicesAction"
                 text="_Service" description="Go to Service"
                 icon="AllIcons.Actions.Search">
             <add-to-group group-id="GoToTargetEx" anchor="first"/>
@@ -41,15 +41,15 @@
         </action>
 
         <!--刷新-->
-        <action id="Toolkit.RefreshServices" class="com.github.aborn.webdevtoolkit.actions.ReloadTreeContentAction"
+        <action id="WebX.RefreshServices" class="com.github.aborn.webdevtoolkit.actions.ReloadTreeContentAction"
                 text="Refresh Services in Project"
                 icon="AllIcons.Actions.Refresh">
         </action>
 
-        <group id="Toolkit.NavigatorActionsToolbar">
-            <reference id="Toolkit.RefreshServices"/>
+        <group id="WebX.NavigatorActionsToolbar">
+            <reference id="WebX.RefreshServices"/>
             <separator/>
-            <reference id="Toolkit.GotoService"/>
+            <reference id="WebX.GotoService"/>
             <separator/>
         </group>
 

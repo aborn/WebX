@@ -7,22 +7,21 @@ import com.github.aborn.webdevtoolkit.datatypes.RestServiceModule;
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ModuleNode;
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ProjectNode;
 import com.github.aborn.webdevtoolkit.datatypes.nodes.ServiceNode;
-import com.github.aborn.webdevtoolkit.utils.RSDataKeys;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionToolbar;
+import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
 import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.treeStructure.SimpleTree;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,8 +34,6 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
     private final Project myProject;
 
     private Splitter servicesContentPaneSplitter;
-    private final JTextArea defaultUnderView = new JTextArea(" json format textarea ");
-
 
     public RSNavigatorPanel(Project project, SimpleTree tree) {
         super(true, true);
@@ -64,7 +61,7 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
         setContent(servicesContentPaneSplitter);
     }
 
-    public void refreshUIContent() {
+    public void refreshUiContent() {
         ProjectNode projectNode = new ProjectNode();
         List<RestServiceModule> moduleNodeList = RestServiceManager.buildRestServiceData(myProject);
         DefaultMutableTreeNode rootNode = buildProjectRootNode(moduleNodeList, projectNode);
@@ -95,36 +92,6 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
         }
         return moduleRoot;
     }
-
-    /*
-    private Collection<? extends RestServiceStructure.BaseSimpleNode> getSelectedNodes(Class<RestServiceStructure.BaseSimpleNode> aClass) {
-        return RestServiceStructure.getSelectedNodes(myTree, aClass);
-    }*/
-
-    @Override
-    @Nullable
-    public Object getData(@NonNls String dataId) {
-
-        if (RSDataKeys.SERVICE_ITEMS.is(dataId)) {
-            return extractServices();
-        }
-
-        return super.getData(dataId);
-    }
-
-    private List<RestServiceItem> extractServices() {
-        List<RestServiceItem> result = new ArrayList<>();
-
-        /*
-        Collection<? extends RestServiceStructure.BaseSimpleNode> selectedNodes = getSelectedNodes(RestServiceStructure.BaseSimpleNode.class);
-        for (RestServiceStructure.BaseSimpleNode selectedNode : selectedNodes) {
-            if (selectedNode instanceof RestServiceStructure.ServiceNode) {
-                result.add(((RestServiceStructure.ServiceNode) selectedNode).myServiceItem);
-            }
-        }*/
-        return result;
-    }
-
 }
 
 

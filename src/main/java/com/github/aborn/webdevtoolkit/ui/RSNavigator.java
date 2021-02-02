@@ -51,7 +51,7 @@ public class RSNavigator implements ToolWindowFactory, DumbAware {
         DumbService.getInstance(project).smartInvokeLater(new Runnable() {
             @Override
             public void run() {
-                panel.refreshUIContent();
+                panel.refreshUiContent();
             }
         });
 
@@ -67,7 +67,6 @@ public class RSNavigator implements ToolWindowFactory, DumbAware {
 
                 final JLabel myLabel = new JLabel(
                         RestfulToolkitBundle.message("toolkit.navigator.nothing.to.display", ToolkitUtil.formatHtmlImage(SYNC_ICON_URL)));
-
 
                 if (myProject.isInitialized()) {
                     return;

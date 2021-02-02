@@ -21,6 +21,6 @@ public class ReloadTreeContentAction extends AnAction {
         final ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow("WebX");
 
         RSNavigatorPanel panel = (RSNavigatorPanel)toolWindow.getContentManager().getContent(0).getComponent();
-        panel.refreshUIContent();
+        panel.refreshUiContent();
     }
 }
