@@ -26,11 +26,8 @@
         <group id="WebX.RestMethod.EditorPopupMenu" text="RESTful Toolkit"
                description="RESTful Toolkit"
                popup="false">
-            <!--<add-to-group group-id="EditorPopupMenu" anchor="last" relative-to-action="EditorToggleColumnMode"/>-->
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <!--<reference ref="GenerateRestUrl"/>-->
         </group>
-
 
         <!-- url 搜索 -->
         <action id="WebX.GotoService" class="com.github.aborn.webdevtoolkit.actions.GotoServicesAction"

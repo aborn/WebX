@@ -14,6 +14,7 @@ import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
+import com.intellij.ui.JBColor;
 import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.treeStructure.SimpleTree;
 
@@ -48,13 +49,12 @@ public class RSNavigatorPanel extends SimpleToolWindowPanel implements DataProvi
         Color gray = new Color(36, 38, 39);
         myTree.setBorder(BorderFactory.createLineBorder(gray));
         JScrollPane scrollPane = ScrollPaneFactory.createScrollPane(myTree);
-        scrollPane.setBorder(BorderFactory.createLineBorder(Color.RED));
-
+        scrollPane.setBorder(BorderFactory.createLineBorder(JBColor.RED));
 
         servicesContentPaneSplitter = new Splitter(true, .5f);
         servicesContentPaneSplitter.setShowDividerControls(true);
         servicesContentPaneSplitter.setDividerWidth(10);
-        servicesContentPaneSplitter.setBorder(BorderFactory.createLineBorder(Color.RED));
+        servicesContentPaneSplitter.setBorder(BorderFactory.createLineBorder(JBColor.RED));
 
         // 显示服务列表
         servicesContentPaneSplitter.setFirstComponent(scrollPane);
