@@ -29,7 +29,7 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
 
-        <!-- url 搜索 -->
+        <!-- 搜索并跳转到定义处 -->
         <action id="WebX.GotoService" class="com.github.aborn.webx.actions.GotoServicesAction"
                 text="_Service" description="Go to Service"
                 icon="AllIcons.Actions.Search">

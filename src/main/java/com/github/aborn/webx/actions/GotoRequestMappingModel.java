@@ -41,12 +41,12 @@ public class GotoRequestMappingModel extends FilteringGotoByModel<HttpMethod> im
 
     @Override
     public String getNotInMessage() {
-        return "No matched method found";
+        return "No matched method found!";
     }
 
     @Override
     public String getNotFoundMessage() {
-        return "Service path not found";
+        return "Service path not found!";
     }
 
     @Override
@@ -94,7 +94,10 @@ public class GotoRequestMappingModel extends FilteringGotoByModel<HttpMethod> im
     @Override
     public boolean matches(@NotNull String popupItem, @NotNull String userPattern) {
         String pattern = userPattern;
-        if (pattern.equals("/")) return true;
+        if (pattern.equals("/")) {
+            return true;
+        }
+
         MinusculeMatcher matcher = NameUtil.buildMatcher("*" + pattern, NameUtil.MatchingCaseSensitivity.NONE);
 
         return matcher.matches(popupItem);

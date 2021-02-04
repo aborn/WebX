@@ -1,13 +1,11 @@
 package com.github.aborn.webx.actions;
 
-import com.github.aborn.webx.modules.restful.GotoRequestMappingContributor;
-import com.github.aborn.webx.services.GotoRequestMappingService;
 import com.github.aborn.webx.datatypes.RestServiceItem;
 import com.github.aborn.webx.datatypes.enums.HttpMethod;
-
-// TODO remove it
-import com.github.aborn.webdevtoolkit.zhaow.actions.GotoRequestMappingProvider;
-import com.github.aborn.webdevtoolkit.zhaow.actions.RestServiceChooseByNamePopup;
+import com.github.aborn.webx.modules.restful.GotoRequestMappingContributor;
+import com.github.aborn.webx.modules.restful.GotoRequestMappingProvider;
+import com.github.aborn.webx.modules.restful.RSChooseByNamePopup;
+import com.github.aborn.webx.services.GotoRequestMappingService;
 import com.intellij.featureStatistics.FeatureUsageTracker;
 import com.intellij.ide.actions.GotoActionBase;
 import com.intellij.ide.util.gotoByName.ChooseByNameFilter;
@@ -16,7 +14,6 @@ import com.intellij.ide.util.gotoByName.ChooseByNameModel;
 import com.intellij.ide.util.gotoByName.ChooseByNamePopup;
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.ide.CopyPasteManager;
@@ -39,12 +36,10 @@ public class GotoServicesAction extends GotoActionBase implements DumbAware {
 
     @Override
     protected void gotoActionPerformed(AnActionEvent e) {
-        // 进入导航
         Project project = e.getProject();
         if (project == null) {
             return;
         }
-
         FeatureUsageTracker.getInstance().triggerFeatureUsed("navigation.popup.service");
 
         ChooseByNameContributor[] chooseByNameContributors = {
@@ -72,32 +67,31 @@ public class GotoServicesAction extends GotoActionBase implements DumbAware {
         };
 
         GotoRequestMappingProvider provider = new GotoRequestMappingProvider(getPsiContext(e));
-        showNavigationPopup(e, model, callback, "Request Mapping Url matching pattern", true, true, (ChooseByNameItemProvider) provider);
+        showNavigationPopup(e, project, model, callback, "Request Mapping Url matching pattern",
+                true, true, (ChooseByNameItemProvider) provider);
     }
 
-    @Override
     protected <T> void showNavigationPopup(AnActionEvent e,
+                                           @NotNull Project project,
                                            ChooseByNameModel model,
                                            final GotoActionCallback<T> callback,
                                            @Nullable final String findUsagesTitle,
                                            boolean useSelectionFromEditor,
                                            final boolean allowMultipleSelection,
                                            final ChooseByNameItemProvider itemProvider) {
-        final Project project = e.getData(CommonDataKeys.PROJECT);
+
         boolean mayRequestOpenInCurrentWindow = model.willOpenEditor() && FileEditorManagerEx.getInstanceEx(project).hasSplitOrUndockedWindows();
         Pair<String, Integer> start = getInitialText(useSelectionFromEditor, e);
-
-        String copiedURL = tryFindCopiedURL();
-
-        String predefinedText = start.first == null ? copiedURL : start.first;
+        String copiedUrl = tryFindCopiedUrl();
+        String predefinedText = start.first == null ? copiedUrl : start.first;
 
         showNavigationPopup(callback, findUsagesTitle,
-                RestServiceChooseByNamePopup.createPopup(project, model, itemProvider, predefinedText,
+                RSChooseByNamePopup.createPopup(project, model, itemProvider, predefinedText,
                         mayRequestOpenInCurrentWindow,
                         start.second), allowMultipleSelection);
     }
 
-    private String tryFindCopiedURL() {
+    private String tryFindCopiedUrl() {
         String contents = CopyPasteManager.getInstance().getContents(DataFlavor.stringFlavor);
         if (contents == null) {
             return null;
@@ -123,9 +117,7 @@ public class GotoServicesAction extends GotoActionBase implements DumbAware {
         @Override
         @NotNull
         protected List<HttpMethod> getAllFilterValues() {
-            List<HttpMethod> elements = Arrays.asList(HttpMethod.values());
-
-            return elements;
+            return Arrays.asList(HttpMethod.values());
         }
 
         @Override
