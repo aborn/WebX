@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# web-dev-toolkit Changelog
+# WebX Changelog
 
 ## [Unreleased]
 ### Added
