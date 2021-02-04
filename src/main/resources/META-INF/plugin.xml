@@ -9,15 +9,15 @@
     <depends>com.intellij.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.aborn.webdevtoolkit.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.aborn.webdevtoolkit.services.MyProjectService"/>
-        <projectService serviceImplementation="com.github.aborn.webdevtoolkit.services.GotoRequestMappingService"/>
+        <applicationService serviceImplementation="com.github.aborn.webx.services.MyApplicationService"/>
+        <projectService serviceImplementation="com.github.aborn.webx.services.MyProjectService"/>
+        <projectService serviceImplementation="com.github.aborn.webx.services.GotoRequestMappingService"/>
         <toolWindow id="WebX" anchor="right" secondary="true" icon="AllIcons.General.Modified"
-                    factoryClass="com.github.aborn.webdevtoolkit.ui.RSNavigator"/>
+                    factoryClass="com.github.aborn.webx.ui.RSNavigator"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.aborn.webdevtoolkit.listeners.MyProjectManagerListener"
+        <listener class="com.github.aborn.webx.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
@@ -30,7 +30,7 @@
         </group>
 
         <!-- url 搜索 -->
-        <action id="WebX.GotoService" class="com.github.aborn.webdevtoolkit.actions.GotoServicesAction"
+        <action id="WebX.GotoService" class="com.github.aborn.webx.actions.GotoServicesAction"
                 text="_Service" description="Go to Service"
                 icon="AllIcons.Actions.Search">
             <add-to-group group-id="GoToTargetEx" anchor="first"/>
@@ -39,7 +39,7 @@
         </action>
 
         <!--刷新-->
-        <action id="WebX.RefreshServices" class="com.github.aborn.webdevtoolkit.actions.ReloadTreeContentAction"
+        <action id="WebX.RefreshServices" class="com.github.aborn.webx.actions.ReloadTreeContentAction"
                 text="Refresh Services in Project"
                 icon="AllIcons.Actions.Refresh">
         </action>
