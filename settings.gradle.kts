@@ -1,1 +1,1 @@
-rootProject.name = "web-dev-toolkit"
+rootProject.name = "WebX"
