@@ -65,8 +65,7 @@ public class RSNavigator implements ToolWindowFactory, DumbAware {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
 
-                final JLabel myLabel = new JLabel(
-                        RestfulToolkitBundle.message("toolkit.navigator.nothing.to.display", ToolkitUtil.formatHtmlImage(SYNC_ICON_URL)));
+                final JLabel myLabel = new JLabel(ToolkitUtil.formatHtmlImage(SYNC_ICON_URL));
 
                 if (myProject.isInitialized()) {
                     return;
