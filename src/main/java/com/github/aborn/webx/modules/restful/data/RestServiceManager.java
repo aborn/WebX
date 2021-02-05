@@ -32,6 +32,7 @@ public class RestServiceManager {
                     serviceProjectList.add(new RestServiceModule(module.getName() + "(" + restServices.size() +")", restServices));
                 }
             }
+            LOG.info("Find " + modules.length + " modules in " + project.getName() + " project.");
         } else {
             List<RestServiceItem> restServices = buildRestServiceItemListFrom(project);
             if (restServices.size() > 0) {
