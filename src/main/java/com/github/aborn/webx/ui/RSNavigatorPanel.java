@@ -1,7 +1,7 @@
 package com.github.aborn.webx.ui;
 
 
-import com.github.aborn.webx.modules.restful.RestServiceManager;
+import com.github.aborn.webx.modules.restful.data.RestServiceManager;
 import com.github.aborn.webx.datatypes.RestServiceItem;
 import com.github.aborn.webx.datatypes.RestServiceModule;
 import com.github.aborn.webx.datatypes.nodes.ModuleNode;

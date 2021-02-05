@@ -1,6 +1,7 @@
 package com.github.aborn.webx.modules.restful;
 
 import com.github.aborn.webx.datatypes.RestServiceItem;
+import com.github.aborn.webx.modules.restful.data.RestServiceManager;
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.module.Module;

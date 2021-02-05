@@ -1,4 +1,4 @@
-package com.github.aborn.webx.actions;
+package com.github.aborn.webx.modules.restful;
 
 import com.github.aborn.webx.datatypes.RestServiceItem;
 import com.github.aborn.webx.datatypes.enums.HttpMethod;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class GotoRequestMappingModel extends FilteringGotoByModel<HttpMethod> implements DumbAware, CustomMatcherModel {
 
-    protected GotoRequestMappingModel(@NotNull Project project, @NotNull ChooseByNameContributor[] contributors) {
+    public GotoRequestMappingModel(@NotNull Project project, @NotNull ChooseByNameContributor[] contributors) {
         super(project, contributors);
     }
 

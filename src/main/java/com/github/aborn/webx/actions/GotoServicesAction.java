@@ -3,6 +3,7 @@ package com.github.aborn.webx.actions;
 import com.github.aborn.webx.datatypes.RestServiceItem;
 import com.github.aborn.webx.datatypes.enums.HttpMethod;
 import com.github.aborn.webx.modules.restful.GotoRequestMappingContributor;
+import com.github.aborn.webx.modules.restful.GotoRequestMappingModel;
 import com.github.aborn.webx.modules.restful.GotoRequestMappingProvider;
 import com.github.aborn.webx.modules.restful.RSChooseByNamePopup;
 import com.github.aborn.webx.services.GotoRequestMappingService;

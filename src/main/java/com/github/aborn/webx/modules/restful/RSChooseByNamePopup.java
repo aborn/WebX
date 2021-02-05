@@ -1,6 +1,5 @@
 package com.github.aborn.webx.modules.restful;
 
-import com.github.aborn.webx.actions.GotoRequestMappingModel;
 import com.github.aborn.webx.modules.restful.utils.ToolkitUtil;
 import com.intellij.ide.util.gotoByName.ChooseByNameItemProvider;
 import com.intellij.ide.util.gotoByName.ChooseByNameModel;

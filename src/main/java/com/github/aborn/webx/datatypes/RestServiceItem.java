@@ -4,6 +4,7 @@ import com.github.aborn.webx.datatypes.enums.HttpMethod;
 import com.github.aborn.webx.modules.restful.utils.IconUtils;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
+import com.intellij.openapi.module.Module;
 import com.intellij.pom.Navigatable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
@@ -21,6 +22,7 @@ public class RestServiceItem implements NavigationItem {
     private PsiMethod psiMethod;
     private PsiElement psiElement;
     private HttpMethod httpMethod;
+    private Module module;
 
     public RestServiceItem(String uri) {
         this.uri = uri;
@@ -76,6 +78,14 @@ public class RestServiceItem implements NavigationItem {
 
     public HttpMethod getHttpMethod() {
         return httpMethod;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
 
     private class RestServiceItemPresentation implements ItemPresentation {
