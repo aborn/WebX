@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>com.github.aborn.webdevtoolkit</id>
-    <name>web-dev-toolkit</name>
+    <id>com.github.aborn.webx</id>
+    <name>WebX</name>
     <vendor>aborn</vendor>
 
     <!-- Product and plugin compatibility requirements -->

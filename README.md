@@ -1,6 +1,6 @@
-# web-dev-toolkit
+# WebX
 
-![Build](https://github.com/aborn/web-dev-toolkit/workflows/Build/badge.svg)
+![Build](https://github.com/aborn/WebX/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 
@@ -25,12 +25,12 @@ To keep everything working, do not remove `<!-- ... -->` sections.
 
 - Using IDE built-in plugin system:
   
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "web-dev-toolkit"</kbd> >
+  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "WebX"</kbd> >
   <kbd>Install Plugin</kbd>
   
 - Manually:
 
-  Download the [latest release](https://github.com/aborn/web-dev-toolkit/releases/latest) and install it manually using
+  Download the [latest release](https://github.com/aborn/WebX/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
 
