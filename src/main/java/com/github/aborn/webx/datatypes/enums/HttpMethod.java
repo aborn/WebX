@@ -10,6 +10,7 @@ import java.util.Map;
  * @date 2021/02/02 11:19 AM
  */
 public enum HttpMethod {
+    // Http方法
     GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS, TRACE, CONNECT;
 
     private static final Map<String, HttpMethod> methodMap = new HashMap(8);
