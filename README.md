@@ -14,7 +14,7 @@
 WebX is a powerful Intellij IDEA plugin for develop web services.
 <!-- Plugin description end -->
 
-### Utils
+### Functions
 * *ONE STEP* quick navigation to URL mapping declarations.
 ( use: `Ctrl + \` or `Ctrl + Alt + N` ) 
 * Show RESTful service structure.
