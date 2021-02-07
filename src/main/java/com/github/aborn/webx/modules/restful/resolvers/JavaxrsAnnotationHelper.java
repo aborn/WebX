@@ -3,6 +3,7 @@ package com.github.aborn.webx.modules.restful.resolvers;
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,9 +17,13 @@ public class JavaxrsAnnotationHelper implements AnnotationHelper {
 
     @Override
     public String getClassUriPath(PsiClass psiClass) {
-        PsiAnnotation annotation = psiClass.getModifierList().findAnnotation(JaxrsPathAnnotation.PATH.getQualifiedName());
-        String path = PsiAnnotationHelper.getAnnotationAttributeValue(annotation, "value");
-        return path != null ? path : "";
+        try {
+            PsiAnnotation annotation = psiClass.getModifierList().findAnnotation(JaxrsPathAnnotation.PATH.getQualifiedName());
+            String path = PsiAnnotationHelper.getAnnotationAttributeValue(annotation, "value");
+            return path != null ? path : StringUtils.EMPTY;
+        } catch (NullPointerException e) {
+            return StringUtils.EMPTY;
+        }
     }
 
     @Override
@@ -44,8 +49,11 @@ public class JavaxrsAnnotationHelper implements AnnotationHelper {
     }
 
     private String getWsPathValue(PsiAnnotation annotation) {
-        String value = PsiAnnotationHelper.getAnnotationAttributeValue(annotation, "value");
+        if (annotation == null) {
+            return StringUtils.EMPTY;
+        }
 
-        return value != null ? value : "";
+        String value = PsiAnnotationHelper.getAnnotationAttributeValue(annotation, "value");
+        return value != null ? value : StringUtils.EMPTY;
     }
 }

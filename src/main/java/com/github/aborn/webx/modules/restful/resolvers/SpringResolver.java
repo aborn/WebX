@@ -83,9 +83,9 @@ public class SpringResolver extends BaseResolver {
 
             for (RequestPath classRequestPath : classRequestPaths) {
                 for (RequestPath methodRequestPath : methodRequestPaths) {
-                    String path = classRequestPath.getPath();
+                    String classUriPath = classRequestPath.getPath();
 
-                    RestServiceItem item = buildRestServiceItem(psiMethod, path, methodRequestPath);
+                    RestServiceItem item = buildRestServiceItem(psiMethod, classUriPath, methodRequestPath);
                     if (module != null) {
                         item.setModule(module);
                     }

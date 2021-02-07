@@ -36,7 +36,7 @@ public class PsiAnnotationHelper {
         return values;
     }
 
-    public static String getAnnotationAttributeValue(PsiAnnotation annotation, String attr) {
+    public static String getAnnotationAttributeValue(@NotNull PsiAnnotation annotation, String attr) {
         List<String> values = getAnnotationAttributeValues(annotation, attr);
         if (!values.isEmpty()) {
             return values.get(0);

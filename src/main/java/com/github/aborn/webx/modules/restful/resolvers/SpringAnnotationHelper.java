@@ -29,9 +29,10 @@ public class SpringAnnotationHelper implements AnnotationHelper {
 
         for (PsiAnnotation annotation : annotations) {
             for (SpringRequestMethodAnnotation mappingAnnotation : SpringRequestMethodAnnotation.values()) {
-                if (mappingAnnotation.getQualifiedName().endsWith(annotation.getQualifiedName())) {
+                if (annotation.getQualifiedName() !=null &&
+                        mappingAnnotation.getQualifiedName().endsWith(annotation.getQualifiedName())) {
                     String defaultValue = "/";
-                    List<RequestPath> requestMappings = getRequestMappings(annotation, defaultValue);
+                    List<RequestPath> requestMappings = getRequestMappings(annotation, defaultValue, mappingAnnotation);
                     if (requestMappings.size() > 0) {
                         list.addAll(requestMappings);
                     }
@@ -42,7 +43,7 @@ public class SpringAnnotationHelper implements AnnotationHelper {
         return list.toArray(new RequestPath[list.size()]);
     }
 
-    private static List<RequestPath> getRequestMappings(PsiAnnotation annotation, String defaultValue) {
+    private static List<RequestPath> getRequestMappings(PsiAnnotation annotation, String defaultValue, SpringRequestMethodAnnotation mappingAnnotation) {
         List<RequestPath> mappingList = new ArrayList<>();
 
         List<String> methodList = PsiAnnotationHelper.getAnnotationAttributeValues(annotation, "method");
@@ -57,11 +58,7 @@ public class SpringAnnotationHelper implements AnnotationHelper {
             pathList.add(defaultValue);
         }
 
-        String defaultMethod = "GET";
-        if ("org.springframework.web.bind.annotation.PostMapping".equals(annotation.getQualifiedName())) {
-            defaultMethod = "POST";
-        }
-
+        String defaultMethodType = mappingAnnotation.methodName();
         if (methodList.size() > 0) {
             for (String method : methodList) {
                 for (String path : pathList) {
@@ -70,7 +67,7 @@ public class SpringAnnotationHelper implements AnnotationHelper {
             }
         } else {
             for (String path : pathList) {
-                mappingList.add(new RequestPath(path, defaultMethod));
+                mappingList.add(new RequestPath(path, defaultMethodType));
             }
         }
 
