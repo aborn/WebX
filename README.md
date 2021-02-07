@@ -15,21 +15,6 @@ WebX is a powerful Intellij IDEA plugin for develop web services, which forks fr
 ### Supported frameworks
 * Spring (Spring MVC / Spring Boot)   
 * JAX-RS 
-
-------
-
-### WebX（Web开始扩展插件）
-WebX是一套Web开发的扩展插件，源于[RestfulToolkit](https://github.com/mrmanzhaow/RestfulToolkit) 并在其基础上对最新版本的IDEA做了支持。
-
-### 功能
-* 根据 URL 直接导航到对应的方法定义 ( `Ctrl \` or `Ctrl Alt N` ); 
-* 提供服务树的显示窗口;
-
-### 支持的框架
-* Spring (Spring MVC / Spring Boot)   
-* JAX-RS 
-
-------
  
 ## Template ToDo list
 - [x] Create a new [IntelliJ Platform Plugin Template][template] project.
@@ -52,6 +37,18 @@ WebX是一套Web开发的扩展插件，源于[RestfulToolkit](https://github.co
   Download the [latest release](https://github.com/aborn/WebX/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
+---
+
+### WebX（强大的Web开发扩展插件）
+WebX是一套强大的Web开发扩展插件，源于[RestfulToolkit](https://github.com/mrmanzhaow/RestfulToolkit) 并在其基础上对最新版本的IDEA做了支持。
+
+### 功能
+* 根据 URL 直接导航到对应的方法定义 ( `Ctrl \` or `Ctrl Alt N` )。
+* 提供服务树的显示窗口。
+
+### 支持的框架
+* Spring (Spring MVC / Spring Boot)   
+* JAX-RS 
 
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
