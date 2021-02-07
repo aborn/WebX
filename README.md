@@ -44,6 +44,8 @@ WebX is a powerful Intellij IDEA plugin for develop web services.
   Download the [latest release](https://github.com/aborn/WebX/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
+- Note: IDEA Version >= 2019.3
+
 ---
 
 ### WebX（强大的Web开发扩展插件）
