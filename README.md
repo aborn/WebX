@@ -10,7 +10,9 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 
 ## WebX (Web development extensions) 
-WebX is a powerful Intellij IDEA plugin for develop web services, which forks from [RestfulToolkit](https://github.com/mrmanzhaow/RestfulToolkit).
+<!-- Plugin description -->
+WebX is a powerful Intellij IDEA plugin for develop web services.
+<!-- Plugin description end -->
 
 ### Utils
 * *ONE STEP* quick navigation to URL mapping declarations.
@@ -29,10 +31,6 @@ WebX is a powerful Intellij IDEA plugin for develop web services, which forks fr
 - [ ] Set the Plugin ID in the above README badges.
 - [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html).
 - [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
-
-<!-- Plugin description -->
-WebX is a powerful Intellij IDEA plugin for develop web services.
-<!-- Plugin description end -->
 
 ## Installation
 

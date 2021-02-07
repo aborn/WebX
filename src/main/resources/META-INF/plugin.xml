@@ -12,7 +12,7 @@
         <applicationService serviceImplementation="com.github.aborn.webx.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.aborn.webx.services.MyProjectService"/>
         <projectService serviceImplementation="com.github.aborn.webx.services.GotoRequestMappingService"/>
-        <toolWindow id="WebX" anchor="right" secondary="true" icon="AllIcons.General.Modified"
+        <toolWindow id="WebX" anchor="right" secondary="true" icon="/icons/webx13x13.png"
                     factoryClass="com.github.aborn.webx.ui.RSNavigator"/>
     </extensions>
 
