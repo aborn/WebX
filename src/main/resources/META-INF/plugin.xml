@@ -24,12 +24,6 @@
 
     <actions>
 
-        <group id="WebX.RestMethod.EditorPopupMenu" text="RESTful Toolkit"
-               description="RESTful Toolkit"
-               popup="false">
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-        </group>
-
         <!-- 搜索并跳转到定义处 -->
         <action id="WebX.GotoService" class="com.github.aborn.webx.actions.GotoServicesAction"
                 text="_Service" description="Go to Service"
