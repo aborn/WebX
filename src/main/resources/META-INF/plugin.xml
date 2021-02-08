@@ -18,8 +18,16 @@
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.aborn.webx.listeners.MyProjectManagerListener"
+        <listener class="com.github.aborn.webx.listeners.WebxProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
+        <listener class="com.github.aborn.webx.listeners.WebxVfsListener"
+                  topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+        <listener class="com.github.aborn.webx.listeners.WebxApplicationActivationListener"
+                  topic="com.intellij.openapi.application.ApplicationActivationListener"/>
+        <listener class="com.github.aborn.webx.listeners.WebxEditorMouseListener"
+                  topic="com.intellij.openapi.editor.event.EditorMouseListener"/>
+        <listener class="com.github.aborn.webx.listeners.WebxDocumentListener"
+                  topic="com.intellij.openapi.editor.event.DocumentListener"/>
     </applicationListeners>
 
     <actions>

@@ -9,14 +9,16 @@ import org.jetbrains.annotations.NotNull;
  * @author aborn
  * @date 2021/01/29 2:56 PM
  */
-public class MyProjectManagerListener implements ProjectManagerListener {
+public class WebxProjectManagerListener extends UserActionBaseListener implements ProjectManagerListener {
     @Override
     public void projectOpened(@NotNull Project project) {
         // Ensure this isn't part of testing
         if (ApplicationManager.getApplication().isUnitTestMode()) {
             return;
         }
+
         //Messages.showMessageDialog(project, "打开！", project.getName(), Messages.getInformationIcon());
+        info(project.getName() + "打开！");
     }
 
     /**
@@ -31,6 +33,7 @@ public class MyProjectManagerListener implements ProjectManagerListener {
             return;
         }
         //Messages.showMessageDialog(project, "关闭！", project.getName(), Messages.getInformationIcon());
+        info(project.getName() + "关闭！");
     }
 
 }
