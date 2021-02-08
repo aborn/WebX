@@ -2,7 +2,7 @@
 
 # WebX Changelog
 
-## 0.1
+## [0.1.0]
 ### Added
 - Initial WebX plugin.
 - Quick navigation to URL mapping declarations.
