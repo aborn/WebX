@@ -2,6 +2,9 @@
 
 # WebX Changelog
 
-## [Unreleased]
+## 0.1
 ### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+- Initial WebX plugin.
+- Quick navigation to URL mapping declarations.
+- Show RESTful service structure.
+- Support Spring and JAX-RS framework.  
