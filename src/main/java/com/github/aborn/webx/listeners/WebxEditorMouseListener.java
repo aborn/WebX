@@ -20,9 +20,4 @@ public class WebxEditorMouseListener extends UserActionBaseListener implements E
         info("mouse pressed. projectName:" + project.getName());
     }
 
-    @Override
-    public void mouseClicked(EditorMouseEvent event) {
-        Project project = event.getEditor().getProject();
-        info("mouse clicked. projectName:" + project.getName());
-    }
 }

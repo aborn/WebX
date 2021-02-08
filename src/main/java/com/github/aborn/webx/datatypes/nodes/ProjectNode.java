@@ -30,7 +30,7 @@ public class ProjectNode extends BaseNode {
     @Override
     public String getName() {
         String s = "Found %d services ";
-        return serviceCount > 0 ? String.format(s, serviceCount) : null;
+        return serviceCount > 0 ? String.format(s, serviceCount) : "Not services found ";
     }
 
     public void updateServiceCount(int serviceCount) {
