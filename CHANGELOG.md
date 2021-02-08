@@ -7,4 +7,4 @@
 - Initial WebX plugin.
 - Quick navigation to URL mapping declarations.
 - Show RESTful service structure.
-- Support Spring and JAX-RS framework.  
+- Support Spring and JAX-RS frameworks.  
