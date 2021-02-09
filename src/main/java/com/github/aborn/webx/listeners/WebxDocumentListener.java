@@ -1,5 +1,7 @@
 package com.github.aborn.webx.listeners;
 
+import com.github.aborn.webx.modules.tc.TimeTrace;
+import com.github.aborn.webx.utils.ToolUtils;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorFactory;
@@ -25,5 +27,7 @@ public class WebxDocumentListener extends UserActionBaseListener implements Docu
             Project project = editors[0].getProject();
             info("document changed. projectName:" + project.getName());
         }
+
+        TimeTrace.appendActionPoint(file, ToolUtils.getProject(document), false);
     }
 }

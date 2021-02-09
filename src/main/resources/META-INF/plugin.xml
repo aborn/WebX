@@ -10,6 +10,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.aborn.webx.services.MyApplicationService"/>
+        <applicationService serviceImplementation="com.github.aborn.webx.modules.tc.TimeTrace"/>
         <projectService serviceImplementation="com.github.aborn.webx.services.MyProjectService"/>
         <projectService serviceImplementation="com.github.aborn.webx.services.GotoRequestMappingService"/>
         <toolWindow id="WebX" anchor="right" secondary="true" icon="/icons/webx13x13.png"
