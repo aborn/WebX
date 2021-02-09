@@ -2,6 +2,13 @@
 
 # WebX Changelog
 
+## [Unreleased]
+### Changed
+- feature 1.
+
+### Fixed
+- fix1.
+
 ## [0.1.0]
 ### Added
 - Initial WebX plugin.
