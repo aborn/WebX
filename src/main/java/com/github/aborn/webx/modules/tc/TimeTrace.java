@@ -1,6 +1,8 @@
 package com.github.aborn.webx.modules.tc;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
@@ -17,7 +19,7 @@ import java.util.concurrent.ScheduledFuture;
  * @author aborn
  * @date 2021/02/09 10:46 AM
  */
-public class TimeTrace {
+public class TimeTrace implements Disposable {
     protected static final Logger LOG = Logger.getInstance(TimeTrace.class);
 
     public TimeTrace() {
@@ -37,12 +39,17 @@ public class TimeTrace {
     private static ConcurrentLinkedQueue<ActionPoint> actionQueues = new ConcurrentLinkedQueue<ActionPoint>();
 
     public void init() {
-        READY = true;
-        setupQueueProcessor();
-        LOG.info("TimeTrace init finished.");
+        if (!READY) {
+            READY = true;
+            setupQueueProcessor();
+            LOG.info("TimeTrace init finished.");
+        }
     }
 
     public static void appendActionPoint(final VirtualFile file, Project project, final boolean isWrite) {
+        TimeTrace service = ServiceManager.getService(TimeTrace.class);
+        service.init();
+
         final BigDecimal currentTimestamp = getCurrentTimestamp();
         if (!isWrite && !enoughTimePassed(currentTimestamp)) {
             return;
@@ -70,12 +77,12 @@ public class TimeTrace {
     }
 
     private void setupQueueProcessor() {
-        final Runnable handler = () -> processHeartbeatQueue();
+        final Runnable handler = () -> processActionsQueue();
         long delay = queueTimeoutSeconds;
         scheduledFixture = scheduler.scheduleAtFixedRate(handler, delay, delay, java.util.concurrent.TimeUnit.SECONDS);
     }
 
-    private static void processHeartbeatQueue() {
+    private static void processActionsQueue() {
         if (TimeTrace.READY) {
 
             ActionPoint actionPoint = actionQueues.poll();
@@ -109,5 +116,15 @@ public class TimeTrace {
     private static String getLanguage(final VirtualFile file) {
         FileType type = file.getFileType();
         return type.getName();
+    }
+
+    @Override
+    public void dispose() {
+        try {
+            scheduledFixture.cancel(true);
+        } catch (Exception e) { }
+
+        // make sure to send all heartbeats before exiting
+        processActionsQueue();
     }
 }
