@@ -40,15 +40,13 @@ public class TimeTrace {
     private static void processHeartbeatQueue() {
         if (TimeTrace.READY) {
 
-            // get single heartbeat from queue
-            ActionPoint heartbeat = heartbeatsQueue.poll();
-            if (heartbeat == null) {
+            ActionPoint actionPoint = heartbeatsQueue.poll();
+            if (actionPoint == null) {
                 return;
             }
 
-            // get all extra heartbeats from queue
             ArrayList<ActionPoint> actionPoints = new ArrayList<ActionPoint>();
-            actionPoints.add(heartbeat);
+            actionPoints.add(actionPoint);
             while (true) {
                 ActionPoint h = heartbeatsQueue.poll();
                 if (h == null)
