@@ -1,5 +1,7 @@
 package com.github.aborn.webx.modules.tc;
 
+import com.intellij.openapi.diagnostic.Logger;
+
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
@@ -11,6 +13,7 @@ import java.util.concurrent.ScheduledFuture;
  * @date 2021/02/09 10:46 AM
  */
 public class TimeTrace {
+    protected static final Logger LOG = Logger.getInstance(TimeTrace.class);
 
     public static Boolean READY = false;
     // 定时上报任务
@@ -19,6 +22,10 @@ public class TimeTrace {
 
     private final int queueTimeoutSeconds = 30;
     private static ConcurrentLinkedQueue<ActionPoint> heartbeatsQueue = new ConcurrentLinkedQueue<ActionPoint>();
+
+    public void init() {
+        setupQueueProcessor();
+    }
 
     private void setupQueueProcessor() {
         final Runnable handler = new Runnable() {
@@ -49,11 +56,12 @@ public class TimeTrace {
                 actionPoints.add(h);
             }
 
-            sendHeartbeat(actionPoints);
+            sendTraceActions(actionPoints);
         }
     }
 
-    private static void sendHeartbeat(final ArrayList<ActionPoint> extraHeartbeats) {
+    private static void sendTraceActions(final ArrayList<ActionPoint> extraHeartbeats) {
         // 处理发送消息
+        LOG.info("send message.");
     }
 }
