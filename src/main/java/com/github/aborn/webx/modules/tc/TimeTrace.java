@@ -1,7 +1,6 @@
 package com.github.aborn.webx.modules.tc;
 
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.Service;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
@@ -35,7 +34,7 @@ public class TimeTrace {
 
     // 每30秒执行一次
     private final int queueTimeoutSeconds = 30;
-    private static ConcurrentLinkedQueue<ActionPoint> heartbeatsQueue = new ConcurrentLinkedQueue<ActionPoint>();
+    private static ConcurrentLinkedQueue<ActionPoint> actionQueues = new ConcurrentLinkedQueue<ActionPoint>();
 
     public void init() {
         READY = true;
@@ -62,7 +61,7 @@ public class TimeTrace {
         lastTime = currentTimestamp;
         LOG.info("appendActionPoint.");
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
-            heartbeatsQueue.add(actionPoint);
+            actionQueues.add(actionPoint);
         });
     }
 
@@ -79,7 +78,7 @@ public class TimeTrace {
     private static void processHeartbeatQueue() {
         if (TimeTrace.READY) {
 
-            ActionPoint actionPoint = heartbeatsQueue.poll();
+            ActionPoint actionPoint = actionQueues.poll();
             if (actionPoint == null) {
                 return;
             }
@@ -87,7 +86,7 @@ public class TimeTrace {
             ArrayList<ActionPoint> actionPoints = new ArrayList<>();
             actionPoints.add(actionPoint);
             while (true) {
-                ActionPoint h = heartbeatsQueue.poll();
+                ActionPoint h = actionQueues.poll();
                 if (h == null) {
                     break;
                 }
