@@ -46,6 +46,10 @@ WebX is a powerful Intellij IDEA plugin for develop web services.
 
 - Note: IDEA Version >= 2019.3
 
+## Demo
+
+![](src/main/resources/images/webx_search.png)
+
 ---
 
 ### WebX（强大的Web开发扩展插件）

@@ -3,6 +3,9 @@
 # WebX Changelog
 
 ## [Unreleased]
+### Added
+- Add time trace module
+
 ### Changed
 - feature 1.
 
