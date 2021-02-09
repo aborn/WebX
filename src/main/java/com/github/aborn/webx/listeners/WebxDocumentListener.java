@@ -28,6 +28,6 @@ public class WebxDocumentListener extends UserActionBaseListener implements Docu
             info("document changed. projectName:" + project.getName());
         }
 
-        TimeTrace.appendActionPoint(file, ToolUtils.getProject(document), false);
+        TimeTrace.appendActionPoint(file, ToolUtils.getProject(document), true);
     }
 }

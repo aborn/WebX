@@ -1,5 +1,6 @@
 package com.github.aborn.webx.listeners;
 
+import com.github.aborn.webx.modules.tc.TimeTrace;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManagerListener;
@@ -19,6 +20,7 @@ public class WebxProjectManagerListener extends UserActionBaseListener implement
 
         //Messages.showMessageDialog(project, "打开！", project.getName(), Messages.getInformationIcon());
         info(project.getName() + "打开！");
+        //TimeTrace.appendActionPoint(null, project, true);
     }
 
     /**
