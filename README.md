@@ -48,10 +48,10 @@ WebX is a powerful Intellij IDEA plugin for develop web services.
 
 ## Demo
 
-* Search
+* Search  
 ![](src/main/resources/images/webx_search.png)
 
-* Tree
+* Tree  
 ![](src/main/resources/images/webx_tree.png)
 
 ---
