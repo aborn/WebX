@@ -1,6 +1,7 @@
 package com.github.aborn.webx.modules.tc.transfer;
 
 import com.github.aborn.webx.modules.tc.DayBitSet;
+import com.google.gson.Gson;
 
 import java.io.Serializable;
 
@@ -26,5 +27,9 @@ public class UserActionRequest implements Serializable {
 
     public void setDayBitSet(DayBitSet dayBitSet) {
         this.dayBitSet = dayBitSet;
+    }
+
+    public String toJson() {
+        return new Gson().toJson(this);
     }
 }

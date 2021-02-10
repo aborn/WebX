@@ -1,5 +1,6 @@
 package com.github.aborn.webx.modules.tc.transfer;
 
+import com.github.aborn.webx.modules.tc.DayBitSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -22,6 +23,23 @@ import java.nio.charset.StandardCharsets;
  * @date 2021/02/10 12:00 PM
  */
 public class DataSenderHelper {
+
+    public static void main(String[] args) {
+        testPost();
+    }
+
+    public static void testPost() {
+        String url = "http://127.0.0.1:8080/webx/live/postUserAction";
+        String token = "8ba394513f8420e";
+        DayBitSet dayBitSet = new DayBitSet();
+
+        UserActionRequest userActionRequest = new UserActionRequest();
+        userActionRequest.setToken(token);
+        userActionRequest.setDayBitSet(dayBitSet);
+
+        String str = postDataJson(url, userActionRequest.toJson());
+        System.out.println(str);
+    }
 
     public static String postDataJson(String url, String json) {
 
