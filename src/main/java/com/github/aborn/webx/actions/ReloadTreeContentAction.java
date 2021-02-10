@@ -1,6 +1,5 @@
 package com.github.aborn.webx.actions;
 
-import com.github.aborn.webx.modules.tc.transfer.DataSenderHelper;
 import com.github.aborn.webx.ui.RSNavigatorPanel;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -23,6 +22,6 @@ public class ReloadTreeContentAction extends AnAction {
 
         RSNavigatorPanel panel = (RSNavigatorPanel)toolWindow.getContentManager().getContent(0).getComponent();
         panel.refreshUiContent();
-        DataSenderHelper.testPost();
+        //DataSenderHelper.testPost();
     }
 }

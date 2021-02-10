@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.github.aborn.webx</id>
     <name>WebX</name>
-    <vendor>aborn</vendor>
+    <vendor url="https://github.com/aborn/webx">aborn</vendor>
 
     <!-- Product and plugin compatibility requirements -->
     <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -56,4 +56,28 @@
         </group>
 
     </actions>
+
+    <idea-version since-build="193" until-build="203.*"/>
+    <version>0.1.0</version>
+    <description><![CDATA[
+       <h3>A powerful toolkit for develop web services.</h3>
+       <ul>
+           <li>1.ONE STEP to navigate to service declaration. ( use: Ctrl + \ or Ctrl + Alt + N ) </li>
+           <li>2.Show RESTful(API) services structure.</li>
+           <li>3.Tracing your code time spent in IDEA.</li>
+       </ul>
+       <p> support Spring framework (Spring MVC / Spring Boot).
+       <p> support JAX-RS.
+       <p> support Java languages.
+       <hr />
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <li>0.1.0 Initial WebX plugin.<br/>
+                  Quick navigation to URL mapping declarations. <br/>
+                  Show RESTful service structure. </li>
+                  Support Spring and JAX-RS frameworks.  . </li>
+
+    ]]>
+    </change-notes>
 </idea-plugin>
