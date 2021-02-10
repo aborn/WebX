@@ -31,19 +31,20 @@ public class DataSenderHelper {
     }
 
     public static void testPost() {
-        String url = "http://127.0.0.1:8080/webx/postUserAction";
-        String token = "8ba394513f8420e";
         DayBitSet dayBitSet = new DayBitSet();
         dayBitSet.setSlotByCurrentTime();
         dayBitSet.set(1);
 
+        String str = postData(dayBitSet);
+        System.out.println(str);
+    }
+
+    public static String postData(DayBitSet dayBitSet) {
         UserActionEntity userActionEntity = new UserActionEntity();
-        userActionEntity.setToken(token);
+        userActionEntity.setToken(ServerInfo.DEFAULT.getToken());
         userActionEntity.setDayBitSetArray(dayBitSet.getDayBitSetByteArray());
         userActionEntity.setDay(dayBitSet.getDay());
-
-        String str = postDataJson(url, userActionEntity);
-        System.out.println(str);
+        return postDataJson(ServerInfo.DEFAULT.getUrl(), userActionEntity);
     }
 
     public static String postDataJson(String url, UserActionEntity userAction) {
