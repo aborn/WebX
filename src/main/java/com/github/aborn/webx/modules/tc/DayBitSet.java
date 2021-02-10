@@ -3,6 +3,7 @@ package com.github.aborn.webx.modules.tc;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.BitSet;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -11,8 +12,10 @@ import java.util.Date;
  * @date 2021/02/10 10:53 AM
  */
 public class DayBitSet implements Serializable {
+    private static final int SLOT_SIZE = 24*60*2;
+    private static final int MAX_SLOT_INDEX = SLOT_SIZE - 1;
 
-    BitSet codingBitSet = new BitSet(2880);
+    BitSet codingBitSet = new BitSet(SLOT_SIZE);
 
     /**
      *  一年中的天，格式为 yyyy-MM-dd
@@ -36,7 +39,31 @@ public class DayBitSet implements Serializable {
         this.codingBitSet.set(slot);
     }
 
-    public int countOfCodingSlot2() {
+    public void setSlotByCurrentTime() {
+        this.setSlotByTime(new Date());
+    }
+
+    public void setSlotByTime(Date date) {
+        int slotIndex = getSlotIndex(date);
+        this.set(slotIndex);
+    }
+
+    public int getSlotIndex(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutes = calendar.get(Calendar.MINUTE);
+        int seconds = calendar.get(Calendar.SECOND);
+        int index = hours*60*2 + minutes*2 + (seconds / 30);
+//        if (index > MAX_SLOT_INDEX) {
+//            throw new Exception("Out of range exception.");
+//        }
+
+        return index;
+    }
+
+    // test
+    private int countOfCodingSlot2() {
         int result = 0;
         for (int i = codingBitSet.nextSetBit(0); i >= 0; i = codingBitSet.nextSetBit(i+1)) {
             result++;
