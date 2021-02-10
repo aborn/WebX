@@ -14,12 +14,16 @@ public class WebxApplicationActivationListener extends UserActionBaseListener im
     @Override
     public void applicationActivated(@NotNull IdeFrame ideFrame) {
         Project project = ideFrame.getProject();
-        info("idea active(open). projectName:" + project.getName());
+        info("idea active(open). projectName:" + getProjectName(project));
     }
 
     @Override
     public void delayedApplicationDeactivated(@NotNull IdeFrame ideFrame) {
         Project project = ideFrame.getProject();
-        info("idea non-active(close). projectName:" + project.getName());
+        info("idea non-active(close). projectName:" + getProjectName(project));
+    }
+
+    private String getProjectName(Project project) {
+        return project == null ? "" : project.getName();
     }
 }
