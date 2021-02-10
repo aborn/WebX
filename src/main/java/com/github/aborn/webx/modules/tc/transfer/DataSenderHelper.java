@@ -9,7 +9,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.SerializableEntity;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -29,37 +31,35 @@ public class DataSenderHelper {
     }
 
     public static void testPost() {
-        String url = "http://127.0.0.1:8080/webx/live/postUserAction";
+        String url = "http://127.0.0.1:8080/webx/postUserAction";
         String token = "8ba394513f8420e";
         DayBitSet dayBitSet = new DayBitSet();
+        dayBitSet.setSlotByCurrentTime();
+        dayBitSet.set(1);
 
-        UserActionRequest userActionRequest = new UserActionRequest();
-        userActionRequest.setToken(token);
-        userActionRequest.setDayBitSet(dayBitSet);
+        UserActionEntity userActionEntity = new UserActionEntity();
+        userActionEntity.setToken(token);
+        userActionEntity.setDayBitSetArray(dayBitSet.getDayBitSetByteArray());
+        userActionEntity.setDay(dayBitSet.getDay());
 
-        String str = postDataJson(url, userActionRequest.toJson());
+        String str = postDataJson(url, userActionEntity);
         System.out.println(str);
     }
 
-    public static String postDataJson(String url, String json) {
+    public static String postDataJson(String url, UserActionEntity userAction) {
 
         CloseableHttpResponse response = null;
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpPost postMethod = new HttpPost(completed(url));
-
+        HttpPost httpPost = new HttpPost(completed(url));
         String result = null;
         try {
-            StringEntity httpEntity = new StringEntity(json);
 
-            httpEntity.setContentType("application/json");
-            httpEntity.setContentEncoding("UTF-8");
+            StringEntity httpEntity = new StringEntity(userAction.toJson());
+            httpPost.addHeader("Content-type", "application/json; charset=utf-8");
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setEntity(httpEntity);
 
-            postMethod.addHeader("Content-type", "application/json; charset=utf-8");
-            postMethod.setHeader("Accept", "application/json");
-            // post body
-            postMethod.setEntity(httpEntity);
-
-            response = httpClient.execute(postMethod);
+            response = httpClient.execute(httpPost);
             result = toString(response.getEntity());
         } catch (IOException e) {
             result = "There was an error accessing to URL: " + url + "\n\n" + e.toString();

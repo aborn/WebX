@@ -48,6 +48,10 @@ public class DayBitSet implements Serializable {
         this.set(slotIndex);
     }
 
+    public byte[] getDayBitSetByteArray() {
+        return this.codingBitSet.toByteArray();
+    }
+
     public int getSlotIndex(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -103,5 +107,9 @@ public class DayBitSet implements Serializable {
         DayBitSet dayBitSet = new DayBitSet();
         dayBitSet.set(1);
         System.out.println(dayBitSet.toString());
+    }
+
+    public String getDay() {
+        return day;
     }
 }
