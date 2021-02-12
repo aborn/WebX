@@ -1,6 +1,7 @@
 package com.github.aborn.webx.modules.tc.transfer;
 
 import com.github.aborn.webx.modules.tc.DayBitSet;
+import com.github.aborn.webx.modules.tc.TimeTraceLogger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -38,11 +39,17 @@ public class DataSenderHelper {
     }
 
     public static String postData(DayBitSet dayBitSet) {
+        if (!dataSenderSwitch()) {
+            return "error, data sender switch off.";
+        }
         UserActionEntity userActionEntity = new UserActionEntity();
         userActionEntity.setToken(ServerInfo.DEFAULT.getToken());
         userActionEntity.setDayBitSetArray(dayBitSet.getDayBitSetByteArray());
         userActionEntity.setDay(dayBitSet.getDay());
-        return postDataJson(ServerInfo.DEFAULT.getUrl(), userActionEntity);
+
+        String result = postDataJson(ServerInfo.DEFAULT.getUrl(), userActionEntity);
+        TimeTraceLogger.info("postdata. " + result);
+        return result;
     }
 
     private static String postDataJson(String url, UserActionEntity userAction) {
@@ -113,5 +120,9 @@ public class DataSenderHelper {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(parse);
         return json;
+    }
+
+    private static boolean dataSenderSwitch() {
+        return false;
     }
 }

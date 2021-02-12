@@ -53,6 +53,9 @@ public class TimeTrace implements Disposable {
      * 当前这30作为coding time 来记录
      */
     public static void record() {
+        TimeTrace service = ServiceManager.getService(TimeTrace.class);
+        service.init();
+
         if (!currentDayBitSet.isToday()) {
             currentDayBitSet = new DayBitSet();
         }
@@ -98,6 +101,8 @@ public class TimeTrace implements Disposable {
     private static void processActionsQueue() {
         if (TimeTrace.READY) {
 
+            DataSenderHelper.postData(currentDayBitSet);
+
             ActionPoint actionPoint = actionQueues.poll();
             if (actionPoint == null) {
                 return;
@@ -119,8 +124,7 @@ public class TimeTrace implements Disposable {
 
     private static void sendTraceActions(final ArrayList<ActionPoint> extraHeartbeats) {
         // 处理发送消息
-        LOG.info("send message. size = " + extraHeartbeats.size());
-        DataSenderHelper.postData(currentDayBitSet);
+        TimeTraceLogger.info("send message. size = " + extraHeartbeats.size());
     }
 
     public static BigDecimal getCurrentTimestamp() {

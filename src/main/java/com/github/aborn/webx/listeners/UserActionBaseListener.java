@@ -17,7 +17,9 @@ public class UserActionBaseListener {
 
     protected void info(String message) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        LOG.info(simpleDateFormat.format(new Date()) + " : " + message);
+        String mes = simpleDateFormat.format(new Date()) + " : " + message;
+        LOG.info(mes);
+        System.out.println(mes);
     }
 
     protected void record() {
