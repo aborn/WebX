@@ -18,6 +18,8 @@ public class WebxEditorMouseListener extends UserActionBaseListener implements E
         VirtualFile file = instance.getFile(editorMouseEvent.getEditor().getDocument());
         Project project = editorMouseEvent.getEditor().getProject();
         info("mouse pressed. projectName:" + project.getName());
+
+        record();
     }
 
 }

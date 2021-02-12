@@ -29,5 +29,6 @@ public class WebxDocumentListener extends UserActionBaseListener implements Docu
         }
 
         TimeTrace.appendActionPoint(file, ToolUtils.getProject(document), true);
+        record();
     }
 }

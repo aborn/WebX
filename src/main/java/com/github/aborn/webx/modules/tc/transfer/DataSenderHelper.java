@@ -9,9 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.SerializableEntity;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -47,7 +45,7 @@ public class DataSenderHelper {
         return postDataJson(ServerInfo.DEFAULT.getUrl(), userActionEntity);
     }
 
-    public static String postDataJson(String url, UserActionEntity userAction) {
+    private static String postDataJson(String url, UserActionEntity userAction) {
 
         CloseableHttpResponse response = null;
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -109,7 +107,7 @@ public class DataSenderHelper {
         }
     }
 
-    public static String format(String str) {
+    private static String format(String str) {
         JsonParser parser = new JsonParser();
         JsonElement parse = parser.parse(str);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

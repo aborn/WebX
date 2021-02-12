@@ -15,6 +15,7 @@ public class WebxApplicationActivationListener extends UserActionBaseListener im
     public void applicationActivated(@NotNull IdeFrame ideFrame) {
         Project project = ideFrame.getProject();
         info("idea active(open). projectName:" + getProjectName(project));
+        record();
     }
 
     @Override

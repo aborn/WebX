@@ -112,4 +112,9 @@ public class DayBitSet implements Serializable {
     public String getDay() {
         return day;
     }
+
+    public boolean isToday() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return simpleDateFormat.format(new Date()).equals(day);
+    }
 }

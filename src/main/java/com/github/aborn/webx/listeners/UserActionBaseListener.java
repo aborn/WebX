@@ -1,6 +1,7 @@
 package com.github.aborn.webx.listeners;
 
 
+import com.github.aborn.webx.modules.tc.TimeTrace;
 import com.intellij.openapi.diagnostic.Logger;
 
 import java.text.SimpleDateFormat;
@@ -17,5 +18,10 @@ public class UserActionBaseListener {
     protected void info(String message) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         LOG.info(simpleDateFormat.format(new Date()) + " : " + message);
+    }
+
+    protected void record() {
+        TimeTrace.record();
+        info("recorded:");
     }
 }

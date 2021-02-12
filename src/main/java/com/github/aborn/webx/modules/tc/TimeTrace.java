@@ -1,5 +1,6 @@
 package com.github.aborn.webx.modules.tc;
 
+import com.github.aborn.webx.modules.tc.transfer.DataSenderHelper;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
@@ -26,6 +27,8 @@ public class TimeTrace implements Disposable {
         init();
     }
 
+    private static DayBitSet currentDayBitSet = new DayBitSet();
+
     private static Boolean READY = false;
     // 定时上报任务
     private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -44,6 +47,16 @@ public class TimeTrace implements Disposable {
             setupQueueProcessor();
             LOG.info("TimeTrace init finished.");
         }
+    }
+
+    /**
+     * 当前这30作为coding time 来记录
+     */
+    public static void record() {
+        if (!currentDayBitSet.isToday()) {
+            currentDayBitSet = new DayBitSet();
+        }
+        currentDayBitSet.setSlotByCurrentTime();
     }
 
     public static void appendActionPoint(final VirtualFile file, Project project, final boolean isWrite) {
@@ -107,6 +120,7 @@ public class TimeTrace implements Disposable {
     private static void sendTraceActions(final ArrayList<ActionPoint> extraHeartbeats) {
         // 处理发送消息
         LOG.info("send message. size = " + extraHeartbeats.size());
+        DataSenderHelper.postData(currentDayBitSet);
     }
 
     public static BigDecimal getCurrentTimestamp() {
