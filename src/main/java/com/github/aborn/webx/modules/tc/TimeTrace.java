@@ -98,6 +98,9 @@ public class TimeTrace implements Disposable {
         scheduledFixture = scheduler.scheduleAtFixedRate(handler, delay, delay, java.util.concurrent.TimeUnit.SECONDS);
     }
 
+    /**
+     * 无论IDEA是否打开，每30s上报一次。
+     */
     private static void processActionsQueue() {
         if (TimeTrace.READY) {
 
