@@ -41,13 +41,14 @@ public class DayBitSet implements Serializable {
         this.codingBitSet.set(slot);
     }
 
-    public void setSlotByCurrentTime() {
-        this.setSlotByTime(new Date());
+    public int setSlotByCurrentTime() {
+        return this.setSlotByTime(new Date());
     }
 
-    public void setSlotByTime(Date date) {
+    public int setSlotByTime(Date date) {
         int slotIndex = getSlotIndex(date);
         this.set(slotIndex);
+        return slotIndex;
     }
 
     public byte[] getDayBitSetByteArray() {

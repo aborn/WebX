@@ -10,7 +10,9 @@ import com.intellij.openapi.vfs.VirtualFile;
 import org.apache.log4j.Level;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -21,7 +23,7 @@ import java.util.concurrent.ScheduledFuture;
  * @date 2021/02/09 10:46 AM
  */
 public class TimeTrace implements Disposable {
-    public static Boolean DEBUG = true;   // 默认为false，调试的时候使用true
+    public static Boolean DEBUG = false;   // 默认为false，调试的时候使用true
 
     public TimeTrace() {
         init();
@@ -58,7 +60,11 @@ public class TimeTrace implements Disposable {
         timeTrace.init();
 
         currentDayBitSet.clearIfNotToday();
-        currentDayBitSet.setSlotByCurrentTime();
+        int slot = currentDayBitSet.setSlotByCurrentTime();
+
+        // 打点记录一下。
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        TimeTraceLogger.info(simpleDateFormat.format(new Date()) + ", slot:" + slot);
     }
 
     public static void appendActionPoint(final VirtualFile file, Project project, final boolean isWrite) {
