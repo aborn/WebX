@@ -56,9 +56,7 @@ public class TimeTrace implements Disposable {
         TimeTrace service = ServiceManager.getService(TimeTrace.class);
         service.init();
 
-        if (!currentDayBitSet.isToday()) {
-            currentDayBitSet = new DayBitSet();
-        }
+        currentDayBitSet.clearIfNotToday();
         currentDayBitSet.setSlotByCurrentTime();
     }
 

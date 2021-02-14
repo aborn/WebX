@@ -13,7 +13,8 @@ public class ServerInfo {
         this.token = token;
     }
 
-    public static ServerInfo DEFAULT = new ServerInfo("http://127.0.0.1:8080/webx/postUserAction", "8ba394513f8420e");
+    public static ServerInfo DEFAULT = new ServerInfo("https://aborn.me/webx/postUserAction", "8ba394513f8420e");
+    public static ServerInfo LOCAL = new ServerInfo("http://127.0.0.1:8080/webx/postUserAction", "8ba394513f8420e");
 
     public String getUrl() {
         return url;

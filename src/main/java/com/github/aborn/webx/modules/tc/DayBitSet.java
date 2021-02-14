@@ -8,17 +8,18 @@ import java.util.Date;
 
 /**
  * 将一天分为 24*60*2 = 2880 个slot，每个slot代表30S，slot=true表示编程时间
+ *
  * @author aborn
  * @date 2021/02/10 10:53 AM
  */
 public class DayBitSet implements Serializable {
-    private static final int SLOT_SIZE = 24*60*2;
+    private static final int SLOT_SIZE = 24 * 60 * 2;
     private static final int MAX_SLOT_INDEX = SLOT_SIZE - 1;
 
     BitSet codingBitSet = new BitSet(SLOT_SIZE);
 
     /**
-     *  一年中的天，格式为 yyyy-MM-dd
+     * 一年中的天，格式为 yyyy-MM-dd
      */
     String day;
 
@@ -33,6 +34,7 @@ public class DayBitSet implements Serializable {
 
     /**
      * slot range [0,2880-1]
+     *
      * @param slot
      */
     public void set(int slot) {
@@ -58,7 +60,7 @@ public class DayBitSet implements Serializable {
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
         int minutes = calendar.get(Calendar.MINUTE);
         int seconds = calendar.get(Calendar.SECOND);
-        int index = hours*60*2 + minutes*2 + (seconds / 30);
+        int index = hours * 60 * 2 + minutes * 2 + (seconds / 30);
 //        if (index > MAX_SLOT_INDEX) {
 //            throw new Exception("Out of range exception.");
 //        }
@@ -69,7 +71,7 @@ public class DayBitSet implements Serializable {
     // test
     private int countOfCodingSlot2() {
         int result = 0;
-        for (int i = codingBitSet.nextSetBit(0); i >= 0; i = codingBitSet.nextSetBit(i+1)) {
+        for (int i = codingBitSet.nextSetBit(0); i >= 0; i = codingBitSet.nextSetBit(i + 1)) {
             result++;
             if (i == Integer.MAX_VALUE) {
                 break; // or (i+1) would overflow
@@ -84,6 +86,7 @@ public class DayBitSet implements Serializable {
 
     /**
      * 这一天的编码时间 (单位S)
+     *
      * @return
      */
     public int codingTimeSeconds() {
@@ -92,6 +95,7 @@ public class DayBitSet implements Serializable {
 
     /**
      * 这一天的写代码时间（单位分）
+     *
      * @return
      */
     public double codingTimeMinutes() {
@@ -100,7 +104,7 @@ public class DayBitSet implements Serializable {
 
     @Override
     public String toString() {
-        return "Day:"+ day + ", Coding Time:" + codingTimeSeconds() + "s(" + codingTimeMinutes() + "m).";
+        return "Day:" + day + ", Coding Time:" + codingTimeSeconds() + "s(" + codingTimeMinutes() + "m).";
     }
 
     public static void main(String[] args) {
@@ -116,5 +120,15 @@ public class DayBitSet implements Serializable {
     public boolean isToday() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.format(new Date()).equals(day);
+    }
+
+    public void clearIfNotToday() {
+        if (isToday()) {
+            return;
+        }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        this.day = simpleDateFormat.format(new Date());
+        this.codingBitSet.clear();
     }
 }
