@@ -23,4 +23,8 @@ public class ServerInfo {
     public String getToken() {
         return token;
     }
+
+    public static ServerInfo getConfigServerInfo() {
+        return LOCAL;   // 调试的时候使用
+    }
 }

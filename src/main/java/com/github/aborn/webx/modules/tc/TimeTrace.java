@@ -4,10 +4,10 @@ import com.github.aborn.webx.modules.tc.transfer.DataSenderHelper;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import org.apache.log4j.Level;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.concurrent.ScheduledFuture;
  * @date 2021/02/09 10:46 AM
  */
 public class TimeTrace implements Disposable {
-    protected static final Logger LOG = Logger.getInstance(TimeTrace.class);
+    public static Boolean DEBUG = true;   // 默认为false，调试的时候使用true
 
     public TimeTrace() {
         init();
@@ -44,8 +44,9 @@ public class TimeTrace implements Disposable {
     public void init() {
         if (!READY) {
             READY = true;
+            setLoggingLevel();
             setupQueueProcessor();
-            LOG.info("TimeTrace init finished.");
+            TimeTraceLogger.info("TimeTrace init finished.");
         }
     }
 
@@ -53,8 +54,8 @@ public class TimeTrace implements Disposable {
      * 当前这30作为coding time 来记录
      */
     public static void record() {
-        TimeTrace service = ServiceManager.getService(TimeTrace.class);
-        service.init();
+        TimeTrace timeTrace = ServiceManager.getService(TimeTrace.class);
+        timeTrace.init();
 
         currentDayBitSet.clearIfNotToday();
         currentDayBitSet.setSlotByCurrentTime();
@@ -80,7 +81,7 @@ public class TimeTrace implements Disposable {
         actionPoint.setProject(projectName);
 
         lastTime = currentTimestamp;
-        LOG.info("appendActionPoint.");
+        TimeTraceLogger.info("appendActionPoint.");
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             actionQueues.add(actionPoint);
         });
@@ -135,6 +136,15 @@ public class TimeTrace implements Disposable {
     private static String getLanguage(final VirtualFile file) {
         FileType type = file.getFileType();
         return type.getName();
+    }
+
+    public static void setLoggingLevel() {
+        if (TimeTrace.DEBUG) {
+            TimeTraceLogger.setLevel(Level.DEBUG);
+            TimeTraceLogger.debug("Logging level set to DEBUG");
+        } else {
+            TimeTraceLogger.setLevel(Level.INFO);
+        }
     }
 
     @Override

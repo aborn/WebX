@@ -43,11 +43,11 @@ public class DataSenderHelper {
             return "error, data sender switch off.";
         }
         UserActionEntity userActionEntity = new UserActionEntity();
-        userActionEntity.setToken(ServerInfo.DEFAULT.getToken());
+        userActionEntity.setToken(ServerInfo.getConfigServerInfo().getToken());
         userActionEntity.setDayBitSetArray(dayBitSet.getDayBitSetByteArray());
         userActionEntity.setDay(dayBitSet.getDay());
 
-        String result = postDataJson(ServerInfo.DEFAULT.getUrl(), userActionEntity);
+        String result = postDataJson(ServerInfo.getConfigServerInfo().getUrl(), userActionEntity);
         TimeTraceLogger.info("postdata. " + result);
         return result;
     }
