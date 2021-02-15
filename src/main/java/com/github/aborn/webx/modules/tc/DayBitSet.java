@@ -13,7 +13,7 @@ import java.util.Date;
  * @date 2021/02/10 10:53 AM
  */
 public class DayBitSet implements Serializable {
-    private static final int SLOT_SIZE = 24 * 60 * 2;
+    public static final int SLOT_SIZE = 24 * 60 * 2;
     private static final int MAX_SLOT_INDEX = SLOT_SIZE - 1;
 
     BitSet codingBitSet = new BitSet(SLOT_SIZE);
@@ -131,5 +131,9 @@ public class DayBitSet implements Serializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         this.day = simpleDateFormat.format(new Date());
         this.codingBitSet.clear();
+    }
+
+    public BitSet getCodingBitSet() {
+        return codingBitSet;
     }
 }

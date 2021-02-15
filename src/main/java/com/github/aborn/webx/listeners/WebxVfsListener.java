@@ -17,5 +17,6 @@ public class WebxVfsListener extends UserActionBaseListener implements BulkFileL
         VFileEvent vFileEvent = events.get(0);
 
         info("vfs event. project: " );
+        record();
     }
 }

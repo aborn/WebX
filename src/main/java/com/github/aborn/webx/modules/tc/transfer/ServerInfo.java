@@ -25,6 +25,6 @@ public class ServerInfo {
     }
 
     public static ServerInfo getConfigServerInfo() {
-        return LOCAL;   // 调试的时候使用
+        return DEFAULT;   // 调试的时候使用
     }
 }

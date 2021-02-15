@@ -18,12 +18,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.BitSet;
 
 /**
  * @author aborn
  * @date 2021/02/10 12:00 PM
  */
 public class DataSenderHelper {
+    private static final BitSet lastPostData = new BitSet(DayBitSet.SLOT_SIZE);
+    private static Date lastPostDate = null;
 
     public static void main(String[] args) {
         testPost();
@@ -47,12 +51,24 @@ public class DataSenderHelper {
         userActionEntity.setDayBitSetArray(dayBitSet.getDayBitSetByteArray());
         userActionEntity.setDay(dayBitSet.getDay());
 
-        String result = postDataJson(ServerInfo.getConfigServerInfo().getUrl(), userActionEntity);
+        Date currentDate = new Date();
+
+        if (lastPostDate != null
+                && lastPostData.cardinality() == dayBitSet.countOfCodingSlot()
+                && ((currentDate.getTime() - lastPostDate.getTime()) / 1000 < 5 * 60)) {   // 5分钟
+            return "No need to post";
+        }
+
+        SenderResponse result = postDataJson(ServerInfo.getConfigServerInfo().getUrl(), userActionEntity);
         TimeTraceLogger.info("postdata. " + result);
-        return result;
+        lastPostDate = currentDate;
+        lastPostData.or(dayBitSet.getCodingBitSet());
+
+        return result.getMessage();
     }
 
-    private static String postDataJson(String url, UserActionEntity userAction) {
+    private static SenderResponse postDataJson(String url, UserActionEntity userAction) {
+        SenderResponse senderResponse = new SenderResponse("", true);
 
         CloseableHttpResponse response = null;
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -67,13 +83,16 @@ public class DataSenderHelper {
 
             response = httpClient.execute(httpPost);
             result = toString(response.getEntity());
+            senderResponse.setStatus(true);
         } catch (IOException e) {
             result = "There was an error accessing to URL: " + url + "\n\n" + e.toString();
+            senderResponse.setStatus(false);
         } finally {
             release(response, httpClient);
         }
 
-        return result;
+        senderResponse.setMessage(result);
+        return senderResponse;
     }
 
     private static String completed(String url) {
