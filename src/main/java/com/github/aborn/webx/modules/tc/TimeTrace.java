@@ -109,8 +109,8 @@ public class TimeTrace implements Disposable {
     private static void processActionsQueue() {
         if (TimeTrace.READY) {
 
-            DataSenderHelper.postData(currentDayBitSet);
-
+            String message = DataSenderHelper.postData(currentDayBitSet);
+            TimeTraceLogger.info(message);
             ActionPoint actionPoint = actionQueues.poll();
             if (actionPoint == null) {
                 return;

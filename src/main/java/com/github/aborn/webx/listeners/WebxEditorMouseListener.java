@@ -22,4 +22,9 @@ public class WebxEditorMouseListener extends UserActionBaseListener implements E
         record();
     }
 
+    @Override
+    public void mouseEntered(EditorMouseEvent editorMouseEvent) {
+        record();
+    }
+
 }
