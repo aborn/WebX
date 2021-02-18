@@ -2,6 +2,7 @@ package com.github.aborn.webx.listeners;
 
 import com.intellij.openapi.vfs.newvfs.BulkFileListener;
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent;
+import org.apache.commons.collections.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -14,9 +15,12 @@ public class WebxVfsListener extends UserActionBaseListener implements BulkFileL
 
     @Override
     public void after(@NotNull List<? extends VFileEvent> events) {
-        VFileEvent vFileEvent = events.get(0);
+        if (CollectionUtils.isEmpty(events)) {
+            return;
+        }
 
-        info("vfs event. project: " );
+        VFileEvent vFileEvent = events.get(0);
+        info("vfs event. project: ");
         record();
     }
 }

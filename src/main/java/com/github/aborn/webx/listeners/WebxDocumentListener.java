@@ -25,10 +25,14 @@ public class WebxDocumentListener extends UserActionBaseListener implements Docu
         Editor[] editors = EditorFactory.getInstance().getEditors(document);
         if (editors.length > 0) {
             Project project = editors[0].getProject();
-            info("document changed. projectName:" + project.getName());
+            if (project != null) {
+                info("document changed. projectName:" + project.getName());
+            }
         }
 
-        TimeTrace.appendActionPoint(file, ToolUtils.getProject(document), true);
+        if (file != null) {
+            TimeTrace.appendActionPoint(file, ToolUtils.getProject(document), true);
+        }
         record();
     }
 }

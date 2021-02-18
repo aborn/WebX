@@ -8,6 +8,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.apache.log4j.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -79,7 +80,7 @@ public class TimeTrace implements Disposable {
         TimeTraceLogger.info(simpleDateFormat.format(new Date()) + ", slot:" + slot);
     }
 
-    public static void appendActionPoint(final VirtualFile file, Project project, final boolean isWrite) {
+    public static void appendActionPoint(@NotNull final VirtualFile file, Project project, final boolean isWrite) {
         TimeTrace service = ServiceManager.getService(TimeTrace.class);
         service.init();
 
