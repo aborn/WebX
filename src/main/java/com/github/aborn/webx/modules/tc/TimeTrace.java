@@ -23,7 +23,10 @@ import java.util.concurrent.ScheduledFuture;
  * @date 2021/02/09 10:46 AM
  */
 public class TimeTrace implements Disposable {
-    public static Boolean DEBUG = false;   // 默认为false，调试的时候使用true
+    /**
+     * 默认为false，调试的时候使用true
+     */
+    public static Boolean DEBUG = false;
 
     public TimeTrace() {
         init();
@@ -32,14 +35,23 @@ public class TimeTrace implements Disposable {
     private static DayBitSet currentDayBitSet = new DayBitSet();
 
     private static Boolean READY = false;
-    // 定时上报任务
+
+    /**
+     * 定时上报任务
+     */
     private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
     private static ScheduledFuture<?> scheduledFixture;
-    // 最小的频率
+
+    /**
+     * 最小的频率：2分钟
+     */
     public static final BigDecimal FREQUENCY = new BigDecimal(2 * 60);
     public static BigDecimal lastTime = new BigDecimal(0);
 
-    // 每30秒执行一次
+    /**
+     * 每30秒执行一次
+     */
     private final int queueTimeoutSeconds = 30;
     private static ConcurrentLinkedQueue<ActionPoint> actionQueues = new ConcurrentLinkedQueue<ActionPoint>();
 
@@ -157,7 +169,8 @@ public class TimeTrace implements Disposable {
     public void dispose() {
         try {
             scheduledFixture.cancel(true);
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
 
         // make sure to send all heartbeats before exiting
         processActionsQueue();
