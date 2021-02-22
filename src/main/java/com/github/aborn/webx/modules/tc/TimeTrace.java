@@ -123,7 +123,7 @@ public class TimeTrace implements Disposable {
         if (TimeTrace.READY) {
 
             String message = DataSenderHelper.postData(currentDayBitSet);
-            TimeTraceLogger.info(message);
+            TimeTraceLogger.info("POST DATA:" + message);
             ActionPoint actionPoint = actionQueues.poll();
             if (actionPoint == null) {
                 return;

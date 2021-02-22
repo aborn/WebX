@@ -15,14 +15,14 @@ public class TimeTraceLogger {
 
     public static void info(String message) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String mes = simpleDateFormat.format(new Date()) + " : " + message;
+        String mes = simpleDateFormat.format(new Date()) + " : #WebX : " + message;
         LOG.info(message);
         System.out.println(mes);
     }
 
     public static void debug(String message) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String mes = simpleDateFormat.format(new Date()) + " : " + message;
+        String mes = simpleDateFormat.format(new Date()) + " : #WebX : " + message;
         LOG.debug(message);
         System.out.println(mes);
     }
