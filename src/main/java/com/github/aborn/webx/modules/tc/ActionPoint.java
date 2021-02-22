@@ -8,6 +8,8 @@ import java.math.BigDecimal;
  * @date 2021/02/09 10:43 AM
  */
 public class ActionPoint {
+    public ActionPoint() {}
+
     String entity;
     BigDecimal timestamp;
     Boolean isWrite;

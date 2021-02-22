@@ -26,6 +26,9 @@ import java.util.BitSet;
  * @date 2021/02/10 12:00 PM
  */
 public class DataSenderHelper {
+    public DataSenderHelper() {
+    }
+
     private static final BitSet lastPostData = new BitSet(DayBitSet.SLOT_SIZE);
     private static Date lastPostDate = null;
 

@@ -5,6 +5,9 @@ package com.github.aborn.webx.modules.tc.transfer;
  * @date 2021/02/10 2:41 PM
  */
 public class ServerInfo {
+    public ServerInfo() {
+    }
+    
     String url;
     String token;
 
