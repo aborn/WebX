@@ -86,10 +86,11 @@ public class TimeTrace implements Disposable {
 
         if (TraceRecorder.isOpended()) {
             int openedTimeSlot = TraceRecorder.getOpenedSlot();
-            boolean tag = false;
+            TimeTraceLogger.info("current_slot=" + currentSlot + ", open_slot=" + openedTimeSlot);
+
             if (openedTimeSlot >= 0) {
                 int findVerIndex = -1;
-                for (int i = currentSlot; i > openedTimeSlot; i--) {
+                for (int i = currentSlot - 1; i >= openedTimeSlot; i--) {
                     if (currentDayBitSet.get(i)) {
                         findVerIndex = i;
                         break;
@@ -99,15 +100,11 @@ public class TimeTrace implements Disposable {
                 // 只往前追踪5分钟，间隔10个slot
                 if (findVerIndex >= 0 && findVerIndex < currentSlot
                         && (currentSlot - findVerIndex) < 10) {
-                    tag = true;
                     for (int j = findVerIndex + 1; j < currentSlot; j++) {
                         currentDayBitSet.set(j);
                     }
+                    TimeTraceLogger.info("TRACED 5 Minutes:" + currentDayBitSet.getCurrentHourSlotInfo());
                 }
-            }
-
-            if (tag) {
-                TimeTraceLogger.info("TRACED 5 Minutes:" + currentDayBitSet.getCurrentHourSlotInfo());
             }
         }
     }
