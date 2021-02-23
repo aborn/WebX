@@ -73,7 +73,7 @@ public class TimeTrace implements Disposable {
         timeTrace.init();
 
         currentDayBitSet.clearIfNotToday();
-        int slot = currentDayBitSet.setSlotByCurrentTime();
+        int currentSlot = currentDayBitSet.setSlotByCurrentTime();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -81,8 +81,35 @@ public class TimeTrace implements Disposable {
         int index = hours * 60 * 2;
 
         // 打点记录一下
-        TimeTraceLogger.info("recorded, slot:" + slot + ", hour_slot:" + (slot - index));
+        TimeTraceLogger.info("recorded, slot:" + currentSlot + ", hour_slot:" + (currentSlot - index));
         TimeTraceLogger.info(currentDayBitSet.getCurrentHourSlotInfo());
+
+        if (TraceRecorder.isOpended()) {
+            int openedTimeSlot = TraceRecorder.getOpenedSlot();
+            boolean tag = false;
+            if (openedTimeSlot >= 0) {
+                int findVerIndex = -1;
+                for (int i = currentSlot; i > openedTimeSlot; i--) {
+                    if (currentDayBitSet.get(i)) {
+                        findVerIndex = i;
+                        break;
+                    }
+                }
+
+                // 只往前追踪5分钟，间隔10个slot
+                if (findVerIndex >= 0 && findVerIndex < currentSlot
+                        && (currentSlot - findVerIndex) < 10) {
+                    tag = true;
+                    for (int j = findVerIndex + 1; j < currentSlot; j++) {
+                        currentDayBitSet.set(j);
+                    }
+                }
+            }
+
+            if (tag) {
+                TimeTraceLogger.info("TRACED 5 Minutes:" + currentDayBitSet.getCurrentHourSlotInfo());
+            }
+        }
     }
 
     public static void appendActionPoint(@NotNull final VirtualFile file, Project project, final boolean isWrite) {

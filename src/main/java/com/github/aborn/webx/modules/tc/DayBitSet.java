@@ -1,5 +1,7 @@
 package com.github.aborn.webx.modules.tc;
 
+import com.github.aborn.webx.utils.DateBitSlotUtils;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.BitSet;
@@ -13,10 +15,8 @@ import java.util.Date;
  * @date 2021/02/10 10:53 AM
  */
 public class DayBitSet implements Serializable {
-    public static final int SLOT_SIZE = 24 * 60 * 2;
-    private static final int MAX_SLOT_INDEX = SLOT_SIZE - 1;
 
-    BitSet codingBitSet = new BitSet(SLOT_SIZE);
+    BitSet codingBitSet = new BitSet(DateBitSlotUtils.SLOT_SIZE);
 
     /**
      * 一年中的天，格式为 yyyy-MM-dd
@@ -50,27 +50,13 @@ public class DayBitSet implements Serializable {
     }
 
     public int setSlotByTime(Date date) {
-        int slotIndex = getSlotIndex(date);
+        int slotIndex = DateBitSlotUtils.getSlotIndex(date);
         this.set(slotIndex);
         return slotIndex;
     }
 
     public byte[] getDayBitSetByteArray() {
         return this.codingBitSet.toByteArray();
-    }
-
-    public int getSlotIndex(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        int hours = calendar.get(Calendar.HOUR_OF_DAY);
-        int minutes = calendar.get(Calendar.MINUTE);
-        int seconds = calendar.get(Calendar.SECOND);
-        int index = hours * 60 * 2 + minutes * 2 + (seconds / 30);
-//        if (index > MAX_SLOT_INDEX) {
-//            throw new Exception("Out of range exception.");
-//        }
-
-        return index;
     }
 
     // test

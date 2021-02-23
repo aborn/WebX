@@ -2,6 +2,7 @@ package com.github.aborn.webx.modules.tc.transfer;
 
 import com.github.aborn.webx.modules.tc.DayBitSet;
 import com.github.aborn.webx.modules.tc.TimeTraceLogger;
+import com.github.aborn.webx.utils.DateBitSlotUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -29,7 +30,7 @@ public class DataSenderHelper {
     public DataSenderHelper() {
     }
 
-    private static final BitSet lastPostData = new BitSet(DayBitSet.SLOT_SIZE);
+    private static final BitSet lastPostData = new BitSet(DateBitSlotUtils.SLOT_SIZE);
     private static Date lastPostDate = null;
 
     public static void main(String[] args) {

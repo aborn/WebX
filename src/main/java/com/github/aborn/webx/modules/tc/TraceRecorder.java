@@ -1,5 +1,7 @@
 package com.github.aborn.webx.modules.tc;
 
+import com.github.aborn.webx.utils.DateBitSlotUtils;
+
 import java.util.Date;
 
 /**
@@ -13,6 +15,14 @@ public class TraceRecorder {
     private static boolean opended = false;
     private static Date openTime = null;
     private static Date closeTime = null;
+
+    public static int getOpenedSlot() {
+        return DateBitSlotUtils.getSlotIndex(openTime);
+    }
+
+    public static boolean isOpended() {
+        return opended;
+    }
 
     public static void open() {
         if (opended) {
