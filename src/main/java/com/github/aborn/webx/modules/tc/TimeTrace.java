@@ -11,8 +11,8 @@ import org.apache.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
@@ -74,10 +74,14 @@ public class TimeTrace implements Disposable {
 
         currentDayBitSet.clearIfNotToday();
         int slot = currentDayBitSet.setSlotByCurrentTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
 
-        // 打点记录一下。
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        TimeTraceLogger.info(simpleDateFormat.format(new Date()) + ", slot:" + slot);
+        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+        int index = hours * 60 * 2;
+
+        // 打点记录一下
+        TimeTraceLogger.info(", slot:" + slot + ", hour_slot:" + (slot - index));
     }
 
     public static void appendActionPoint(@NotNull final VirtualFile file, Project project, final boolean isWrite) {

@@ -10,6 +10,8 @@ import com.intellij.openapi.project.Project;
  * @date 2021/02/04 2:51 PM
  */
 public class ToolUtils {
+    private ToolUtils() {
+    }
 
     public static Project getProject(Document document) {
         Editor[] editors = EditorFactory.getInstance().getEditors(document);

@@ -41,6 +41,10 @@ public class DayBitSet implements Serializable {
         this.codingBitSet.set(slot);
     }
 
+    public boolean get(int slot) {
+        return this.codingBitSet.get(slot);
+    }
+
     public int setSlotByCurrentTime() {
         return this.setSlotByTime(new Date());
     }
@@ -135,5 +139,38 @@ public class DayBitSet implements Serializable {
 
     public BitSet getCodingBitSet() {
         return codingBitSet;
+    }
+
+    public String getCurrentHourSlotInfo() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        return getHourSlotInfo(calendar.get(Calendar.HOUR_OF_DAY));
+    }
+
+    /**
+     * 获取小时内的slot打印信息
+     *
+     * @param hour [0~23]
+     * @return
+     */
+    public String getHourSlotInfo(int hour) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        Calendar calendarSet = Calendar.getInstance();
+        calendarSet.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DATE), hour, 0, 0);
+        int index = calendarSet.get(Calendar.HOUR_OF_DAY) * 60 * 2;
+        StringBuilder result = new StringBuilder(hour + "");
+        result.append("[").append(index).append("+]:");
+
+        int slotHourIndex = 0;
+        for (int i = index; i < (index + 60 * 2); i++) {
+            if (get(i)) {
+                result.append(slotHourIndex).append(", ");
+            }
+            slotHourIndex++;
+        }
+
+        return result.toString();
     }
 }

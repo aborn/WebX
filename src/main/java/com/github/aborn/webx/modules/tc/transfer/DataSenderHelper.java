@@ -63,7 +63,7 @@ public class DataSenderHelper {
         }
 
         SenderResponse result = postDataJson(ServerInfo.getConfigServerInfo().getUrl(), userActionEntity);
-        TimeTraceLogger.info("after postdata.");
+        TimeTraceLogger.info("after postdata, status:" + result.getStatus());
         lastPostDate = currentDate;
         lastPostData.or(dayBitSet.getCodingBitSet());
 
@@ -145,6 +145,6 @@ public class DataSenderHelper {
     }
 
     private static boolean dataSenderSwitch() {
-        return false;
+        return true;
     }
 }

@@ -5,8 +5,10 @@ package com.github.aborn.webx.modules.tc.transfer;
  * @date 2021/02/15 10:40 PM
  */
 public class SenderResponse {
+    public SenderResponse() {}
+
     String message;
-    Boolean status;   // true 表示成功
+    Boolean status;
 
     public SenderResponse(String message, Boolean status) {
         this.message = message;
