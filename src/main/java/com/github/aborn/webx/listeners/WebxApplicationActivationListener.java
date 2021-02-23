@@ -22,7 +22,7 @@ public class WebxApplicationActivationListener extends UserActionBaseListener im
     }
 
     @Override
-    public void delayedApplicationDeactivated(@NotNull IdeFrame ideFrame) {
+    public void applicationDeactivated(@NotNull IdeFrame ideFrame) {
         Project project = ideFrame.getProject();
         info("idea non-active(close). projectName:" + getProjectName(project));
         TraceRecorder.close();
