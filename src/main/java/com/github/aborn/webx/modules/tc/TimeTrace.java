@@ -82,6 +82,7 @@ public class TimeTrace implements Disposable {
 
         // 打点记录一下
         TimeTraceLogger.info(", slot:" + slot + ", hour_slot:" + (slot - index));
+        TimeTraceLogger.info(currentDayBitSet.getCurrentHourSlotInfo());
     }
 
     public static void appendActionPoint(@NotNull final VirtualFile file, Project project, final boolean isWrite) {
