@@ -165,7 +165,6 @@ public class TimeTrace implements Disposable {
     public static void setLoggingLevel() {
         if (TimeTrace.DEBUG) {
             TimeTraceLogger.setLevel(Level.DEBUG);
-            TimeTraceLogger.debug("Logging level set to DEBUG");
         } else {
             TimeTraceLogger.setLevel(Level.INFO);
         }

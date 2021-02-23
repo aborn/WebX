@@ -17,10 +17,7 @@ public class TimeTraceLogger {
     protected static final Logger LOG = Logger.getInstance(TimeTraceLogger.class);
 
     public static void info(String message) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String mes = simpleDateFormat.format(new Date()) + " : #WebX : " + message;
-        LOG.info(message);
-        System.out.println(mes);
+        LOG.info(" : #WebX : " + message);
     }
 
     public static void debug(String message) {
