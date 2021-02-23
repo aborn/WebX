@@ -35,7 +35,7 @@ public class DayBitSet implements Serializable {
     /**
      * slot range [0,2880-1]
      *
-     * @param slot
+     * @param slot 要设置的slot
      */
     public void set(int slot) {
         this.codingBitSet.set(slot);
@@ -59,35 +59,19 @@ public class DayBitSet implements Serializable {
         return this.codingBitSet.toByteArray();
     }
 
-    // test
-    private int countOfCodingSlot2() {
-        int result = 0;
-        for (int i = codingBitSet.nextSetBit(0); i >= 0; i = codingBitSet.nextSetBit(i + 1)) {
-            result++;
-            if (i == Integer.MAX_VALUE) {
-                break; // or (i+1) would overflow
-            }
-        }
-        return result;
-    }
-
     public int countOfCodingSlot() {
         return codingBitSet.cardinality();
     }
 
     /**
-     * 这一天的编码时间 (单位S)
-     *
-     * @return
+     * @return 这一天的编码时间 (单位S)
      */
     public int codingTimeSeconds() {
         return countOfCodingSlot() * 30;
     }
 
     /**
-     * 这一天的写代码时间（单位分）
-     *
-     * @return
+     * @return 这一天的写代码时间（单位分钟）
      */
     public double codingTimeMinutes() {
         return codingTimeSeconds() / 60.0;
@@ -137,7 +121,7 @@ public class DayBitSet implements Serializable {
      * 获取小时内的slot打印信息
      *
      * @param hour [0~23]
-     * @return
+     * @return 小时的slot标记信息
      */
     public String getHourSlotInfo(int hour) {
         Calendar calendar = Calendar.getInstance();

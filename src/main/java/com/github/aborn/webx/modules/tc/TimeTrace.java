@@ -33,14 +33,14 @@ public class TimeTrace implements Disposable {
         init();
     }
 
-    private static DayBitSet currentDayBitSet = new DayBitSet();
+    private static final DayBitSet CURRENT_DAY_BIT_SET = new DayBitSet();
 
     private static Boolean READY = false;
 
     /**
      * 定时上报任务
      */
-    private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private static final ScheduledExecutorService SCHEDULER = Executors.newScheduledThreadPool(1);
 
     private static ScheduledFuture<?> scheduledFixture;
 
@@ -53,8 +53,8 @@ public class TimeTrace implements Disposable {
     /**
      * 每30秒执行一次
      */
-    private final int queueTimeoutSeconds = 30;
-    private static ConcurrentLinkedQueue<ActionPoint> actionQueues = new ConcurrentLinkedQueue<ActionPoint>();
+    private static final int QUEUE_TIMEOUT_SECONDS = 30;
+    private static final ConcurrentLinkedQueue<ActionPoint> ACTION_POINTS = new ConcurrentLinkedQueue<>();
 
     public void init() {
         if (!READY) {
@@ -72,8 +72,8 @@ public class TimeTrace implements Disposable {
         TimeTrace timeTrace = ServiceManager.getService(TimeTrace.class);
         timeTrace.init();
 
-        currentDayBitSet.clearIfNotToday();
-        int currentSlot = currentDayBitSet.setSlotByCurrentTime();
+        CURRENT_DAY_BIT_SET.clearIfNotToday();
+        int currentSlot = CURRENT_DAY_BIT_SET.setSlotByCurrentTime();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -82,7 +82,7 @@ public class TimeTrace implements Disposable {
 
         // 打点记录一下
         TimeTraceLogger.info("recorded, slot:" + currentSlot + ", hour_slot:" + (currentSlot - index));
-        TimeTraceLogger.info(currentDayBitSet.getCurrentHourSlotInfo());
+        TimeTraceLogger.info(CURRENT_DAY_BIT_SET.getCurrentHourSlotInfo());
 
         if (TraceRecorder.isOpended()) {
             int openedTimeSlot = TraceRecorder.getOpenedSlot();
@@ -91,7 +91,7 @@ public class TimeTrace implements Disposable {
             if (openedTimeSlot >= 0) {
                 int findVerIndex = -1;
                 for (int i = currentSlot - 1; i >= openedTimeSlot; i--) {
-                    if (currentDayBitSet.get(i)) {
+                    if (CURRENT_DAY_BIT_SET.get(i)) {
                         findVerIndex = i;
                         break;
                     }
@@ -101,9 +101,9 @@ public class TimeTrace implements Disposable {
                 if (findVerIndex >= 0 && findVerIndex < currentSlot
                         && (currentSlot - findVerIndex) < 10) {
                     for (int j = findVerIndex + 1; j < currentSlot; j++) {
-                        currentDayBitSet.set(j);
+                        CURRENT_DAY_BIT_SET.set(j);
                     }
-                    TimeTraceLogger.info("TRACED 5 Minutes:" + currentDayBitSet.getCurrentHourSlotInfo());
+                    TimeTraceLogger.info("TRACED 5 Minutes:" + CURRENT_DAY_BIT_SET.getCurrentHourSlotInfo());
                 }
             }
         }
@@ -131,7 +131,7 @@ public class TimeTrace implements Disposable {
         lastTime = currentTimestamp;
         TimeTraceLogger.info("appendActionPoint.");
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
-            actionQueues.add(actionPoint);
+            ACTION_POINTS.add(actionPoint);
         });
     }
 
@@ -140,9 +140,9 @@ public class TimeTrace implements Disposable {
     }
 
     private void setupQueueProcessor() {
-        final Runnable handler = () -> processActionsQueue();
-        long delay = queueTimeoutSeconds;
-        scheduledFixture = scheduler.scheduleAtFixedRate(handler, delay, delay, java.util.concurrent.TimeUnit.SECONDS);
+        final Runnable handler = TimeTrace::processActionsQueue;
+        long delay = QUEUE_TIMEOUT_SECONDS;
+        scheduledFixture = SCHEDULER.scheduleAtFixedRate(handler, delay, delay, java.util.concurrent.TimeUnit.SECONDS);
     }
 
     /**
@@ -151,9 +151,9 @@ public class TimeTrace implements Disposable {
     private static void processActionsQueue() {
         if (TimeTrace.READY) {
 
-            String message = DataSenderHelper.postData(currentDayBitSet);
+            String message = DataSenderHelper.postData(CURRENT_DAY_BIT_SET);
             TimeTraceLogger.info("POST DATA:" + message);
-            ActionPoint actionPoint = actionQueues.poll();
+            ActionPoint actionPoint = ACTION_POINTS.poll();
             if (actionPoint == null) {
                 return;
             }
@@ -161,7 +161,7 @@ public class TimeTrace implements Disposable {
             ArrayList<ActionPoint> actionPoints = new ArrayList<>();
             actionPoints.add(actionPoint);
             while (true) {
-                ActionPoint h = actionQueues.poll();
+                ActionPoint h = ACTION_POINTS.poll();
                 if (h == null) {
                     break;
                 }
@@ -199,6 +199,7 @@ public class TimeTrace implements Disposable {
         try {
             scheduledFixture.cancel(true);
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // make sure to send all heartbeats before exiting

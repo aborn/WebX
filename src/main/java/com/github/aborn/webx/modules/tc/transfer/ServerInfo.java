@@ -5,9 +5,6 @@ package com.github.aborn.webx.modules.tc.transfer;
  * @date 2021/02/10 2:41 PM
  */
 public class ServerInfo {
-    public ServerInfo() {
-    }
-    
     String url;
     String token;
 
@@ -28,6 +25,7 @@ public class ServerInfo {
     }
 
     public static ServerInfo getConfigServerInfo() {
-        return DEFAULT;   // 调试的时候使用
+        // 调试的时候可使用LOCAL
+        return DEFAULT;
     }
 }
