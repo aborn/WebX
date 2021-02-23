@@ -74,14 +74,14 @@ public class TimeTrace implements Disposable {
 
         currentDayBitSet.clearIfNotToday();
         int slot = currentDayBitSet.setSlotByCurrentTime();
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
         int index = hours * 60 * 2;
 
         // 打点记录一下
-        TimeTraceLogger.info(", slot:" + slot + ", hour_slot:" + (slot - index));
+        TimeTraceLogger.info("recorded, slot:" + slot + ", hour_slot:" + (slot - index));
         TimeTraceLogger.info(currentDayBitSet.getCurrentHourSlotInfo());
     }
 

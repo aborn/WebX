@@ -16,6 +16,7 @@ import com.intellij.openapi.vfs.VirtualFile;
  * @date 2021/02/08 4:11 PM
  */
 public class WebxDocumentListener extends UserActionBaseListener implements DocumentListener {
+    public WebxDocumentListener() {}
 
     @Override
     public void documentChanged(DocumentEvent documentEvent) {

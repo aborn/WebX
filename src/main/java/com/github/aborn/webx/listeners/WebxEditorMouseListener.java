@@ -11,15 +11,18 @@ import com.intellij.openapi.vfs.VirtualFile;
  * @date 2021/02/08 4:09 PM
  */
 public class WebxEditorMouseListener extends UserActionBaseListener implements EditorMouseListener {
+    public WebxEditorMouseListener() {}
 
     @Override
     public void mousePressed(EditorMouseEvent editorMouseEvent) {
+        record();
+
+        /** 先不用处理
         FileDocumentManager instance = FileDocumentManager.getInstance();
         VirtualFile file = instance.getFile(editorMouseEvent.getEditor().getDocument());
         Project project = editorMouseEvent.getEditor().getProject();
         info("mouse pressed. projectName:" + project.getName());
-
-        record();
+         */
     }
 
     @Override

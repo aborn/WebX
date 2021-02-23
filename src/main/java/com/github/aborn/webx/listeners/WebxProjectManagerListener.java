@@ -10,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
  * @date 2021/01/29 2:56 PM
  */
 public class WebxProjectManagerListener extends UserActionBaseListener implements ProjectManagerListener {
+    public WebxProjectManagerListener() {}
+
     @Override
     public void projectOpened(@NotNull Project project) {
         // Ensure this isn't part of testing

@@ -12,6 +12,7 @@ import java.util.List;
  * @date 2021/02/08 2:26 PM
  */
 public class WebxVfsListener extends UserActionBaseListener implements BulkFileListener {
+    public WebxVfsListener() {}
 
     @Override
     public void after(@NotNull List<? extends VFileEvent> events) {
