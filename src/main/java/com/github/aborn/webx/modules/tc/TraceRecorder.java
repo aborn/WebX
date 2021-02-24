@@ -2,6 +2,7 @@ package com.github.aborn.webx.modules.tc;
 
 import com.github.aborn.webx.utils.DateBitSlotUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,6 +18,16 @@ public class TraceRecorder {
     private static Date closeTime = null;
 
     public static int getOpenedSlot() {
+        if (openTime == null) { return -1; }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDay = simpleDateFormat.format(new Date());
+
+        // ignore if not today.
+        if (!simpleDateFormat.format(openTime).equals(currentDay)) {
+            return -1;
+        }
+
         return DateBitSlotUtils.getSlotIndex(openTime);
     }
 
