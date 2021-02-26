@@ -50,6 +50,15 @@ public class DataSenderHelper {
         if (!dataSenderSwitch()) {
             return "error, data sender switch off.";
         }
+
+        if (dayBitSet.countOfCodingSlot() == 0) {
+            return "No need to post, reason: data empty.";
+        }
+
+        if (!dayBitSet.isToday()) {
+            return "No need to post, reason: is not today's data. " + dayBitSet.getDay();
+        }
+
         UserActionEntity userActionEntity = new UserActionEntity();
         userActionEntity.setToken(ServerInfo.getConfigServerInfo().getToken());
         userActionEntity.setDayBitSetArray(dayBitSet.getDayBitSetByteArray());
