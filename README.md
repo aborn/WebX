@@ -68,9 +68,7 @@ WebX是一套强大的Web开发扩展插件，源于[RestfulToolkit](https://git
 * JAX-RS 
 
 ### WebX微信小程序
-<img src="src/main/resources/images/wechat_430.jpg" alt="WebX微信小程序" style="width:250px;height:250px"/>
 
----
-Plugin based on the [IntelliJ Platform Plugin Template][template].
+![](src/main/resources/images/wechat_430.jpg)
 
 [template]: https://github.com/JetBrains/intellij-platform-plugin-template
