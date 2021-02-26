@@ -152,8 +152,7 @@ public class DataSenderHelper {
         JsonParser parser = new JsonParser();
         JsonElement parse = parser.parse(str);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(parse);
-        return json;
+        return gson.toJson(parse);
     }
 
     private static boolean dataSenderSwitch() {
