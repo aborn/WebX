@@ -67,6 +67,12 @@ WebX是一套强大的Web开发扩展插件，源于[RestfulToolkit](https://git
 * Spring (Spring MVC / Spring Boot)   
 * JAX-RS 
 
+<div align="center">
+    <a href="https://plugins.jetbrains.com/plugin/16053-webx">
+        <img src="./src/main/resources/images/wechat_430.jpg" width="220" height="220" alt="logo"/>
+    </a>
+</div>
+
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
 
