@@ -8,6 +8,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.apache.log4j.Level;
+import org.codehaus.groovy.transform.TimedInterruptibleASTTransformation;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
@@ -149,26 +150,34 @@ public class TimeTrace implements Disposable {
      * 无论IDEA是否打开，每30s上报一次。
      */
     private static void processActionsQueue() {
-        if (TimeTrace.READY) {
+        try {
+            if (TimeTrace.READY) {
 
-            String message = DataSenderHelper.postData(CURRENT_DAY_BIT_SET);
-            TimeTraceLogger.info("POST DATA:" + message);
-            ActionPoint actionPoint = ACTION_POINTS.poll();
-            if (actionPoint == null) {
-                return;
-            }
+                String message = DataSenderHelper.postData(CURRENT_DAY_BIT_SET);
+                TimeTraceLogger.info("POST DATA:" + message);
 
-            ArrayList<ActionPoint> actionPoints = new ArrayList<>();
-            actionPoints.add(actionPoint);
-            while (true) {
-                ActionPoint h = ACTION_POINTS.poll();
-                if (h == null) {
-                    break;
+                /***
+                ActionPoint actionPoint = ACTION_POINTS.poll();
+                if (actionPoint == null) {
+                    return;
                 }
-                actionPoints.add(h);
-            }
 
-            sendTraceActions(actionPoints);
+                ArrayList<ActionPoint> actionPoints = new ArrayList<>();
+                actionPoints.add(actionPoint);
+                while (true) {
+                    ActionPoint h = ACTION_POINTS.poll();
+                    if (h == null) {
+                        break;
+                    }
+                    actionPoints.add(h);
+                }
+
+                sendTraceActions(actionPoints);
+                 */
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            TimeTraceLogger.info("SCHEDULER running exception.");
         }
     }
 
