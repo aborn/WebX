@@ -66,15 +66,17 @@ public class DataSenderHelper {
 
         Date currentDate = new Date();
 
+        // 5分钟内无需频繁上传
         if (lastPostDate != null
                 && lastPostData.cardinality() == dayBitSet.countOfCodingSlot()
-                && ((currentDate.getTime() - lastPostDate.getTime()) / 1000 < 5 * 60)) {   // 5分钟
-            return "No need to post";
+                && ((currentDate.getTime() - lastPostDate.getTime()) / 1000 < 5 * 60)) {
+            return "No need to post, reason: time to short.";
         }
 
         SenderResponse result = postDataJson(ServerInfo.getConfigServerInfo().getUrl(), userActionEntity);
         TimeTraceLogger.info("after postdata, status:" + result.getStatus());
         lastPostDate = currentDate;
+        lastPostData.clear();
         lastPostData.or(dayBitSet.getCodingBitSet());
 
         return result.getMessage();
