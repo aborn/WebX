@@ -4,9 +4,7 @@ import com.github.aborn.webx.modules.tc.DayBitSet;
 import com.github.aborn.webx.modules.tc.TimeTraceLogger;
 import com.github.aborn.webx.utils.DateBitSlotUtils;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.JsonObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -15,12 +13,11 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.BitSet;
+import java.util.Date;
 
 /**
  * @author aborn
@@ -116,8 +113,13 @@ public class DataSenderHelper {
             httpPost.setEntity(httpEntity);
 
             response = httpClient.execute(httpPost);
-            result = toString(response.getEntity());
-            senderResponse.setStatus(true);
+            BaseResponse baseResponse = toString(response.getEntity());
+            if (baseResponse == null) {
+                result = "Error in http request.";
+            } else {
+                senderResponse.setStatus(baseResponse.getCode() == 200);
+                senderResponse.setMessage(baseResponse.getMsg());
+            }
         } catch (IOException e) {
             result = "There was an error accessing to URL: " + url + "\n\n" + e.toString();
             senderResponse.setStatus(false);
@@ -151,8 +153,7 @@ public class DataSenderHelper {
         }
     }
 
-    @NotNull
-    private static String toString(HttpEntity entity) {
+    private static BaseResponse toString(HttpEntity entity) {
         String result = null;
         try {
             result = EntityUtils.toString(entity, StandardCharsets.UTF_8);
@@ -161,17 +162,17 @@ public class DataSenderHelper {
         }
 
         if (StringUtils.isBlank(result)) {
-            return StringUtils.EMPTY;
+            return null;
         } else {
-            return format(result);
+            Gson gson = new Gson();
+            JsonObject jsonObject = gson.fromJson(result, JsonObject.class);
+            int code = jsonObject.get("code").getAsInt();
+            boolean status = jsonObject.get("status").getAsBoolean();
+            String msg = jsonObject.get("msg").getAsString();
+            BaseResponse baseResponse = new BaseResponse(status, msg, code);
+            baseResponse.setData(jsonObject.get("data").getAsString());
+            return baseResponse;
         }
-    }
-
-    private static String format(String str) {
-        JsonParser parser = new JsonParser();
-        JsonElement parse = parser.parse(str);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return gson.toJson(parse);
     }
 
     private static boolean dataSenderSwitch() {

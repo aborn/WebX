@@ -9,6 +9,8 @@ Website:     https://wakatime.com/
 package com.github.aborn.webx.ui;
 
 import com.github.aborn.webx.datatypes.PlaceholderTextField;
+import com.github.aborn.webx.modules.tc.transfer.DataSenderHelper;
+import com.github.aborn.webx.modules.tc.transfer.SenderResponse;
 import com.github.aborn.webx.utils.ConfigFile;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
@@ -79,8 +81,12 @@ public class Settings extends DialogWrapper {
 
     @Override
     public void doOKAction() {
-        ConfigFile.set("settings", "id", idText.getText());
-        ConfigFile.set("settings", "token", tokenText.getText());
+        String id = idText.getText();
+        String token = tokenText.getText();
+        ConfigFile.set("settings", "id", id);
+        ConfigFile.set("settings", "token", token);
+
+        SenderResponse senderResponse = DataSenderHelper.validate(id, token);
         super.doOKAction();
     }
 
