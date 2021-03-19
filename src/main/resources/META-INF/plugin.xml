@@ -47,10 +47,18 @@
                 icon="AllIcons.Actions.Refresh">
         </action>
 
+        <!--设置-->
+        <action id="WebX.Settings" class="com.github.aborn.webx.actions.UserSettingAction"
+                text="Config User Token and ID"
+                icon="AllIcons.General.User">
+        </action>
+
         <group id="WebX.NavigatorActionsToolbar">
             <reference id="WebX.RefreshServices"/>
             <separator/>
             <reference id="WebX.GotoService"/>
+            <separator/>
+            <reference id="WebX.Settings"/>
             <separator/>
         </group>
 
