@@ -9,6 +9,7 @@ public class SenderResponse {
 
     String message;
     Boolean status;
+    int code;
 
     public SenderResponse(String message, Boolean status) {
         this.message = message;
@@ -29,5 +30,13 @@ public class SenderResponse {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

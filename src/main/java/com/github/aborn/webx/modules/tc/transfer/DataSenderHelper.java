@@ -117,8 +117,9 @@ public class DataSenderHelper {
             if (baseResponse == null) {
                 result = "Error in http request.";
             } else {
-                senderResponse.setStatus(baseResponse.getCode() == 200);
+                senderResponse.setStatus(baseResponse.isStatus());
                 senderResponse.setMessage(baseResponse.getMsg());
+                senderResponse.setCode(baseResponse.getCode());
             }
         } catch (IOException e) {
             result = "There was an error accessing to URL: " + url + "\n\n" + e.toString();
@@ -170,7 +171,7 @@ public class DataSenderHelper {
             boolean status = jsonObject.get("status").getAsBoolean();
             String msg = jsonObject.get("msg").getAsString();
             BaseResponse baseResponse = new BaseResponse(status, msg, code);
-            baseResponse.setData(jsonObject.get("data").getAsString());
+            // baseResponse.setData(jsonObject.get("data").getAsString());
             return baseResponse;
         }
     }

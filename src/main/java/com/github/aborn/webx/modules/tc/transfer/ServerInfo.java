@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ServerInfo {
     private static final String POST_URL = "https://aborn.me/webx/postUserAction";
+    private static String TOKEN = null;
     public static final String VALIDATE_URL = "http://aborn.me/webx/user/postUserConfig";
     String url;
     String token;
@@ -31,12 +32,16 @@ public class ServerInfo {
 
     public static ServerInfo getConfigServerInfo() {
         // 调试的时候可使用LOCAL
-        String token = ConfigFile.get("settings", "token");
+        String token = TOKEN != null ? TOKEN : ConfigFile.get("settings", "token");
         System.out.println("current user token is=" + token);
         if (StringUtils.isNotBlank(token)) {
             return new ServerInfo(POST_URL, token.trim());
         } else {
             return null;
         }
+    }
+
+    public static void setToken(String token) {
+        TOKEN = token;
     }
 }
