@@ -1,10 +1,14 @@
 package com.github.aborn.webx.modules.tc.transfer;
 
+import com.github.aborn.webx.utils.ConfigFile;
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author aborn
  * @date 2021/02/10 2:41 PM
  */
 public class ServerInfo {
+    private static final String POST_URL = "https://aborn.me/webx/postUserAction";
     String url;
     String token;
 
@@ -13,7 +17,7 @@ public class ServerInfo {
         this.token = token;
     }
 
-    public static ServerInfo DEFAULT = new ServerInfo("https://aborn.me/webx/postUserAction", "8ba394513f8420e");
+    public static ServerInfo DEFAULT = new ServerInfo(POST_URL, "8ba394513f8420e");
     public static ServerInfo LOCAL = new ServerInfo("http://127.0.0.1:8080/webx/postUserAction", "8ba394513f8420e");
 
     public String getUrl() {
@@ -26,6 +30,11 @@ public class ServerInfo {
 
     public static ServerInfo getConfigServerInfo() {
         // 调试的时候可使用LOCAL
-        return DEFAULT;
+        String token = ConfigFile.get("settings", "token");
+        if (StringUtils.isNotBlank(token)) {
+            return new ServerInfo(POST_URL, token.trim());
+        } else {
+            return null;
+        }
     }
 }

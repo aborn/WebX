@@ -59,8 +59,13 @@ public class DataSenderHelper {
             return "No need to post, reason: is not today's data. " + dayBitSet.getDay();
         }
 
+        ServerInfo serverInfo = ServerInfo.getConfigServerInfo();
+        if (serverInfo == null) {
+            return "User config not provided, no posting data.";
+        }
+
         UserActionEntity userActionEntity = new UserActionEntity();
-        userActionEntity.setToken(ServerInfo.getConfigServerInfo().getToken());
+        userActionEntity.setToken(serverInfo.getToken());
         userActionEntity.setDayBitSetArray(dayBitSet.getDayBitSetByteArray());
         userActionEntity.setDay(dayBitSet.getDay());
 
@@ -73,7 +78,7 @@ public class DataSenderHelper {
             return "No need to post, reason: time to short.";
         }
 
-        SenderResponse result = postDataJson(ServerInfo.getConfigServerInfo().getUrl(), userActionEntity);
+        SenderResponse result = postDataJson(serverInfo.getUrl(), userActionEntity);
         TimeTraceLogger.info("after postdata, status:" + result.getStatus());
         lastPostDate = currentDate;
         lastPostData.clear();
