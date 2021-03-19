@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ServerInfo {
     private static final String POST_URL = "https://aborn.me/webx/postUserAction";
+    public static final String VALIDATE_URL = "http://aborn.me/webx/user/postUserConfig";
     String url;
     String token;
 

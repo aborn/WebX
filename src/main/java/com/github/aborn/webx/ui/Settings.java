@@ -17,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.UUID;
 
 public class Settings extends DialogWrapper {
     private final JPanel panel;
@@ -82,7 +81,6 @@ public class Settings extends DialogWrapper {
     public void doOKAction() {
         ConfigFile.set("settings", "id", idText.getText());
         ConfigFile.set("settings", "token", tokenText.getText());
-        System.out.println("OK button is pressed!");
         super.doOKAction();
     }
 

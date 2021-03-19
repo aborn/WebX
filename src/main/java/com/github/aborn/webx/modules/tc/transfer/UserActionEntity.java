@@ -1,14 +1,12 @@
 package com.github.aborn.webx.modules.tc.transfer;
 
-import com.google.gson.Gson;
-
 import java.io.Serializable;
 
 /**
  * @author aborn
  * @date 2021/02/10 12:14 PM
  */
-public class UserActionEntity implements Serializable {
+public class UserActionEntity extends SenderEntity implements Serializable {
     private String token;
     private byte[] dayBitSetArray;
     // 具体的天，格式：yyyy-MM-dd
@@ -36,9 +34,5 @@ public class UserActionEntity implements Serializable {
 
     public void setDayBitSetArray(byte[] dayBitSetArray) {
         this.dayBitSetArray = dayBitSetArray;
-    }
-
-    public String toJson() {
-        return new Gson().toJson(this);
     }
 }

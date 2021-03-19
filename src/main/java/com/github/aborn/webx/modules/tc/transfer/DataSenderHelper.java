@@ -42,8 +42,11 @@ public class DataSenderHelper {
         dayBitSet.setSlotByCurrentTime();
         dayBitSet.set(1);
 
-        String str = postData(dayBitSet);
-        System.out.println(str);
+        //String str = postData(dayBitSet);
+        //System.out.println(str);
+
+        SenderResponse response = validate("webx","8ba394513f8420e");
+        System.out.println(response);
     }
 
     public static String postData(DayBitSet dayBitSet) {
@@ -87,7 +90,18 @@ public class DataSenderHelper {
         return result.getMessage();
     }
 
-    private static SenderResponse postDataJson(String url, UserActionEntity userAction) {
+    /**
+     * 验证token和id是否合法
+     * @param id 用户的github id
+     * @param token 用户申请获得的token
+     * @return
+     */
+    public static SenderResponse validate(String id, String token) {
+        UserEntity userEntity = new UserEntity(token, id);
+        return postDataJson(ServerInfo.VALIDATE_URL, userEntity);
+    }
+
+    private static SenderResponse postDataJson(String url, SenderEntity senderEntity) {
         SenderResponse senderResponse = new SenderResponse("", true);
 
         CloseableHttpResponse response = null;
@@ -96,7 +110,7 @@ public class DataSenderHelper {
         String result = null;
         try {
 
-            StringEntity httpEntity = new StringEntity(userAction.toJson());
+            StringEntity httpEntity = new StringEntity(senderEntity.toJson());
             httpPost.addHeader("Content-type", "application/json; charset=utf-8");
             httpPost.setHeader("Accept", "application/json");
             httpPost.setEntity(httpEntity);
