@@ -31,6 +31,7 @@ public class ServerInfo {
     public static ServerInfo getConfigServerInfo() {
         // 调试的时候可使用LOCAL
         String token = ConfigFile.get("settings", "token");
+        System.out.println("current user token is=" + token);
         if (StringUtils.isNotBlank(token)) {
             return new ServerInfo(POST_URL, token.trim());
         } else {

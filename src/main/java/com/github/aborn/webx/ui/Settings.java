@@ -67,11 +67,15 @@ public class Settings extends DialogWrapper {
 
         String id = idText.getText();
         String token = tokenText.getText();
-        if (!"webx".equals(id) || !"8ba394513f8420e".equals(token)) {
-            return new ValidationInfo("Invalid user id or token.");
+        if ("webx".equals(id) && "8ba394513f8420e".equals(token)) {
+            return null;
         }
 
-        return null;
+        if ("aborn".equals(id) && "0x8bf8e412".equals(token)) {
+            return null;
+        }
+
+        return new ValidationInfo("Invalid user id or token.");
     }
 
     @Override
