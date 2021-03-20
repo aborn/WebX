@@ -67,8 +67,16 @@ WebX是一套强大的Web开发扩展插件，源于[RestfulToolkit](https://git
 * Spring (Spring MVC / Spring Boot)   
 * JAX-RS 
 
-### WebX微信小程序
+###「i极客日历」微信小程序
 
-![](src/main/resources/images/wechat_430.jpg)
+![](docs/wechat_430.jpg)
+
+### 配置自己的token和id
+
+* 打开配置入口    
+![](docs/UserSetting1.jpg)
+
+* 配置信息    
+![](docs/UserSetting2.jpg)
 
 [template]: https://github.com/JetBrains/intellij-platform-plugin-template
