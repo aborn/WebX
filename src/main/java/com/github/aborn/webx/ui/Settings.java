@@ -16,6 +16,7 @@ import com.github.aborn.webx.modules.tc.transfer.ServerInfo;
 import com.github.aborn.webx.utils.ConfigFile;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.ValidationInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
@@ -29,9 +30,12 @@ public class Settings extends DialogWrapper {
     private final PlaceholderTextField idText;
     private final JLabel tokenLabel;
     private final PlaceholderTextField tokenText;
+    private Project project;
 
     public Settings(@Nullable Project project) {
         super(project, true);
+
+        this.project = project;
         setTitle("WebX User Settings");
         setOKButtonText("Save");
         panel = new JPanel();
@@ -65,10 +69,12 @@ public class Settings extends DialogWrapper {
         return panel;
     }
 
+    /**
+     * 注意这里的校验要简单，否则会出现频繁校验的问题
+     * @return
+     */
     @Override
     protected ValidationInfo doValidate() {
-        // TODO 调用远程接口做校验
-
         String id = idText.getText();
         String token = tokenText.getText();
         if ("webx".equals(id) && "8ba394513f8420e".equals(token)) {
@@ -88,17 +94,20 @@ public class Settings extends DialogWrapper {
         String token = tokenText.getText();
 
         SenderResponse senderResponse = DataSenderHelper.validate(id, token);
-        if (senderResponse.getStatus()) {
+        if (senderResponse.getCode() == 200 && senderResponse.getStatus()) {
             // 校验成功保存到本地
             TimeTraceLogger.info("settings is success, token: " + token + ", id: " + id);
             ConfigFile.set("settings", "id", id);
             ConfigFile.set("settings", "token", token);
             ServerInfo.setToken(token);
+            super.doOKAction();
         } else {
             TimeTraceLogger.info("settings is error, token: " + token + ", id: " + id);
-            // TODO 这里需要给提示
+            Messages.showMessageDialog(this.project,
+                    "Invalid user id or token！ErrorCode:" + senderResponse.getCode() + "," + senderResponse.getMessage(),
+                    "Error", Messages.getInformationIcon());
+            return;
         }
-        super.doOKAction();
     }
 
 }

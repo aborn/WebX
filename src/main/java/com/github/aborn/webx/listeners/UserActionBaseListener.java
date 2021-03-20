@@ -3,10 +3,6 @@ package com.github.aborn.webx.listeners;
 
 import com.github.aborn.webx.modules.tc.TimeTrace;
 import com.github.aborn.webx.modules.tc.TimeTraceLogger;
-import com.intellij.openapi.diagnostic.Logger;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @author aborn
