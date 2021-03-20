@@ -9,6 +9,7 @@ Website:     https://wakatime.com/
 package com.github.aborn.webx.ui;
 
 import com.github.aborn.webx.datatypes.PlaceholderTextField;
+import com.github.aborn.webx.modules.tc.TimeTraceLogger;
 import com.github.aborn.webx.modules.tc.transfer.DataSenderHelper;
 import com.github.aborn.webx.modules.tc.transfer.SenderResponse;
 import com.github.aborn.webx.modules.tc.transfer.ServerInfo;
@@ -89,10 +90,12 @@ public class Settings extends DialogWrapper {
         SenderResponse senderResponse = DataSenderHelper.validate(id, token);
         if (senderResponse.getStatus()) {
             // 校验成功保存到本地
+            TimeTraceLogger.info("settings is success, token: " + token + ", id: " + id);
             ConfigFile.set("settings", "id", id);
             ConfigFile.set("settings", "token", token);
             ServerInfo.setToken(token);
         } else {
+            TimeTraceLogger.info("settings is error, token: " + token + ", id: " + id);
             // TODO 这里需要给提示
         }
         super.doOKAction();

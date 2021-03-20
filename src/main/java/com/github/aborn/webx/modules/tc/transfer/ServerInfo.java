@@ -1,5 +1,6 @@
 package com.github.aborn.webx.modules.tc.transfer;
 
+import com.github.aborn.webx.modules.tc.TimeTraceLogger;
 import com.github.aborn.webx.utils.ConfigFile;
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,7 +34,7 @@ public class ServerInfo {
     public static ServerInfo getConfigServerInfo() {
         // 调试的时候可使用LOCAL
         String token = TOKEN != null ? TOKEN : ConfigFile.get("settings", "token");
-        System.out.println("current user token is=" + token);
+        TimeTraceLogger.info("current user token is:" + token);
         if (StringUtils.isNotBlank(token)) {
             return new ServerInfo(POST_URL, token.trim());
         } else {
