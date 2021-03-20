@@ -12,6 +12,11 @@
 ### Fixed
 - fix1.
 
+## [1.0.0]
+### Added
+- Add time trace module.
+- Support record coding time. 
+
 ## [0.1.0]
 ### Added
 - Initial WebX plugin.

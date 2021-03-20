@@ -65,7 +65,7 @@
     </actions>
 
     <idea-version since-build="193" until-build="203.*"/>
-    <version>0.1.0</version>
+    <version>1.0.0</version>
     <description><![CDATA[
        <h3>A powerful toolkit for develop web services.</h3>
        <ul>
@@ -76,10 +76,14 @@
        <p> support Spring framework (Spring MVC / Spring Boot).
        <p> support JAX-RS.
        <p> support Java languages.
+       <p> Support record coding time.
        <hr />
     ]]></description>
 
     <change-notes><![CDATA[
+        <li>1.0.0 Support record coding time.<br/>
+                  Add time trace module. <br/>
+                  Support user token and id configuration.</li>
         <li>0.1.0 Initial WebX plugin.<br/>
                   Quick navigation to URL mapping declarations. <br/>
                   Show RESTful service structure. </li>
