@@ -65,9 +65,11 @@ WebX是一套强大的Web开发扩展插件，源于[RestfulToolkit](https://git
 
 ### 支持的框架
 * Spring (Spring MVC / Spring Boot)   
-* JAX-RS 
-
+* JAX-RS  
+  
 ###「i极客日历」微信小程序  
+
+[iCalendar](https://github.com/aborn/iCalendar)   
 
 ![](docs/wechat_430.jpg)
 
