@@ -11,7 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 public class ServerInfo {
     private static final String POST_URL = "https://aborn.me/webx/postUserAction";
     private static String TOKEN = null;
-    public static final String VALIDATE_URL = "http://aborn.me/webx/user/postUserConfig";
+    public static final String VALIDATE_URL = "https://aborn.me/webx/user/postUserConfig";
+    public static final String VALIDATE_URL_LOCAL = "http://127.0.0.1:8080/webx/user/postUserConfig";
+
     String url;
     String token;
 
