@@ -65,7 +65,7 @@
     </actions>
 
     <idea-version since-build="193"/>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description><![CDATA[
        <h3>A powerful toolkit for develop web services.</h3>
        <ul>
@@ -81,6 +81,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <li>1.0.1 Support intellij idea 2021.1.<li/>
         <li>1.0.0 Support record coding time.<br/>
                   Add time trace module. <br/>
                   Support user token and id configuration.</li>

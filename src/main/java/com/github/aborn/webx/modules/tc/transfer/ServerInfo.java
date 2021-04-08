@@ -36,7 +36,7 @@ public class ServerInfo {
     public static ServerInfo getConfigServerInfo() {
         // 调试的时候可使用LOCAL
         String token = TOKEN != null ? TOKEN : ConfigFile.get("settings", "token");
-        TimeTraceLogger.info("current user token is:" + token);
+        TimeTraceLogger.info("current user token:" + token);
         if (StringUtils.isNotBlank(token)) {
             return new ServerInfo(POST_URL, token.trim());
         } else {
