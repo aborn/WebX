@@ -12,6 +12,10 @@
 ### Fixed
 - fix1.
 
+## [1.0.1]
+### Added
+- Support Intellij IDEA 2021.1
+
 ## [1.0.0]
 ### Added
 - Add time trace module.

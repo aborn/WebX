@@ -9,10 +9,13 @@ import java.io.Serializable;
 public class UserEntity extends SenderEntity implements Serializable {
     private String token;
     private String id;
+    private Integer actiontype;
 
     public UserEntity(String token, String id) {
         this.token = token;
         this.id = id;
+        // WebX Validate actiontype Code as 101
+        this.actiontype = 101;
     }
 
     public String getToken() {
@@ -29,5 +32,13 @@ public class UserEntity extends SenderEntity implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Integer getActiontype() {
+        return actiontype;
+    }
+
+    public void setActiontype(Integer actiontype) {
+        this.actiontype = actiontype;
     }
 }
