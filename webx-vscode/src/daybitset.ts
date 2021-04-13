@@ -8,8 +8,8 @@ export class DayBitSet {
 
     constructor() {
         this.day = "2021-04-07";
-        this.bitset = new BitSet()
-        this.bitset.setRange(0, SLOT_SIZE)
+        this.bitset = new BitSet();
+        this.bitset.setRange(0, SLOT_SIZE);
     }
 
     public record(): void {
