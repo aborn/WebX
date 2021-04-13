@@ -3,7 +3,7 @@ import * as events from "./events";
 
 export class WebX {
     constructor(state: vscode.Memento) {
-        this.initEventListeners()
+        this.initEventListeners();
     }
 
     private initEventListeners(): void {
@@ -19,7 +19,7 @@ export class WebX {
     }
 
     private record() {
-        console.log('record.')
+        console.log('record.');
     }
 
     public dispose() {
