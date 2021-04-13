@@ -26,4 +26,9 @@ public class DateBitSlotUtils {
 
         return hours * 60 * 2 + minutes * 2 + (seconds / 30);
     }
+
+    public static void main(String[] args) {
+        Date date = new Date();
+        System.out.println(date + ", slot=" + getSlotIndex(date));
+    }
 }
