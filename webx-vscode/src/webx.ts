@@ -23,7 +23,7 @@ export class WebX {
 
     private record() {
         this.daybitset.record();
-        this.daybitset.print();
+        // this.daybitset.print();
     }
 
     public dispose() {
