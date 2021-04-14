@@ -1,9 +1,12 @@
 import * as vscode from "vscode";
 import * as events from "./events";
+import { DayBitSet } from "./daybitset";
 
 export class WebX {
+    private daybitset: DayBitSet;
     constructor(state: vscode.Memento) {
         this.initEventListeners();
+        this.daybitset = new DayBitSet();
     }
 
     private initEventListeners(): void {
@@ -19,7 +22,8 @@ export class WebX {
     }
 
     private record() {
-        console.log('record.');
+        this.daybitset.record();
+        this.daybitset.print();
     }
 
     public dispose() {

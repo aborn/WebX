@@ -8,9 +8,9 @@ export class DayBitSet {
 
     constructor() {
         this.day = "2021-04-07";
-        this.bitset = new BitSet(SLOT_SIZE);
-        this.bitset.clear();
-        // this.bitset.setRange(0, SLOT_SIZE);
+        this.bitset = new BitSet;
+        this.bitset.setRange(0, SLOT_SIZE, 0);
+        this.bitset.set(SLOT_SIZE - 1, 0);
     }
 
     public record(): void {
@@ -23,16 +23,7 @@ export class DayBitSet {
     }
 
     public print(): void {
-        let index = 0;
-        for (let b of this.bitset) {
-            if (b === 1) {
-                console.log(index + ':' + b + '\n');
-            }
-            index = index + 1;
-        }
-        console.log('last index=' + index);
         let arr = this.bitset.toArray();
-        console.log("array length = " + arr.length);
-        console.log(arr);
+        console.log(arr);        
     }
 }
