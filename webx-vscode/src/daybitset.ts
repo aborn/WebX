@@ -22,8 +22,17 @@ export class DayBitSet {
         return this.bitset.cardinality();
     }
 
+    public toByteBuffer(): ArrayBuffer {
+        const buffer = new ArrayBuffer(SLOT_SIZE);
+        return buffer;
+    }
+
     public print(): void {
         let arr = this.bitset.toArray();
-        console.log(arr);        
+        console.log(arr);
+    }
+
+    public getDay(): string {
+        return this.day;
     }
 }
