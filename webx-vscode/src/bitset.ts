@@ -1,6 +1,6 @@
 
-const WORD_LENGTH = 32;
-const WORD_LOG = 5;
+const WORD_LENGTH = 8;
+const WORD_LOG = 3;
 
 export class BitSet {
     // 总共有多少个bitslot
@@ -45,15 +45,29 @@ export class BitSet {
         }
         return s;
     }
-    
+
     public toByteBuffer(): ArrayBuffer {
         const buffer = new ArrayBuffer(this.data.length * WORD_LENGTH);
         var unit32Array = new Uint32Array(buffer);
 
-        for (var i= 0; i< unit32Array.length; i++) {
+        for (var i = 0; i < unit32Array.length; i++) {
             unit32Array[i] = this.data[i];
         }
         return buffer;
+    }
+
+    public toIntArray() : number[] {        
+        return this.data;
+    }
+
+    public toBuffer() : Int8Array {
+        const buffer = new ArrayBuffer(this.data.length * WORD_LENGTH);
+        var int8Array = new Int8Array(buffer);
+
+        for (var i = 0; i < int8Array.length; i++) {
+            int8Array[i] = this.data[i];
+        }
+        return int8Array;
     }
 
     private popCount(v: number): number {

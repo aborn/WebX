@@ -18,6 +18,10 @@ export class DayBitSet {
         console.log("slot=" + slot + ":" + this.bitset.get(slot) + ", cardinality=" + this.cardinality() + "wordlength=" + this.bitset.wordLength());
     }
 
+    public getBitSet(): BitSet {
+        return this.bitset;
+    }
+
     public get(ndx: number): number {
         return this.bitset.get(ndx);
     }

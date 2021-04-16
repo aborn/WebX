@@ -1,5 +1,7 @@
 package com.github.aborn.webx.modules.tc.transfer;
 
+import com.github.aborn.webx.modules.tc.DayBitSet;
+
 import java.io.Serializable;
 
 /**
@@ -34,5 +36,16 @@ public class UserActionEntity extends SenderEntity implements Serializable {
 
     public void setDayBitSetArray(byte[] dayBitSetArray) {
         this.dayBitSetArray = dayBitSetArray;
+    }
+
+    public static void main(String[] args) {
+        UserActionEntity userActionEntity = new UserActionEntity();
+        userActionEntity.setToken("123");
+        DayBitSet dayBitSet = new DayBitSet();
+        dayBitSet.set(1);
+        userActionEntity.setDayBitSetArray(dayBitSet.getDayBitSetByteArray());
+        userActionEntity.setDay("2021-08-11");
+        String json = userActionEntity.toJson();
+        System.out.println(json);
     }
 }
