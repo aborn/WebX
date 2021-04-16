@@ -5,7 +5,7 @@ const WORD_LOG = 3;
 export class BitSet {
     // 总共有多少个bitslot
     private slot: number;
-    private data: number[];
+    private data: Int8Array;
 
     constructor(slot: number) {
         if (slot <= 0) {
@@ -13,27 +13,27 @@ export class BitSet {
         }
 
         this.slot = slot;
-        this.data = [];
-        var l = slot >>> WORD_LOG;
-
-        for (var i = 0; l >= i; l--) {
-            this.data.push(0);
-        }
+        this.data = new Int8Array(slot >>> WORD_LOG);
     }
 
     public set(ndx: number): void {
-        this.data[ndx >>> WORD_LOG] |= (1 << ndx);
+        var n = ndx >>> WORD_LOG;
+        var b = ndx & 0x7;
+        this.data[n] |= (1 << b);
+        // console.log('ndx=' + ndx + ', n=' + n + ', value=' + this.data[n] + ", get=" + this.get(ndx));
     }
 
     public get(ndx: number): number {
         var n = ndx >>> WORD_LOG;
+        var b = ndx & 0x7;
 
         if (n >= this.data.length) {
             throw Error('Index out of box.');
         }
-        return (this.data[n] >>> ndx) & 1;
+        return (this.data[n] >> b) & 1;
     }
 
+    // TODO 这里有问题
     public cardinality(): number {
         var s = 0;
         var d = this.data;
@@ -56,13 +56,12 @@ export class BitSet {
         return buffer;
     }
 
-    public toIntArray() : number[] {        
+    public toIntArray(): Int8Array {
         return this.data;
     }
 
-    public toBuffer() : Int8Array {
-        const buffer = new ArrayBuffer(this.data.length * WORD_LENGTH);
-        var int8Array = new Int8Array(buffer);
+    public toBuffer(): Int8Array {
+        var int8Array = new Int8Array(this.data.length - 1);
 
         for (var i = 0; i < int8Array.length; i++) {
             int8Array[i] = this.data[i];

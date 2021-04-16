@@ -6,16 +6,21 @@ let daybitset = new DayBitSet();
 daybitset.record();
 
 daybitset.set(1);
+daybitset.set(8);
+daybitset.set(24 * 60 * 2 - 1);
+console.log('100===' +  daybitset.get(100));
 //console.log('cardinality:' + daybitset.cardinality());
 daybitset.print();
 
+var intArr = daybitset.getBitSet().toIntArray();
 const data = {
     token: '8ba394513f8420e',
     day: daybitset.getDay(),
-    dayBitSetArray: daybitset.getBitSet().toIntArray()
+    dayBitSetArray: intArr
 };
 
 console.log(data);
+console.log('length=' + intArr.length);
 
 var a = true;
 if (a) {
