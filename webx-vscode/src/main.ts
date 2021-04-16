@@ -4,7 +4,9 @@ import axios from 'axios';
 console.log('start runing.');
 let daybitset = new DayBitSet();
 daybitset.record();
-console.log('cardinality:' + daybitset.cardinality());
+
+daybitset.set(1);
+//console.log('cardinality:' + daybitset.cardinality());
 daybitset.print();
 
 axios({
@@ -19,7 +21,7 @@ axios({
     data: {
         token: '8ba394513f8420e',
         day: daybitset.getDay(),
-        dayBitSetArray: daybitset.getDay
+        dayBitSetArray: daybitset.toByteBuffer()
     }
 }).then((response: any) => {
     // handle success

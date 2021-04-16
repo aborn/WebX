@@ -1,4 +1,4 @@
-import BitSet from "bitset";
+import { BitSet } from "./bitset";
 import * as dateutils from "./dateutils";
 const SLOT_SIZE = 24 * 60 * 2;
 
@@ -8,14 +8,22 @@ export class DayBitSet {
 
     constructor() {
         this.day = "2021-04-07";
-        this.bitset = new BitSet;
-        this.bitset.setRange(0, SLOT_SIZE, 0);
-        this.bitset.set(SLOT_SIZE - 1, 0);
+        this.bitset = new BitSet(SLOT_SIZE);
     }
 
     public record(): void {
         let slot = dateutils.getSlotIndex();
-        this.bitset.set(slot, 1);
+        this.bitset.set(slot);
+
+        console.log("slot=" + slot + ":" + this.bitset.get(slot) + ", cardinality=" + this.cardinality() + "wordlength=" + this.bitset.wordLength());
+    }
+
+    public get(ndx: number): number {
+        return this.bitset.get(ndx);
+    }
+
+    public set(ndx: number): void {
+        this.bitset.set(ndx);
     }
 
     public cardinality(): number {
@@ -23,13 +31,11 @@ export class DayBitSet {
     }
 
     public toByteBuffer(): ArrayBuffer {
-        const buffer = new ArrayBuffer(SLOT_SIZE);
-        return buffer;
+        return this.bitset.toByteBuffer();
     }
 
     public print(): void {
-        let arr = this.bitset.toArray();
-        console.log(arr);
+        console.log("cardinality=" + this.cardinality());
     }
 
     public getDay(): string {
