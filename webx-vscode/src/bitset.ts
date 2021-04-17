@@ -16,11 +16,19 @@ export class BitSet {
         this.data = new Int8Array(slot >>> WORD_LOG);
     }
 
-    public set(ndx: number): void {
+    /**
+     * set the value of ndx
+     * @param ndx the index of bit slot to be set
+     * @param value Optional value that should be set 0/1.
+     */
+    public set(ndx: number, value?: number): void {
         var n = ndx >>> WORD_LOG;
         var b = ndx & 0x7;
-        this.data[n] |= (1 << b);
-        // console.log('ndx=' + ndx + ', n=' + n + ', value=' + this.data[n] + ", get=" + this.get(ndx));
+        if (value === 0) {
+            this.data[n] &= ~(1 << b);
+        } else {
+            this.data[n] |= (1 << b);
+        }
     }
 
     public get(ndx: number): number {
@@ -31,6 +39,12 @@ export class BitSet {
             throw Error('Index out of box.');
         }
         return (this.data[n] >> b) & 1;
+    }
+
+    public clear(): void {
+        for (var i = 0; i < this.data.length; i++) {
+            this.data[i] = 0;
+        }
     }
 
     public cardinality(): number {
