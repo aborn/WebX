@@ -33,6 +33,10 @@ export class DayBitSet {
         return this.bitset;
     }
 
+    public getDayBitSetByteArray(): number[] {
+        return this.bitset.toIntArray();
+    }
+
     public print(): void {
         console.log("day:" + this.day + ", cardinality:" + this.bitset.cardinality());
     }

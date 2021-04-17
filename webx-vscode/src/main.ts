@@ -1,6 +1,7 @@
 import { DayBitSet } from "./daybitset";
 import axios from 'axios';
 import * as dateutils from "./dateutils";
+import { DataSender } from "./datasender";
 
 console.log(dateutils.getDayInfo());
 console.log("isToday:" + dateutils.isToday("2021-04-17"));
@@ -29,27 +30,10 @@ const data = {
 };
 
 
-var a = false;
+var a = true;
 if (a) {
-    axios({
-        url: 'http://localhost:8080/webx/postUserAction',
-        method: 'post',
-        headers: {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            'Content-type': 'application/json; charset=utf-8',
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            'Accept': 'application/json'
-        },
-        data: data
-    }).then((response: any) => {
-        // handle success
-        console.log(response.data);
-    }).catch((error: any) => {
-        // handle error
-        console.log(error);
-    }).then(() => {
-        // always executed
-    });
+    var datasender = new DataSender();
+    datasender.postData(daybitset);
 }
 
 console.log('end in main.');
