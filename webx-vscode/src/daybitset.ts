@@ -7,7 +7,7 @@ export class DayBitSet {
     private bitset: BitSet;
 
     constructor() {
-        this.day = "2021-04-07";
+        this.day = dateutils.getDayInfo();
         this.bitset = new BitSet(SLOT_SIZE);
     }
 

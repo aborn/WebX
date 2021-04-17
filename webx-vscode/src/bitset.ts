@@ -24,6 +24,7 @@ export class BitSet {
     public set(ndx: number, value?: number): void {
         var n = ndx >>> WORD_LOG;
         var b = ndx & 0x7;
+
         if (value === 0) {
             this.data[n] &= ~(1 << b);
         } else {
@@ -36,7 +37,7 @@ export class BitSet {
         var b = ndx & 0x7;
 
         if (n >= this.data.length) {
-            throw Error('Index out of box.');
+            throw Error('Index out of bitset.');
         }
         return (this.data[n] >> b) & 1;
     }

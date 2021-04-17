@@ -1,6 +1,10 @@
 import { DayBitSet } from "./daybitset";
 import axios from 'axios';
+import * as dateutils from "./dateutils";
 
+console.log(dateutils.getDayInfo());
+console.log("isToday:" + dateutils.isToday("2021-04-17"));
+console.log("isToday:" + dateutils.isToday("2021-04-16"));
 console.log('start runing.');
 var daybitset = new DayBitSet();
 
