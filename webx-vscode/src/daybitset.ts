@@ -15,7 +15,7 @@ export class DayBitSet {
         let slot = dateutils.getSlotIndex();
         this.bitset.set(slot);
 
-        console.log("slot=" + slot + ":" + this.bitset.get(slot) + ", cardinality=" + this.cardinality() + "wordlength=" + this.bitset.wordLength());
+        console.log("slot=" + slot + ":" + this.bitset.get(slot) + ", cardinality=" + this.cardinality() + ", wordlength=" + this.bitset.wordLength());
     }
 
     public getBitSet(): BitSet {

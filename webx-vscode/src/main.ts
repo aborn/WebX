@@ -3,16 +3,15 @@ import axios from 'axios';
 
 console.log('start runing.');
 let daybitset = new DayBitSet();
-daybitset.record();
+// daybitset.record();
 
 daybitset.set(1);
 daybitset.set(8);
 daybitset.set(24 * 60 * 2 - 1);
-console.log('100===' +  daybitset.get(100));
-//console.log('cardinality:' + daybitset.cardinality());
-daybitset.print();
 
+console.log('cardinality:' + daybitset.getBitSet().cardinality());
 var byteArray = daybitset.getBitSet().toIntArray();
+
 var intArray = [];
 intArray[0] = 2;
 intArray[1] = 1;
@@ -24,10 +23,10 @@ const data = {
     dayBitSetArray: byteArray
 };
 
-console.log(data);
+// console.log(data);
 console.log('length=' + intArray.length);
 
-var a = true;
+var a = false;
 if (a) {
     axios({
         url: 'http://localhost:8080/webx/postUserAction',
