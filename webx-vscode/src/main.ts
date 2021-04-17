@@ -12,15 +12,20 @@ console.log('100===' +  daybitset.get(100));
 //console.log('cardinality:' + daybitset.cardinality());
 daybitset.print();
 
-var intArr = daybitset.getBitSet().toIntArray();
+var byteArray = daybitset.getBitSet().toIntArray();
+var intArray = [];
+intArray[0] = 2;
+intArray[1] = 1;
+intArray[359] = -128;
+
 const data = {
     token: '8ba394513f8420e',
     day: daybitset.getDay(),
-    dayBitSetArray: intArr
+    dayBitSetArray: byteArray
 };
 
 console.log(data);
-console.log('length=' + intArr.length);
+console.log('length=' + intArray.length);
 
 var a = true;
 if (a) {

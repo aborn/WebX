@@ -56,8 +56,12 @@ export class BitSet {
         return buffer;
     }
 
-    public toIntArray(): Int8Array {
-        return this.data;
+    public toIntArray(): number[] {
+        var intArray = [];
+        for (var i = 0; i < this.data.length; i++) {
+            intArray[i] = this.data[i];
+        }
+        return intArray;
     }
 
     public toBuffer(): Int8Array {
