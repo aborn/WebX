@@ -11,11 +11,22 @@ export class DayBitSet {
         this.bitset = new BitSet(SLOT_SIZE);
     }
 
-    public record(): void {
+    public record(): number {
+        this.clearIfNotToday();
         let slot = dateutils.getSlotIndex();
         this.bitset.set(slot);
 
         console.log("slot=" + slot + ":" + this.bitset.get(slot) + ", cardinality=" + this.bitset.cardinality() + ", wordlength=" + this.bitset.wordLength());
+        return slot;
+    }
+
+    private clearIfNotToday(): void {
+        if (dateutils.isToday(this.day)) {
+            return;
+        }
+
+        this.day = dateutils.getDayInfo();
+        this.bitset.clear();
     }
 
     public getBitSet(): BitSet {
@@ -23,7 +34,7 @@ export class DayBitSet {
     }
 
     public print(): void {
-        console.log("cardinality=" + this.getBitSet().cardinality());
+        console.log("day:" + this.day + ", cardinality:" + this.bitset.cardinality());
     }
 
     public getDay(): string {
