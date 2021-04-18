@@ -34,6 +34,7 @@ export class DayBitSet {
         return this.bitset;
     }
 
+
     public getDayBitSetByteArray(): number[] {
         return this.bitset.toIntArray();
     }

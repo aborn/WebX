@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { DayBitSet } from "./daybitset";
+import { BitSet } from "./bitset";
 
 const TOKEN_WEBX = "0x4af97337";
 const URL_REMOTE = "https://aborn.me/webx/postUserAction";
@@ -7,20 +8,18 @@ const URL_LOCAL = "http://127.0.0.1:8080/webx/postUserAction";
 
 export class DataSender {
     private lastPostDate: Date | null;
-    private lastPostData: DayBitSet | null;
+    private lastPostData: BitSet;
 
     constructor() {
         this.lastPostDate = null;
-        this.lastPostData = null;
+        this.lastPostData = new DayBitSet().getBitSet();
     }
 
     public postData(daybitset: DayBitSet): string {
         if (this.isNeedPost(daybitset)) {
             var result = this.doPostData(daybitset);
             this.lastPostDate = new Date();
-
-            // TODO clear & or
-            this.lastPostData = daybitset;
+            this.lastPostData.or(daybitset.getBitSet());
             return result;
         } else {
             return "No need to post!";
@@ -32,7 +31,7 @@ export class DataSender {
 
         if (this.lastPostDate === null
             || this.lastPostData === null
-            || daybitset.countOfCodingSlot() !== this.lastPostData.countOfCodingSlot()
+            || daybitset.countOfCodingSlot() !== this.lastPostData.cardinality()
             || (now.getTime() - this.lastPostDate.getTime() / 1000) > 5 * 60  // 5分钟以上
         ) {
             return true;

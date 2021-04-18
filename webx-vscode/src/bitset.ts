@@ -42,6 +42,20 @@ export class BitSet {
         return (this.data[n] >> b) & 1;
     }
 
+    public or(bitset: BitSet): void {
+        var int8Array = bitset.toInt8Array();
+        for (var i = 0; i < Math.min(bitset.wordLength(), this.wordLength()); i++) {
+            this.data[i] |= int8Array[i];
+        }
+    }
+
+    public and(bitset: BitSet): void {
+        var int8Array = bitset.toInt8Array();
+        for (var i = 0; i < Math.min(bitset.wordLength(), this.wordLength()); i++) {
+            this.data[i] &= int8Array[i];
+        }
+    }
+
     public clear(): void {
         for (var i = 0; i < this.data.length; i++) {
             this.data[i] = 0;
@@ -60,16 +74,6 @@ export class BitSet {
         return s;
     }
 
-    public toByteBuffer(): ArrayBuffer {
-        const buffer = new ArrayBuffer(this.data.length * WORD_LENGTH);
-        var unit32Array = new Uint32Array(buffer);
-
-        for (var i = 0; i < unit32Array.length; i++) {
-            unit32Array[i] = this.data[i];
-        }
-        return buffer;
-    }
-
     // as Java action
     public toIntArray(): number[] {
         var intArray = [];
@@ -80,13 +84,8 @@ export class BitSet {
     }
 
     // 与 toIntArray() 不一样的地方是，这里把的Int8Array是object，而toIntArray返回的是array
-    public toBuffer(): Int8Array {
-        var int8Array = new Int8Array(this.data.length - 1);
-
-        for (var i = 0; i < int8Array.length; i++) {
-            int8Array[i] = this.data[i];
-        }
-        return int8Array;
+    public toInt8Array(): Int8Array {
+        return this.data;
     }
 
     private toUnit8Int(v: number): number {
@@ -111,6 +110,7 @@ export class BitSet {
         return (((v + (v >>> 4) & 0xF0F0F0F) * 0x1010101) >>> 24);
     }
 
+    // the world array length
     public wordLength(): number {
         return this.data.length;
     }
