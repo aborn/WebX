@@ -1,10 +1,7 @@
 import axios from 'axios';
 import { DayBitSet } from "./daybitset";
 import { BitSet } from "./bitset";
-
-const TOKEN_WEBX = "0x4af97337";
-const URL_REMOTE = "https://aborn.me/webx/postUserAction";
-const URL_LOCAL = "http://127.0.0.1:8080/webx/postUserAction";
+import * as servers from "./serverinfo";
 
 export class DataSender {
     private lastPostDate: Date | null;
@@ -49,7 +46,8 @@ export class DataSender {
         var serverInfo = this.getServerInfo();
 
         axios({
-            url: serverInfo.url,
+            baseURL: serverInfo.baseURL,
+            url: 'postUserAction',
             method: 'post',
             headers: {
                 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -62,7 +60,7 @@ export class DataSender {
                 day: daybitset.getDay(),
                 dayBitSetArray: daybitset.getDayBitSetByteArray()
             },
-            timeout: 2000
+            timeout: serverInfo.timeout
         }).then((response: any) => {
             // handle success
             // console.log(response.data);
@@ -77,10 +75,7 @@ export class DataSender {
     }
 
     private getServerInfo(): any {
-        return {
-            token: TOKEN_WEBX,
-            url: URL_LOCAL
-        };
+        return servers.LOCAL_SERVER;
     }
 
 }
