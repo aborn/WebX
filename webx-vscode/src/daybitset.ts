@@ -38,6 +38,10 @@ export class DayBitSet {
         return this.bitset.toIntArray();
     }
 
+    public countOfCodingSlot(): number {
+        return this.bitset.cardinality();
+    }
+
     public print(): void {
         var dayStaticByHour: number[] = [];
         for (var i = 0; i < SLOT_SIZE; i++) {

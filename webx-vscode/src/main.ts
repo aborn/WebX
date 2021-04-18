@@ -3,10 +3,12 @@ import axios from 'axios';
 import * as dateutils from "./dateutils";
 import { DataSender } from "./datasender";
 
+console.log('start runing.');
+console.log('start time==>' + new Date().getTime());
+
 console.log(dateutils.getDayInfo());
 console.log("isToday:" + dateutils.isToday("2021-04-17"));
 console.log("isToday:" + dateutils.isToday("2021-04-16"));
-console.log('start runing.');
 var daybitset = new DayBitSet();
 
 daybitset.record();
@@ -30,11 +32,11 @@ const data = {
     dayBitSetArray: byteArray
 };
 
-
 var a = false;
 if (a) {
     var datasender = new DataSender();
     datasender.postData(daybitset);
 }
 
+console.log('end time==>' + new Date().getTime());
 console.log('end in main.');

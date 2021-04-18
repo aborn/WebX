@@ -6,13 +6,45 @@ const URL_REMOTE = "https://aborn.me/webx/postUserAction";
 const URL_LOCAL = "http://127.0.0.1:8080/webx/postUserAction";
 
 export class DataSender {
+    private lastPostDate: Date | null;
+    private lastPostData: DayBitSet | null;
 
     constructor() {
-
+        this.lastPostDate = null;
+        this.lastPostData = null;
     }
-    
+
     public postData(daybitset: DayBitSet): string {
+        if (this.isNeedPost(daybitset)) {
+            var result = this.doPostData(daybitset);
+            this.lastPostDate = new Date();
+
+            // TODO clear & or
+            this.lastPostData = daybitset;
+            return result;
+        } else {
+            return "No need to post!";
+        }
+    }
+
+    private isNeedPost(daybitset: DayBitSet): boolean {
+        var now = new Date();
+
+        if (this.lastPostDate === null
+            || this.lastPostData === null
+            || daybitset.countOfCodingSlot() !== this.lastPostData.countOfCodingSlot()
+            || (now.getTime() - this.lastPostDate.getTime() / 1000) > 5 * 60  // 5分钟以上
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private doPostData(daybitset: DayBitSet): string {
         var serverInfo = this.getServerInfo();
+
+
         axios({
             url: serverInfo.url,
             method: 'post',
