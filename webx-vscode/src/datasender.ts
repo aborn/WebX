@@ -17,6 +17,7 @@ export class DataSender {
 
     public postData(daybitset: DayBitSet): string {
         if (this.isNeedPost(daybitset)) {
+            console.log('Start Post!');
             var result = this.doPostData(daybitset);
             this.lastPostDate = new Date();
             this.lastPostData.or(daybitset.getBitSet());
@@ -27,12 +28,16 @@ export class DataSender {
     }
 
     private isNeedPost(daybitset: DayBitSet): boolean {
-        var now = new Date();
+        var now = new Date();        
+        var timeLasped = 0;
+        if (this.lastPostDate !== null) {
+            timeLasped = (now.getTime() - this.lastPostDate.getTime()) / 1000;            
+        }
 
         if (this.lastPostDate === null
             || this.lastPostData === null
             || daybitset.countOfCodingSlot() !== this.lastPostData.cardinality()
-            || (now.getTime() - this.lastPostDate.getTime() / 1000) > 5 * 60  // 5分钟以上
+            || (timeLasped) > 5 * 60  // 5分钟以上
         ) {
             return true;
         }
@@ -42,7 +47,6 @@ export class DataSender {
 
     private doPostData(daybitset: DayBitSet): string {
         var serverInfo = this.getServerInfo();
-
 
         axios({
             url: serverInfo.url,
