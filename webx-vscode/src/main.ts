@@ -14,6 +14,7 @@ var bitset = daybitset.getBitSet();
 bitset.set(1);
 bitset.set(8);
 bitset.set(24 * 60 * 2 - 1, 1);
+daybitset.print();
 
 console.log('cardinality:' + bitset.cardinality());
 bitset.set(8, 0);
@@ -30,7 +31,7 @@ const data = {
 };
 
 
-var a = true;
+var a = false;
 if (a) {
     var datasender = new DataSender();
     datasender.postData(daybitset);
