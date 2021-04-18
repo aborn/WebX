@@ -61,10 +61,11 @@ export class DataSender {
                 token: serverInfo.token,
                 day: daybitset.getDay(),
                 dayBitSetArray: daybitset.getDayBitSetByteArray()
-            }
+            },
+            timeout: 2000
         }).then((response: any) => {
             // handle success
-            console.log(response.data);
+            // console.log(response.data);
         }).catch((error: any) => {
             // handle error
             console.log(error);
