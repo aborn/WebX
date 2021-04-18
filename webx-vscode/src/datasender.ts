@@ -68,7 +68,7 @@ export class DataSender {
             // always executed
         });
 
-        return "";
+        return "post finished.";
     }
 
     private getServerInfo(): any {

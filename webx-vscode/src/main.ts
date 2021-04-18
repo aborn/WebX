@@ -35,7 +35,8 @@ const data = {
 var a = false;
 if (a) {
     var datasender = new DataSender();
-    datasender.postData(daybitset);
+    var postResult = datasender.postData(daybitset);
+    console.log(postResult);
 }
 
 console.log('end time==>' + new Date().getTime());

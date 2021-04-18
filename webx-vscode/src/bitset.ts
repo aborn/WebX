@@ -3,7 +3,7 @@ const WORD_LENGTH = 8;
 const WORD_LOG = 3;
 
 export class BitSet {
-    // 总共有多少个bitslot
+    // how many bit slot.
     private slot: number;
     private data: Int8Array;
 
@@ -54,6 +54,7 @@ export class BitSet {
         for (var i = 0; i < Math.min(bitset.wordLength(), this.wordLength()); i++) {
             this.data[i] &= int8Array[i];
         }
+        // TODO how to deal with the left bitword when bistset.wordLength is short ?
     }
 
     public clear(): void {
