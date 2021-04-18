@@ -75,6 +75,16 @@ export class BitSet {
         return s;
     }
 
+    public toBitSetSlotArray(): number[] {
+        var slotArray = [];
+        for (var i=0; i<this.slot; i++) {
+            if (this.get(i)) {
+                slotArray.push(i);
+            }
+        }
+        return slotArray;
+    }
+
     // as Java action
     public toIntArray(): number[] {
         var intArray = [];

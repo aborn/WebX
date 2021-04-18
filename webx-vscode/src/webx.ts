@@ -33,6 +33,7 @@ export class WebX {
     }
 
     public dispose() {
+        console.log('webx closed.');
         // clear all temp state and post current data
     }
 }

@@ -34,7 +34,6 @@ export class DayBitSet {
         return this.bitset;
     }
 
-
     public getDayBitSetByteArray(): number[] {
         return this.bitset.toIntArray();
     }
@@ -44,6 +43,12 @@ export class DayBitSet {
     }
 
     public print(): void {
+        var dayStaticByHour = this.getDayStaticByHour();
+        console.log("day:" + this.day + ", cardinality:"
+            + this.bitset.cardinality() + ", dayStaticByHour:" + this.array2string(dayStaticByHour));
+    }
+
+    public getDayStaticByHour(): number[] {
         var dayStaticByHour: number[] = [];
         for (var i = 0; i < SLOT_SIZE; i++) {
             if (this.bitset.get(i) === 1) {
@@ -54,8 +59,7 @@ export class DayBitSet {
                 dayStaticByHour[ndx] += 1;
             }
         }
-        console.log("day:" + this.day + ", cardinality:"
-            + this.bitset.cardinality() + ", dayStaticByHour:" + this.array2string(dayStaticByHour));
+        return dayStaticByHour;
     }
 
     private array2string(arr: number[]): string {

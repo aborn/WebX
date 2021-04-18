@@ -28,10 +28,10 @@ export class DataSender {
     }
 
     private isNeedPost(daybitset: DayBitSet): boolean {
-        var now = new Date();        
+        var now = new Date();
         var timeLasped = 0;
         if (this.lastPostDate !== null) {
-            timeLasped = (now.getTime() - this.lastPostDate.getTime()) / 1000;            
+            timeLasped = (now.getTime() - this.lastPostDate.getTime()) / 1000;
         }
 
         if (this.lastPostDate === null
