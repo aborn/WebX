@@ -2,14 +2,19 @@ import axios from 'axios';
 import { DayBitSet } from "./daybitset";
 import { BitSet } from "./bitset";
 import * as servers from "./serverinfo";
+import { UserConfig } from "./userconfig";
+
+
 
 export class DataSender {
     private lastPostDate: Date | null;
     private lastPostData: BitSet;
+    private userConfig: UserConfig;
 
     constructor() {
         this.lastPostDate = null;
         this.lastPostData = new DayBitSet().getBitSet();
+        this.userConfig = new UserConfig();
     }
 
     public postData(daybitset: DayBitSet): string {
@@ -44,6 +49,10 @@ export class DataSender {
 
     private doPostData(daybitset: DayBitSet): string {
         var serverInfo = this.getServerInfo();
+        var token = this.userConfig.getToken();
+        if (token === null) {
+            return "token is null, doPostData failed.";
+        }
 
         axios({
             baseURL: serverInfo.baseURL,
@@ -56,7 +65,7 @@ export class DataSender {
                 'Accept': 'application/json'
             },
             data: {
-                token: serverInfo.token,
+                token: token,
                 day: daybitset.getDay(),
                 dayBitSetArray: daybitset.getDayBitSetByteArray()
             },

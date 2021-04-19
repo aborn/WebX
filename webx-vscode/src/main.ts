@@ -1,9 +1,10 @@
 import { DayBitSet } from "./daybitset";
 import { DataSender } from "./datasender";
 import { BitSet } from "./bitset";
-import * as config from "./config";
+import { UserConfig } from "./userconfig";
 
-config.getToken();
+var userconfig = new UserConfig();
+console.log('gettoken=' + userconfig.getToken());
 
 console.log('start runing.');
 console.log('start time==>' + new Date().getTime());
