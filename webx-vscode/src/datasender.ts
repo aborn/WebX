@@ -4,8 +4,6 @@ import { BitSet } from "./bitset";
 import * as servers from "./serverinfo";
 import { UserConfig } from "./userconfig";
 
-
-
 export class DataSender {
     private lastPostDate: Date | null;
     private lastPostData: BitSet;
