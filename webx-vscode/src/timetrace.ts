@@ -12,6 +12,8 @@ export class TimeTrace {
 
     constructor() {
         this.daybitset = new DayBitSet();
+        // initial record when open.
+        this.record();
         this.datasender = new DataSender();
         this.isActive = true;
         this.openTime = new Date();
@@ -43,6 +45,7 @@ export class TimeTrace {
             }
         }
 
+        // TODO: postdata using timer task.
         var log = this.datasender.postData(this.daybitset);
         console.log(log);
     }
