@@ -19,7 +19,7 @@ export class UserConfig {
     }
 
     private init(callback: (id: string, token: string) => void): void {
-        // TODO file root 
+        // TODO file root dealing
         fs.readFile('/Users/aborn/.webx.cfg', function (err, data) {
             if (err) {
                 return console.error(err);
@@ -38,11 +38,11 @@ export class UserConfig {
                     let key = parts[0].trim();
                     let value = parts[1].trim();
                     if (key === 'token') {
-                        console.log('token=' + value);
+                        // console.log('token=' + value);
                         token = value;
                     }
                     if (key === 'id') {
-                        console.log('id=' + value);
+                        // console.log('id=' + value);
                         id = value;
                     }
                 }
