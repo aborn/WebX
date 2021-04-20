@@ -54,6 +54,8 @@ export class DataSender {
             };
         }
 
+        console.log(daybitset.getDay() + ":" + daybitset.countOfCodingSlot());
+        
         axios({
             baseURL: serverInfo.baseURL,
             url: 'postUserAction',

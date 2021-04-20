@@ -5,3 +5,6 @@ export const FILE_CREATED = "fileCreated";
 export const FILE_EDITED = "fileEdited";
 export const FILE_REMOVED = "fileRemoved";
 export const FILE_SAVED = "fileSaved";
+export const TEXT_EDITOR_SELECT = "textEditorSelection";
+export const TEXT_EDITOR_VIEW_CHANGE = "textEditorViewChange";
+export const TEXT_EDITOR_ACTIVE = "textEditorActive";

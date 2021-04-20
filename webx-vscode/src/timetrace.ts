@@ -33,7 +33,7 @@ export class TimeTrace {
             let openTimeSlot = this.getOpenedSlot();
 
             if (openTimeSlot >= 0) {
-                console.log('current slot:' + currentSlot + ", openedTimeSlot:" + openTimeSlot);
+                // console.log('current slot:' + currentSlot + ", openedTimeSlot:" + openTimeSlot);
                 var findVerIndex = -1;
                 for (var i = currentSlot - 1; i >= openTimeSlot; i--) {
                     if (this.daybitset.getBitSet().get(i)) {
@@ -56,7 +56,7 @@ export class TimeTrace {
     private timerAction(): void {
         console.log('start to post:');
         let log = this.datasender.postData(this.daybitset);
-        console.log('post success!', new Date(), ' : ', log);
+        console.log('post finished!', new Date(), ' : ', log);
     }
 
     public setVSCodeWindowState(state: boolean): void {
