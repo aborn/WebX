@@ -1,28 +1,87 @@
 import { DayBitSet } from "./daybitset";
 import { DataSender } from "./datasender";
+import * as DateUtils from "./dateutils";
 
 export class TimeTrace {
     private daybitset: DayBitSet;
     private datasender: DataSender;
     // vs-code is active or inactive
     private isActive: boolean;
+    private openTime: Date | null;
+    private closeTime: Date | null;
 
     constructor() {
         this.daybitset = new DayBitSet();
         this.datasender = new DataSender();
         this.isActive = true;
+        this.openTime = new Date();
+        this.closeTime = null;
     }
 
     public record(): void {
-        var slot = this.daybitset.record();
-        var log = this.datasender.postData(this.daybitset);
+        var currentSlot = this.daybitset.record();
+        if (this.isActive) {
+            let openTimeSlot = this.getOpenedSlot();
 
-        // TODO: 在vscode是active的情况下，往前追踪5分钟，间隔10个slot
+            if (openTimeSlot >= 0) {
+                console.log('current slot:' + currentSlot + ", openedTimeSlot:" + openTimeSlot);
+                var findVerIndex = -1;
+                for (var i = currentSlot - 1; i >= openTimeSlot; i--) {
+                    if (this.daybitset.getBitSet().get(i)) {
+                        findVerIndex = i;
+                        break;
+                    }
+                }
+
+                // only trace back 5 minutes, interval 10 slot.
+                if (findVerIndex >= 0 && findVerIndex < currentSlot
+                    && (currentSlot - findVerIndex) < 10) {
+                    for (var j = findVerIndex + 1; j < currentSlot; j++) {
+                        this.daybitset.getBitSet().set(i);
+                    }
+                }
+            }
+        }
+
+        var log = this.datasender.postData(this.daybitset);
         console.log(log);
     }
 
     public setVSCodeWindowState(state: boolean): void {
-        console.log('------ window' + (state ? 'actived' : 'deactived') + ' ------', new Date());
-        this.isActive = state;
+        console.log('------ window ' + (state ? 'actived' : 'deactived') + ' ------', new Date());
+        state ? this.active() : this.deactive();
+    }
+
+    private getOpenedSlot(): number {
+        if (this.openTime === null) { return -1; }
+
+        // ignore if not today
+        if (!DateUtils.isToday(DateUtils.getDayInfo(this.openTime))) {
+            return -1;
+        }
+
+        return DateUtils.getSlotIndex(this.openTime);
+    }
+
+    private active() {
+        if (this.isActive) {
+            if (this.openTime === null) {
+                this.openTime = new Date();
+            }
+        } else {
+            this.isActive = true;
+            this.openTime = new Date();
+        }
+    }
+
+    private deactive() {
+        if (this.isActive) {
+            this.isActive = false;
+            this.closeTime = new Date();
+        } else {
+            if (this.closeTime === null) {
+                this.closeTime = new Date();
+            }
+        }
     }
 }
