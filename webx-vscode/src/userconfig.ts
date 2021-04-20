@@ -4,7 +4,7 @@ import * as path from 'path';
 
 export class UserConfig {
     private configFile: string;
-    private logFile: string;
+    // private logFile: string;
     private token: string | null;
     private id: string | null;
 
@@ -13,7 +13,7 @@ export class UserConfig {
         this.id = null;
         let homePath = this.getUserHomeDir();
         this.configFile = path.join(homePath, '.webx.cfg');
-        this.logFile = path.join(homePath, '.webx.log');
+        // this.logFile = path.join(homePath, '.webx.log');
 
         this.init((id, token) => {
             this.id = id;
@@ -23,6 +23,10 @@ export class UserConfig {
 
     public getToken(): string | null {
         return this.token;
+    }
+
+    public print(): void {
+        console.log("[id = " + this.id + ", token = " + this.token);
     }
 
     public config(id: string, token: string): void {
@@ -75,7 +79,7 @@ export class UserConfig {
         });
     }
 
-    public isPortable(): boolean {
+    private isPortable(): boolean {
         return !!process.env['VSCODE_PORTABLE'];
     }
 
@@ -94,9 +98,4 @@ export class UserConfig {
     public getConfigFile(): string {
         return this.configFile;
     }
-}
-
-
-export function setToken(): boolean {
-    return true;
 }

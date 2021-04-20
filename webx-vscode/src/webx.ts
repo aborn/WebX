@@ -1,16 +1,13 @@
 import * as vscode from "vscode";
 import * as events from "./events";
-import { DayBitSet } from "./daybitset";
-import { DataSender } from "./datasender";
+import { TimeTrace } from "./timetrace";
 
 export class WebX {
-    private daybitset: DayBitSet;
-    private datasender: DataSender;
+    private timetrace: TimeTrace;
 
     constructor(state: vscode.Memento) {
         this.initEventListeners();
-        this.daybitset = new DayBitSet();
-        this.datasender = new DataSender();
+        this.timetrace = new TimeTrace();
     }
 
     private initEventListeners(): void {
@@ -27,10 +24,7 @@ export class WebX {
     }
 
     private record() {
-        this.daybitset.record();
-        var log = this.datasender.postData(this.daybitset);
-        console.log(log);
-        // this.daybitset.print();
+        this.timetrace.record();
     }
 
     public dispose() {
