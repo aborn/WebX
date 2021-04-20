@@ -1,6 +1,6 @@
 # webx README
 
-This is the README for your extension "webx". After writing up a brief description, we recommend including the following sections.
+WebX is a powerful extension for recording your coding time.
 
 ## Features
 

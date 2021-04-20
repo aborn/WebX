@@ -1,8 +1,14 @@
 {
   "name": "webx",
   "displayName": "WebX",
-  "description": "",
+  "description": "WebX is a powerful extension for develop web services.",
+  "publisher": "aborn",
   "version": "0.0.1",
+  "homepage": "https://github.com/aborn/WebX/tree/main/webx-vscode",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/aborn/WebX"
+	},
   "engines": {
     "vscode": "^1.55.0"
   },
