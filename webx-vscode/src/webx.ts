@@ -14,6 +14,7 @@ export class WebX {
     }
 
     private initEventListeners(): void {
+        // TODO: vs code active / inactive event.
         let events: vscode.Disposable[] = [];
         vscode.workspace.onDidChangeTextDocument(this.onEdit, this, events);
     }
