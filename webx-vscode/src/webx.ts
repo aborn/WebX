@@ -1,4 +1,3 @@
-import { timeStamp } from "node:console";
 import * as vscode from "vscode";
 import * as events from "./events";
 import { TimeTrace } from "./timetrace";
