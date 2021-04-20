@@ -29,6 +29,7 @@ export class UserConfig {
         console.log("[id = " + this.id + ", token = " + this.token);
     }
 
+    // TODO: User command setting for token config.
     public config(id: string, token: string): void {
         let contents: string[] = [];
         if (id && id.trim.length > 0 && token && token.trim.length > 0) {
