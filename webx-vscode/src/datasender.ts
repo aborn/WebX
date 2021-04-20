@@ -17,11 +17,10 @@ export class DataSender {
 
     public postData(daybitset: DayBitSet): string {
         if (this.isNeedPost(daybitset)) {
-            console.log('Start Post!');
             var result = this.doPostData(daybitset);
             this.lastPostDate = new Date();
             this.lastPostData.or(daybitset.getBitSet());
-            return result;
+            return result.msg;
         } else {
             return "No need to post!";
         }
@@ -45,11 +44,14 @@ export class DataSender {
         return false;
     }
 
-    private doPostData(daybitset: DayBitSet): string {
+    private doPostData(daybitset: DayBitSet): { status: boolean, msg: string } {
         var serverInfo = this.getServerInfo();
         var token = this.userConfig.getToken();
         if (token === null) {
-            return "token is null, doPostData failed.";
+            return {
+                status: false,
+                msg: "token is null, doPostData failed."
+            };
         }
 
         axios({
@@ -70,19 +72,37 @@ export class DataSender {
             timeout: serverInfo.timeout
         }).then((response: any) => {
             // handle success
-            // console.log(response.data);
+            console.log(response.data);
+            return {
+                status: true, 
+                msg: 'post data success.'
+            };
         }).catch((error: any) => {
-            // handle error
             console.log(error);
+            if (error.response) {
+                return {
+                    status: false,
+                    msg: 'post data failed: server error'
+                };
+            } else {
+                return {
+                    status: false,
+                    msg: error.message
+                };
+            }
         }).then(() => {
             // always executed
         });
 
-        return "post finished.";
+        return {
+            status: true,
+            msg: 'finished post, status: unknown.'
+        };
     }
 
     private getServerInfo(): any {
-        return servers.LOCAL_SERVER;
+        return servers.REMOTE_SERVER;
+        // return servers.LOCAL_SERVER;
     }
 
 }

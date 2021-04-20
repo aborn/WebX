@@ -9,15 +9,22 @@ export class TimeTrace {
     private isActive: boolean;
     private openTime: Date | null;
     private closeTime: Date | null;
+    private timer: NodeJS.Timeout;
 
     constructor() {
         this.daybitset = new DayBitSet();
+        
         // initial record when open.
         this.record();
         this.datasender = new DataSender();
         this.isActive = true;
         this.openTime = new Date();
         this.closeTime = null;
+        
+        // post data for each every 30s 
+        this.timer = setInterval((that) => {
+            that.timerAction();
+        }, 30 * 1000, this);
     }
 
     public record(): void {
@@ -44,10 +51,12 @@ export class TimeTrace {
                 }
             }
         }
+    }
 
-        // TODO: postdata using timer task.
-        var log = this.datasender.postData(this.daybitset);
-        console.log(log);
+    private timerAction(): void {
+        console.log('start to post:');
+        let log = this.datasender.postData(this.daybitset);
+        console.log('post success!', new Date(), ' : ', log);
     }
 
     public setVSCodeWindowState(state: boolean): void {
@@ -86,5 +95,9 @@ export class TimeTrace {
                 this.closeTime = new Date();
             }
         }
+    }
+
+    public dispose() {
+        clearInterval(this.timer);
     }
 }

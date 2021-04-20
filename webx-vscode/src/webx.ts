@@ -1,3 +1,4 @@
+import { timeStamp } from "node:console";
 import * as vscode from "vscode";
 import * as events from "./events";
 import { TimeTrace } from "./timetrace";
@@ -11,7 +12,6 @@ export class WebX {
     }
 
     private initEventListeners(): void {
-        // TODO: vs code active / inactive event.
         let events: vscode.Disposable[] = [];
         vscode.window.onDidChangeWindowState(this.onFocus, this, events);
         vscode.workspace.onDidChangeTextDocument(this.onEdit, this, events);
@@ -33,7 +33,7 @@ export class WebX {
     }
 
     public dispose() {
-        console.log('webx closed.');
-        // clear all temp state and post current data
+        this.timetrace.dispose();
+        console.log('webx disposed.');
     }
 }
