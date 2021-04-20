@@ -5,10 +5,10 @@
   "publisher": "aborn",
   "version": "0.0.1",
   "homepage": "https://github.com/aborn/WebX/tree/main/webx-vscode",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/aborn/WebX"
-	},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aborn/WebX"
+  },
   "engines": {
     "vscode": "^1.55.0"
   },

@@ -21,6 +21,7 @@ export class UserConfig {
         });
     }
 
+    // TODO: token need init when token is null.
     public getToken(): string | null {
         return this.token;
     }
