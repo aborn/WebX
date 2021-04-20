@@ -10,7 +10,7 @@ export class TimeTrace {
     constructor() {
         this.daybitset = new DayBitSet();
         this.datasender = new DataSender();
-        this.isActive  = true;
+        this.isActive = true;
     }
 
     public record(): void {
@@ -19,5 +19,10 @@ export class TimeTrace {
 
         // TODO: 在vscode是active的情况下，往前追踪5分钟，间隔10个slot
         console.log(log);
+    }
+
+    public setVSCodeWindowState(state: boolean): void {
+        console.log('------ window' + (state ? 'actived' : 'deactived') + ' ------', new Date());
+        this.isActive = state;
     }
 }

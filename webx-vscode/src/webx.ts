@@ -13,6 +13,7 @@ export class WebX {
     private initEventListeners(): void {
         // TODO: vs code active / inactive event.
         let events: vscode.Disposable[] = [];
+        vscode.window.onDidChangeWindowState(this.onFocus, this, events);
         vscode.workspace.onDidChangeTextDocument(this.onEdit, this, events);
     }
 
@@ -21,6 +22,10 @@ export class WebX {
         if (e.contentChanges.length > 0) {
             this.record();
         }
+    }
+
+    private onFocus(e: vscode.WindowState) {
+        this.timetrace.setVSCodeWindowState(e.focused);
     }
 
     private record() {
