@@ -21,7 +21,7 @@ export class TimeTrace {
         this.openTime = new Date();
         this.closeTime = null;
         
-        // post data for each every 30s 
+        // post data for each 30s 
         this.timer = setInterval((that) => {
             that.timerAction();
         }, 30 * 1000, this);
